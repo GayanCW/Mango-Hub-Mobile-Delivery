@@ -1,0 +1,258 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.example.mangoHub"
+4    android:versionCode="1"
+5    android:versionName="1.0.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="16"
+9        android:targetSdkVersion="28" />
+10    <!--
+11         Flutter needs it to communicate with the running application
+12         to allow setting breakpoints, to provide hot reload, etc.
+13    -->
+14    <uses-permission android:name="android.permission.INTERNET" />
+14-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\debug\AndroidManifest.xml:6:5-66
+14-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\debug\AndroidManifest.xml:6:22-64
+15    <!--
+16     io.flutter.app.FlutterApplication is an android.app.Application that
+17         calls FlutterMain.startInitialization(this); in its onCreate method.
+18         In most cases you can leave this as-is, but you if you want to provide
+19         additional functionality it is fine to subclass or reimplement
+20         FlutterApplication and put your custom class here.
+21    -->
+22    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+22-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:8:5-79
+22-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:8:22-76
+23    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+23-->[:location] G:\MangoHub\mangohub-mobile-delivery\build\location\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-81
+23-->[:location] G:\MangoHub\mangohub-mobile-delivery\build\location\intermediates\library_manifest\debug\AndroidManifest.xml:7:22-78
+24    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+24-->[:image_picker] G:\MangoHub\mangohub-mobile-delivery\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-80
+24-->[:image_picker] G:\MangoHub\mangohub-mobile-delivery\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:7:22-77
+25    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- Include required permissions for Google Maps API to run. -->
+25-->[:image_picker] G:\MangoHub\mangohub-mobile-delivery\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:8:5-81
+25-->[:image_picker] G:\MangoHub\mangohub-mobile-delivery\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:8:22-78
+26    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+26-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\7a446382788d38111f4082b02aeda717\play-services-maps-17.0.0\AndroidManifest.xml:23:5-79
+26-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\7a446382788d38111f4082b02aeda717\play-services-maps-17.0.0\AndroidManifest.xml:23:22-76
+27
+28    <uses-feature
+28-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\7a446382788d38111f4082b02aeda717\play-services-maps-17.0.0\AndroidManifest.xml:26:5-28:35
+29        android:glEsVersion="0x00020000"
+29-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\7a446382788d38111f4082b02aeda717\play-services-maps-17.0.0\AndroidManifest.xml:27:9-41
+30        android:required="true" />
+30-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\7a446382788d38111f4082b02aeda717\play-services-maps-17.0.0\AndroidManifest.xml:28:9-32
+31
+32    <uses-permission android:name="android.permission.WAKE_LOCK" />
+32-->[com.google.android.gms:play-services-measurement-api:17.6.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\98fae2a3bdd762fd65c348a3731607f6\play-services-measurement-api-17.6.0\AndroidManifest.xml:24:5-68
+32-->[com.google.android.gms:play-services-measurement-api:17.6.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\98fae2a3bdd762fd65c348a3731607f6\play-services-measurement-api-17.6.0\AndroidManifest.xml:24:22-65
+33    <uses-permission android:name="com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE" />
+33-->[com.google.android.gms:play-services-measurement:17.6.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\a8b806c2ca4ea066a6a2f472df9c62db\play-services-measurement-17.6.0\AndroidManifest.xml:26:5-110
+33-->[com.google.android.gms:play-services-measurement:17.6.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\a8b806c2ca4ea066a6a2f472df9c62db\play-services-measurement-17.6.0\AndroidManifest.xml:26:22-107
+34
+35    <application
+35-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:9:5-49:19
+36        android:name="io.flutter.app.FlutterApplication"
+36-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:10:9-57
+37        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+37-->[androidx.core:core:1.1.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\fdb7f764bae631c34cad86862de08b65\core-1.1.0\AndroidManifest.xml:24:18-86
+38        android:debuggable="true"
+39        android:icon="@mipmap/ic_launcher"
+39-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:12:9-43
+40        android:label="MangoHub Mobile Delivery" >
+40-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:11:9-49
+41        <meta-data
+41-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:13:9-14:77
+42            android:name="com.google.android.geo.API_KEY"
+42-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:13:20-65
+43            android:value="AIzaSyAEpoBFxvVpzbg9pQgpKuWELNyH9pcKBf4" />
+43-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:14:20-75
+44
+45        <activity
+45-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:15:9-43:20
+46            android:name="com.example.mangoHub.MainActivity"
+46-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:16:13-41
+47            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+47-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:19:13-163
+48            android:hardwareAccelerated="true"
+48-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:20:13-47
+49            android:launchMode="singleTop"
+49-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:17:13-43
+50            android:theme="@style/LaunchTheme"
+50-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:18:13-47
+51            android:windowSoftInputMode="adjustResize" >
+51-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:21:13-55
+52
+53            <!--
+54                 Specifies an Android theme to apply to this Activity as soon as
+55                 the Android process has started. This theme is visible to the user
+56                 while the Flutter UI initializes. After that, this theme continues
+57                 to determine the Window background behind the Flutter UI.
+58            -->
+59            <meta-data
+59-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:26:13-29:17
+60                android:name="io.flutter.embedding.android.NormalTheme"
+60-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:27:15-70
+61                android:resource="@style/NormalTheme" />
+61-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:28:15-52
+62            <!--
+63                 Displays an Android View that continues showing the launch screen
+64                 Drawable until Flutter paints its first frame, then this splash
+65                 screen fades out. A splash screen is useful to avoid any visual
+66                 gap between the end of Android's launch screen and the painting of
+67                 Flutter's first frame.
+68            -->
+69            <meta-data
+69-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:35:13-38:17
+70                android:name="io.flutter.embedding.android.SplashScreenDrawable"
+70-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:36:15-79
+71                android:resource="@drawable/launch_background" />
+71-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:37:15-61
+72
+73            <intent-filter>
+73-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:39:13-42:29
+74                <action android:name="android.intent.action.MAIN" />
+74-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:40:17-68
+74-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:40:25-66
+75
+76                <category android:name="android.intent.category.LAUNCHER" />
+76-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:41:17-76
+76-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:41:27-74
+77            </intent-filter>
+78        </activity>
+79        <!--
+80             Don't delete the meta-data below.
+81             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java
+82        -->
+83        <meta-data
+83-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:46:9-48:33
+84            android:name="flutterEmbedding"
+84-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:47:13-44
+85            android:value="2" />
+85-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:48:13-30
+86
+87        <provider
+87-->[:image_picker] G:\MangoHub\mangohub-mobile-delivery\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:11:9-19:20
+88            android:name="io.flutter.plugins.imagepicker.ImagePickerFileProvider"
+88-->[:image_picker] G:\MangoHub\mangohub-mobile-delivery\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:12:13-82
+89            android:authorities="com.example.mangoHub.flutter.image_provider"
+89-->[:image_picker] G:\MangoHub\mangohub-mobile-delivery\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:13:13-74
+90            android:exported="false"
+90-->[:image_picker] G:\MangoHub\mangohub-mobile-delivery\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:14:13-37
+91            android:grantUriPermissions="true" >
+91-->[:image_picker] G:\MangoHub\mangohub-mobile-delivery\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:15:13-47
+92            <meta-data
+92-->[:image_picker] G:\MangoHub\mangohub-mobile-delivery\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:16:13-18:75
+93                android:name="android.support.FILE_PROVIDER_PATHS"
+93-->[:image_picker] G:\MangoHub\mangohub-mobile-delivery\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:17:17-67
+94                android:resource="@xml/flutter_image_picker_file_paths" />
+94-->[:image_picker] G:\MangoHub\mangohub-mobile-delivery\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:18:17-72
+95        </provider>
+96
+97        <service
+97-->[:cloud_firestore] G:\MangoHub\mangohub-mobile-delivery\build\cloud_firestore\intermediates\library_manifest\debug\AndroidManifest.xml:8:9-12:19
+98            android:name="com.google.firebase.components.ComponentDiscoveryService"
+98-->[:cloud_firestore] G:\MangoHub\mangohub-mobile-delivery\build\cloud_firestore\intermediates\library_manifest\debug\AndroidManifest.xml:8:18-89
+99            android:directBootAware="true"
+99-->[com.google.firebase:firebase-common:19.3.1] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\e96d661727e2ec44988308433a5565ad\jetified-firebase-common-19.3.1\AndroidManifest.xml:35:13-43
+100            android:exported="false" >
+100-->[com.google.firebase:firebase-firestore:21.7.1] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\ab8b693b39e5b80e252c7d62fff91d63\jetified-firebase-firestore-21.7.1\AndroidManifest.xml:19:13-37
+101            <meta-data
+101-->[:cloud_firestore] G:\MangoHub\mangohub-mobile-delivery\build\cloud_firestore\intermediates\library_manifest\debug\AndroidManifest.xml:9:13-11:85
+102                android:name="com.google.firebase.components:io.flutter.plugins.firebase.firestore.FlutterFirebaseFirestoreRegistrar"
+102-->[:cloud_firestore] G:\MangoHub\mangohub-mobile-delivery\build\cloud_firestore\intermediates\library_manifest\debug\AndroidManifest.xml:10:17-134
+103                android:value="com.google.firebase.components.ComponentRegistrar" />
+103-->[:cloud_firestore] G:\MangoHub\mangohub-mobile-delivery\build\cloud_firestore\intermediates\library_manifest\debug\AndroidManifest.xml:11:17-82
+104            <meta-data
+104-->[:firebase_core] G:\MangoHub\mangohub-mobile-delivery\build\firebase_core\intermediates\library_manifest\debug\AndroidManifest.xml:9:13-11:85
+105                android:name="com.google.firebase.components:io.flutter.plugins.firebase.core.FlutterFirebaseCoreRegistrar"
+105-->[:firebase_core] G:\MangoHub\mangohub-mobile-delivery\build\firebase_core\intermediates\library_manifest\debug\AndroidManifest.xml:10:17-124
+106                android:value="com.google.firebase.components.ComponentRegistrar" />
+106-->[:firebase_core] G:\MangoHub\mangohub-mobile-delivery\build\firebase_core\intermediates\library_manifest\debug\AndroidManifest.xml:11:17-82
+107            <meta-data
+107-->[com.google.firebase:firebase-firestore:21.7.1] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\ab8b693b39e5b80e252c7d62fff91d63\jetified-firebase-firestore-21.7.1\AndroidManifest.xml:20:13-22:85
+108                android:name="com.google.firebase.components:com.google.firebase.firestore.FirestoreRegistrar"
+108-->[com.google.firebase:firebase-firestore:21.7.1] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\ab8b693b39e5b80e252c7d62fff91d63\jetified-firebase-firestore-21.7.1\AndroidManifest.xml:21:17-111
+109                android:value="com.google.firebase.components.ComponentRegistrar" />
+109-->[com.google.firebase:firebase-firestore:21.7.1] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\ab8b693b39e5b80e252c7d62fff91d63\jetified-firebase-firestore-21.7.1\AndroidManifest.xml:22:17-82
+110            <meta-data
+110-->[com.google.android.gms:play-services-measurement-api:17.6.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\98fae2a3bdd762fd65c348a3731607f6\play-services-measurement-api-17.6.0\AndroidManifest.xml:30:13-32:85
+111                android:name="com.google.firebase.components:com.google.firebase.analytics.connector.internal.AnalyticsConnectorRegistrar"
+111-->[com.google.android.gms:play-services-measurement-api:17.6.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\98fae2a3bdd762fd65c348a3731607f6\play-services-measurement-api-17.6.0\AndroidManifest.xml:31:17-139
+112                android:value="com.google.firebase.components.ComponentRegistrar" />
+112-->[com.google.android.gms:play-services-measurement-api:17.6.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\98fae2a3bdd762fd65c348a3731607f6\play-services-measurement-api-17.6.0\AndroidManifest.xml:32:17-82
+113            <meta-data
+113-->[com.google.firebase:firebase-installations:16.3.2] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\0bbac981ae9a6b906d984b47b0dd33fb\firebase-installations-16.3.2\AndroidManifest.xml:17:13-19:85
+114                android:name="com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsRegistrar"
+114-->[com.google.firebase:firebase-installations:16.3.2] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\0bbac981ae9a6b906d984b47b0dd33fb\firebase-installations-16.3.2\AndroidManifest.xml:18:17-127
+115                android:value="com.google.firebase.components.ComponentRegistrar" />
+115-->[com.google.firebase:firebase-installations:16.3.2] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\0bbac981ae9a6b906d984b47b0dd33fb\firebase-installations-16.3.2\AndroidManifest.xml:19:17-82
+116        </service> <!-- Needs to be explicitly declared on P+ -->
+117        <uses-library
+117-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\7a446382788d38111f4082b02aeda717\play-services-maps-17.0.0\AndroidManifest.xml:33:9-35:40
+118            android:name="org.apache.http.legacy"
+118-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\7a446382788d38111f4082b02aeda717\play-services-maps-17.0.0\AndroidManifest.xml:34:13-50
+119            android:required="false" />
+119-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\7a446382788d38111f4082b02aeda717\play-services-maps-17.0.0\AndroidManifest.xml:35:13-37
+120
+121        <activity
+121-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\c6dd8f0dd025fb534d96453a90eb96a2\play-services-base-17.0.0\AndroidManifest.xml:23:9-26:75
+122            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+122-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\c6dd8f0dd025fb534d96453a90eb96a2\play-services-base-17.0.0\AndroidManifest.xml:24:13-79
+123            android:exported="false"
+123-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\c6dd8f0dd025fb534d96453a90eb96a2\play-services-base-17.0.0\AndroidManifest.xml:25:13-37
+124            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+124-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\c6dd8f0dd025fb534d96453a90eb96a2\play-services-base-17.0.0\AndroidManifest.xml:26:13-72
+125
+126        <provider
+126-->[com.google.firebase:firebase-common:19.3.1] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\e96d661727e2ec44988308433a5565ad\jetified-firebase-common-19.3.1\AndroidManifest.xml:26:9-31:39
+127            android:name="com.google.firebase.provider.FirebaseInitProvider"
+127-->[com.google.firebase:firebase-common:19.3.1] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\e96d661727e2ec44988308433a5565ad\jetified-firebase-common-19.3.1\AndroidManifest.xml:27:13-77
+128            android:authorities="com.example.mangoHub.firebaseinitprovider"
+128-->[com.google.firebase:firebase-common:19.3.1] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\e96d661727e2ec44988308433a5565ad\jetified-firebase-common-19.3.1\AndroidManifest.xml:28:13-72
+129            android:directBootAware="true"
+129-->[com.google.firebase:firebase-common:19.3.1] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\e96d661727e2ec44988308433a5565ad\jetified-firebase-common-19.3.1\AndroidManifest.xml:29:13-43
+130            android:exported="false"
+130-->[com.google.firebase:firebase-common:19.3.1] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\e96d661727e2ec44988308433a5565ad\jetified-firebase-common-19.3.1\AndroidManifest.xml:30:13-37
+131            android:initOrder="100" />
+131-->[com.google.firebase:firebase-common:19.3.1] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\e96d661727e2ec44988308433a5565ad\jetified-firebase-common-19.3.1\AndroidManifest.xml:31:13-36
+132
+133        <receiver
+133-->[com.google.android.gms:play-services-measurement:17.6.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\a8b806c2ca4ea066a6a2f472df9c62db\play-services-measurement-17.6.0\AndroidManifest.xml:29:9-33:20
+134            android:name="com.google.android.gms.measurement.AppMeasurementReceiver"
+134-->[com.google.android.gms:play-services-measurement:17.6.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\a8b806c2ca4ea066a6a2f472df9c62db\play-services-measurement-17.6.0\AndroidManifest.xml:30:13-85
+135            android:enabled="true"
+135-->[com.google.android.gms:play-services-measurement:17.6.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\a8b806c2ca4ea066a6a2f472df9c62db\play-services-measurement-17.6.0\AndroidManifest.xml:31:13-35
+136            android:exported="false" >
+136-->[com.google.android.gms:play-services-measurement:17.6.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\a8b806c2ca4ea066a6a2f472df9c62db\play-services-measurement-17.6.0\AndroidManifest.xml:32:13-37
+137        </receiver>
+138
+139        <service
+139-->[com.google.android.gms:play-services-measurement:17.6.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\a8b806c2ca4ea066a6a2f472df9c62db\play-services-measurement-17.6.0\AndroidManifest.xml:35:9-38:40
+140            android:name="com.google.android.gms.measurement.AppMeasurementService"
+140-->[com.google.android.gms:play-services-measurement:17.6.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\a8b806c2ca4ea066a6a2f472df9c62db\play-services-measurement-17.6.0\AndroidManifest.xml:36:13-84
+141            android:enabled="true"
+141-->[com.google.android.gms:play-services-measurement:17.6.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\a8b806c2ca4ea066a6a2f472df9c62db\play-services-measurement-17.6.0\AndroidManifest.xml:37:13-35
+142            android:exported="false" />
+142-->[com.google.android.gms:play-services-measurement:17.6.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\a8b806c2ca4ea066a6a2f472df9c62db\play-services-measurement-17.6.0\AndroidManifest.xml:38:13-37
+143        <service
+143-->[com.google.android.gms:play-services-measurement:17.6.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\a8b806c2ca4ea066a6a2f472df9c62db\play-services-measurement-17.6.0\AndroidManifest.xml:39:9-43:72
+144            android:name="com.google.android.gms.measurement.AppMeasurementJobService"
+144-->[com.google.android.gms:play-services-measurement:17.6.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\a8b806c2ca4ea066a6a2f472df9c62db\play-services-measurement-17.6.0\AndroidManifest.xml:40:13-87
+145            android:enabled="true"
+145-->[com.google.android.gms:play-services-measurement:17.6.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\a8b806c2ca4ea066a6a2f472df9c62db\play-services-measurement-17.6.0\AndroidManifest.xml:41:13-35
+146            android:exported="false"
+146-->[com.google.android.gms:play-services-measurement:17.6.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\a8b806c2ca4ea066a6a2f472df9c62db\play-services-measurement-17.6.0\AndroidManifest.xml:42:13-37
+147            android:permission="android.permission.BIND_JOB_SERVICE" />
+147-->[com.google.android.gms:play-services-measurement:17.6.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\a8b806c2ca4ea066a6a2f472df9c62db\play-services-measurement-17.6.0\AndroidManifest.xml:43:13-69
+148
+149        <meta-data
+149-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\7cdf2ab3d6cbdbb074331dd97d78bd7d\jetified-play-services-basement-17.0.0\AndroidManifest.xml:23:9-25:69
+150            android:name="com.google.android.gms.version"
+150-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\7cdf2ab3d6cbdbb074331dd97d78bd7d\jetified-play-services-basement-17.0.0\AndroidManifest.xml:24:13-58
+151            android:value="@integer/google_play_services_version" />
+151-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\7cdf2ab3d6cbdbb074331dd97d78bd7d\jetified-play-services-basement-17.0.0\AndroidManifest.xml:25:13-66
+152    </application>
+153
+154</manifest>

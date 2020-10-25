@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "308670191932",
+    "firebase_url": "https://mangohub-development.firebaseio.com",
+    "project_id": "mangohub-development",
+    "storage_bucket": "mangohub-development.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:308670191932:android:505f4d999d11c40831e639",
+        "android_client_info": {
+          "package_name": "com.example.mangoHub"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "308670191932-3igledsqkdi2kj84h7hquj6i682rki4l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD7nQnX6AErIGPis39cr_3lKX-DR9S_Pu0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "308670191932-3igledsqkdi2kj84h7hquj6i682rki4l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
