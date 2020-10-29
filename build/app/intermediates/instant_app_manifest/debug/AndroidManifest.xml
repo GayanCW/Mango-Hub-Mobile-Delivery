@@ -21,9 +21,9 @@
          FlutterApplication and put your custom class here.
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- Include required permissions for Google Maps API to run. -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- Include required permissions for Google Maps API to run. -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <uses-feature
@@ -41,7 +41,7 @@
         android:label="MangoHub Mobile Delivery" >
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyAEpoBFxvVpzbg9pQgpKuWELNyH9pcKBf4" />
+            android:value="AIzaSyDhOoTKiPahx0kxP77CsMoQFcI61ivN4PU" />
 
         <activity
             android:name="com.example.mangoHub.MainActivity"

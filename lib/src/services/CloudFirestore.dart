@@ -1,13 +1,7 @@
-import 'dart:async';
-import 'dart:math';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mangoHub/src/blocs/GetNearbyCompanies/get_nearby_companies_bloc.dart';
-import 'package:mangoHub/src/models/APImodels/GetNearbyCompaniesModel.dart';
 import 'package:mangoHub/src/models/APImodels/OrderModel.dart';
-import 'package:mangoHub/src/screens/OrderPage.dart';
 
 
 class FirebaseInitialize extends StatelessWidget {
@@ -57,7 +51,7 @@ class _ViewUserPageState extends State<ViewUserPage> {
             List<OrderProductList> productList = new List<OrderProductList>();
             List<OrderAditionalCharges> aditionalChargesList = new List<OrderAditionalCharges>();
 
-            allOrderCompanies.clear();
+            nearbyOrders.clear();
 
             for(int index=0; index<snapshot.data.documents.length; index++) {
               OrderGeo singleGeo= OrderGeo();
@@ -87,7 +81,7 @@ class _ViewUserPageState extends State<ViewUserPage> {
                 ));
               }
 
-              allOrderCompanies.add(OrderModel(
+              nearbyOrders.add(OrderModel(
 
                 orderProductList: productList,
                 orderAditionalCharges: aditionalChargesList,

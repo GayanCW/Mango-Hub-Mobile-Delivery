@@ -5,22 +5,23 @@ INJECTED from G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidM
 INJECTED from G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:1:1-50:12
 INJECTED from G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:1:1-50:12
 MERGED from G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:1:1-50:12
-MERGED from [:location] G:\MangoHub\mangohub-mobile-delivery\build\location\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-10:12
-MERGED from [:image_picker] G:\MangoHub\mangohub-mobile-delivery\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-22:12
-MERGED from [:google_maps_flutter] G:\MangoHub\mangohub-mobile-delivery\build\google_maps_flutter\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
-MERGED from [:flutter_plugin_android_lifecycle] G:\MangoHub\mangohub-mobile-delivery\build\flutter_plugin_android_lifecycle\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
-MERGED from [:cloud_firestore] G:\MangoHub\mangohub-mobile-delivery\build\cloud_firestore\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-15:12
-MERGED from [:location_web] G:\MangoHub\mangohub-mobile-delivery\build\location_web\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
-MERGED from [:firebase_core] G:\MangoHub\mangohub-mobile-delivery\build\firebase_core\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-15:12
 MERGED from [:hexcolor] G:\MangoHub\mangohub-mobile-delivery\build\hexcolor\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
+MERGED from [:google_maps_flutter] G:\MangoHub\mangohub-mobile-delivery\build\google_maps_flutter\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
+MERGED from [:image_picker] G:\MangoHub\mangohub-mobile-delivery\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-22:12
+MERGED from [:flutter_plugin_android_lifecycle] G:\MangoHub\mangohub-mobile-delivery\build\flutter_plugin_android_lifecycle\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
+MERGED from [:location] G:\MangoHub\mangohub-mobile-delivery\build\location\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-10:12
+MERGED from [:location_web] G:\MangoHub\mangohub-mobile-delivery\build\location_web\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
+MERGED from [:geolocator] G:\MangoHub\mangohub-mobile-delivery\build\geolocator\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
+MERGED from [:cloud_firestore] G:\MangoHub\mangohub-mobile-delivery\build\cloud_firestore\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-15:12
+MERGED from [:firebase_core] G:\MangoHub\mangohub-mobile-delivery\build\firebase_core\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-15:12
 MERGED from [androidx.multidex:multidex:2.0.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\bd4f627e73a2f6f5109d2259ced3ced5\multidex-2.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [com.google.android.gms:play-services-maps:17.0.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\7a446382788d38111f4082b02aeda717\play-services-maps-17.0.0\AndroidManifest.xml:17:1-38:12
-MERGED from [com.google.android.gms:play-services-location:16.0.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\83e97a3086be2af6777ef1273d6ab318\jetified-play-services-location-16.0.0\AndroidManifest.xml:2:1-9:12
+MERGED from [com.google.android.gms:play-services-location:17.0.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\f6ed85132a5410bdbdbb0829d08234a6\play-services-location-17.0.0\AndroidManifest.xml:2:1-9:12
 MERGED from [com.google.firebase:firebase-firestore:21.7.1] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\ab8b693b39e5b80e252c7d62fff91d63\jetified-firebase-firestore-21.7.1\AndroidManifest.xml:2:1-26:12
 MERGED from [com.google.firebase:firebase-auth-interop:18.0.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\3b13127dc24b312c6b7fc3e3c30e6a5d\firebase-auth-interop-18.0.0\AndroidManifest.xml:2:1-10:12
 MERGED from [com.google.firebase:firebase-database-collection:17.0.1] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\fe556d1c64a7ef12e97e2b55e48f4f3c\firebase-database-collection-17.0.1\AndroidManifest.xml:2:1-9:12
 MERGED from [com.google.android.gms:play-services-base:17.0.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\c6dd8f0dd025fb534d96453a90eb96a2\play-services-base-17.0.0\AndroidManifest.xml:17:1-29:12
-MERGED from [com.google.android.gms:play-services-places-placereport:16.0.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\07785c96269afd0c67522eb30d0b689d\play-services-places-placereport-16.0.0\AndroidManifest.xml:17:1-24:12
+MERGED from [com.google.android.gms:play-services-places-placereport:17.0.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\adcbc480b7c638efb439e353539d3e6e\play-services-places-placereport-17.0.0\AndroidManifest.xml:17:1-24:12
 MERGED from [com.google.firebase:firebase-core:17.5.1] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\5b1231bee0f730cb5b8d30bf6df8b0ee\firebase-core-17.5.1\AndroidManifest.xml:2:1-9:12
 MERGED from [com.google.firebase:firebase-analytics:17.6.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\e9d967453853660fb985240c48962d2c\firebase-analytics-17.6.0\AndroidManifest.xml:2:1-9:12
 MERGED from [com.google.android.gms:play-services-measurement-api:17.6.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\98fae2a3bdd762fd65c348a3731607f6\play-services-measurement-api-17.6.0\AndroidManifest.xml:17:1-36:12
@@ -91,16 +92,16 @@ MERGED from [:firebase_core] G:\MangoHub\mangohub-mobile-delivery\build\firebase
 MERGED from [:firebase_core] G:\MangoHub\mangohub-mobile-delivery\build\firebase_core\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-13:19
 MERGED from [com.google.android.gms:play-services-maps:17.0.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\7a446382788d38111f4082b02aeda717\play-services-maps-17.0.0\AndroidManifest.xml:30:5-36:19
 MERGED from [com.google.android.gms:play-services-maps:17.0.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\7a446382788d38111f4082b02aeda717\play-services-maps-17.0.0\AndroidManifest.xml:30:5-36:19
-MERGED from [com.google.android.gms:play-services-location:16.0.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\83e97a3086be2af6777ef1273d6ab318\jetified-play-services-location-16.0.0\AndroidManifest.xml:7:5-20
-MERGED from [com.google.android.gms:play-services-location:16.0.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\83e97a3086be2af6777ef1273d6ab318\jetified-play-services-location-16.0.0\AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-location:17.0.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\f6ed85132a5410bdbdbb0829d08234a6\play-services-location-17.0.0\AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-location:17.0.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\f6ed85132a5410bdbdbb0829d08234a6\play-services-location-17.0.0\AndroidManifest.xml:7:5-20
 MERGED from [com.google.firebase:firebase-firestore:21.7.1] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\ab8b693b39e5b80e252c7d62fff91d63\jetified-firebase-firestore-21.7.1\AndroidManifest.xml:16:5-24:19
 MERGED from [com.google.firebase:firebase-firestore:21.7.1] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\ab8b693b39e5b80e252c7d62fff91d63\jetified-firebase-firestore-21.7.1\AndroidManifest.xml:16:5-24:19
 MERGED from [com.google.firebase:firebase-auth-interop:18.0.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\3b13127dc24b312c6b7fc3e3c30e6a5d\firebase-auth-interop-18.0.0\AndroidManifest.xml:7:5-8:19
 MERGED from [com.google.firebase:firebase-auth-interop:18.0.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\3b13127dc24b312c6b7fc3e3c30e6a5d\firebase-auth-interop-18.0.0\AndroidManifest.xml:7:5-8:19
 MERGED from [com.google.android.gms:play-services-base:17.0.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\c6dd8f0dd025fb534d96453a90eb96a2\play-services-base-17.0.0\AndroidManifest.xml:22:5-27:19
 MERGED from [com.google.android.gms:play-services-base:17.0.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\c6dd8f0dd025fb534d96453a90eb96a2\play-services-base-17.0.0\AndroidManifest.xml:22:5-27:19
-MERGED from [com.google.android.gms:play-services-places-placereport:16.0.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\07785c96269afd0c67522eb30d0b689d\play-services-places-placereport-16.0.0\AndroidManifest.xml:22:5-20
-MERGED from [com.google.android.gms:play-services-places-placereport:16.0.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\07785c96269afd0c67522eb30d0b689d\play-services-places-placereport-16.0.0\AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-places-placereport:17.0.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\adcbc480b7c638efb439e353539d3e6e\play-services-places-placereport-17.0.0\AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-places-placereport:17.0.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\adcbc480b7c638efb439e353539d3e6e\play-services-places-placereport-17.0.0\AndroidManifest.xml:22:5-20
 MERGED from [com.google.firebase:firebase-core:17.5.1] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\5b1231bee0f730cb5b8d30bf6df8b0ee\firebase-core-17.5.1\AndroidManifest.xml:7:5-20
 MERGED from [com.google.firebase:firebase-core:17.5.1] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\5b1231bee0f730cb5b8d30bf6df8b0ee\firebase-core-17.5.1\AndroidManifest.xml:7:5-20
 MERGED from [com.google.firebase:firebase-analytics:17.6.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\e9d967453853660fb985240c48962d2c\firebase-analytics-17.6.0\AndroidManifest.xml:7:5-20
@@ -193,28 +194,30 @@ uses-sdk
 INJECTED from G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml
 INJECTED from G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml
-MERGED from [:location] G:\MangoHub\mangohub-mobile-delivery\build\location\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
-MERGED from [:location] G:\MangoHub\mangohub-mobile-delivery\build\location\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
-MERGED from [:image_picker] G:\MangoHub\mangohub-mobile-delivery\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
-MERGED from [:image_picker] G:\MangoHub\mangohub-mobile-delivery\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
-MERGED from [:google_maps_flutter] G:\MangoHub\mangohub-mobile-delivery\build\google_maps_flutter\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
-MERGED from [:google_maps_flutter] G:\MangoHub\mangohub-mobile-delivery\build\google_maps_flutter\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
-MERGED from [:flutter_plugin_android_lifecycle] G:\MangoHub\mangohub-mobile-delivery\build\flutter_plugin_android_lifecycle\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
-MERGED from [:flutter_plugin_android_lifecycle] G:\MangoHub\mangohub-mobile-delivery\build\flutter_plugin_android_lifecycle\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
-MERGED from [:cloud_firestore] G:\MangoHub\mangohub-mobile-delivery\build\cloud_firestore\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
-MERGED from [:cloud_firestore] G:\MangoHub\mangohub-mobile-delivery\build\cloud_firestore\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
-MERGED from [:location_web] G:\MangoHub\mangohub-mobile-delivery\build\location_web\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
-MERGED from [:location_web] G:\MangoHub\mangohub-mobile-delivery\build\location_web\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
-MERGED from [:firebase_core] G:\MangoHub\mangohub-mobile-delivery\build\firebase_core\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
-MERGED from [:firebase_core] G:\MangoHub\mangohub-mobile-delivery\build\firebase_core\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:hexcolor] G:\MangoHub\mangohub-mobile-delivery\build\hexcolor\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:hexcolor] G:\MangoHub\mangohub-mobile-delivery\build\hexcolor\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:google_maps_flutter] G:\MangoHub\mangohub-mobile-delivery\build\google_maps_flutter\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:google_maps_flutter] G:\MangoHub\mangohub-mobile-delivery\build\google_maps_flutter\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:image_picker] G:\MangoHub\mangohub-mobile-delivery\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:image_picker] G:\MangoHub\mangohub-mobile-delivery\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:flutter_plugin_android_lifecycle] G:\MangoHub\mangohub-mobile-delivery\build\flutter_plugin_android_lifecycle\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:flutter_plugin_android_lifecycle] G:\MangoHub\mangohub-mobile-delivery\build\flutter_plugin_android_lifecycle\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:location] G:\MangoHub\mangohub-mobile-delivery\build\location\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:location] G:\MangoHub\mangohub-mobile-delivery\build\location\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:location_web] G:\MangoHub\mangohub-mobile-delivery\build\location_web\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:location_web] G:\MangoHub\mangohub-mobile-delivery\build\location_web\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:geolocator] G:\MangoHub\mangohub-mobile-delivery\build\geolocator\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:geolocator] G:\MangoHub\mangohub-mobile-delivery\build\geolocator\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:cloud_firestore] G:\MangoHub\mangohub-mobile-delivery\build\cloud_firestore\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:cloud_firestore] G:\MangoHub\mangohub-mobile-delivery\build\cloud_firestore\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:firebase_core] G:\MangoHub\mangohub-mobile-delivery\build\firebase_core\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:firebase_core] G:\MangoHub\mangohub-mobile-delivery\build\firebase_core\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [androidx.multidex:multidex:2.0.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\bd4f627e73a2f6f5109d2259ced3ced5\multidex-2.0.0\AndroidManifest.xml:20:5-43
 MERGED from [androidx.multidex:multidex:2.0.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\bd4f627e73a2f6f5109d2259ced3ced5\multidex-2.0.0\AndroidManifest.xml:20:5-43
 MERGED from [com.google.android.gms:play-services-maps:17.0.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\7a446382788d38111f4082b02aeda717\play-services-maps-17.0.0\AndroidManifest.xml:20:5-44
 MERGED from [com.google.android.gms:play-services-maps:17.0.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\7a446382788d38111f4082b02aeda717\play-services-maps-17.0.0\AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-location:16.0.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\83e97a3086be2af6777ef1273d6ab318\jetified-play-services-location-16.0.0\AndroidManifest.xml:5:5-44
-MERGED from [com.google.android.gms:play-services-location:16.0.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\83e97a3086be2af6777ef1273d6ab318\jetified-play-services-location-16.0.0\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-location:17.0.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\f6ed85132a5410bdbdbb0829d08234a6\play-services-location-17.0.0\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-location:17.0.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\f6ed85132a5410bdbdbb0829d08234a6\play-services-location-17.0.0\AndroidManifest.xml:5:5-44
 MERGED from [com.google.firebase:firebase-firestore:21.7.1] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\ab8b693b39e5b80e252c7d62fff91d63\jetified-firebase-firestore-21.7.1\AndroidManifest.xml:7:5-9:41
 MERGED from [com.google.firebase:firebase-firestore:21.7.1] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\ab8b693b39e5b80e252c7d62fff91d63\jetified-firebase-firestore-21.7.1\AndroidManifest.xml:7:5-9:41
 MERGED from [com.google.firebase:firebase-auth-interop:18.0.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\3b13127dc24b312c6b7fc3e3c30e6a5d\firebase-auth-interop-18.0.0\AndroidManifest.xml:5:5-44
@@ -223,8 +226,8 @@ MERGED from [com.google.firebase:firebase-database-collection:17.0.1] C:\Users\G
 MERGED from [com.google.firebase:firebase-database-collection:17.0.1] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\fe556d1c64a7ef12e97e2b55e48f4f3c\firebase-database-collection-17.0.1\AndroidManifest.xml:5:5-7:41
 MERGED from [com.google.android.gms:play-services-base:17.0.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\c6dd8f0dd025fb534d96453a90eb96a2\play-services-base-17.0.0\AndroidManifest.xml:20:5-44
 MERGED from [com.google.android.gms:play-services-base:17.0.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\c6dd8f0dd025fb534d96453a90eb96a2\play-services-base-17.0.0\AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-places-placereport:16.0.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\07785c96269afd0c67522eb30d0b689d\play-services-places-placereport-16.0.0\AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-places-placereport:16.0.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\07785c96269afd0c67522eb30d0b689d\play-services-places-placereport-16.0.0\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-places-placereport:17.0.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\adcbc480b7c638efb439e353539d3e6e\play-services-places-placereport-17.0.0\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-places-placereport:17.0.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\adcbc480b7c638efb439e353539d3e6e\play-services-places-placereport-17.0.0\AndroidManifest.xml:20:5-44
 MERGED from [com.google.firebase:firebase-core:17.5.1] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\5b1231bee0f730cb5b8d30bf6df8b0ee\firebase-core-17.5.1\AndroidManifest.xml:5:5-44
 MERGED from [com.google.firebase:firebase-core:17.5.1] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\5b1231bee0f730cb5b8d30bf6df8b0ee\firebase-core-17.5.1\AndroidManifest.xml:5:5-44
 MERGED from [com.google.firebase:firebase-analytics:17.6.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\e9d967453853660fb985240c48962d2c\firebase-analytics-17.6.0\AndroidManifest.xml:5:5-44
@@ -325,10 +328,6 @@ MERGED from [com.google.android.gms:play-services-measurement-sdk-api:17.6.0] C:
 MERGED from [com.google.android.gms:play-services-measurement-sdk-api:17.6.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\ebd40d08bfbecba5255fe0b979759191\play-services-measurement-sdk-api-17.6.0\AndroidManifest.xml:23:5-67
 	android:name
 		ADDED from G:\MangoHub\mangohub-mobile-delivery\android\app\src\debug\AndroidManifest.xml:6:22-64
-uses-permission#android.permission.ACCESS_COARSE_LOCATION
-ADDED from [:location] G:\MangoHub\mangohub-mobile-delivery\build\location\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-81
-	android:name
-		ADDED from [:location] G:\MangoHub\mangohub-mobile-delivery\build\location\intermediates\library_manifest\debug\AndroidManifest.xml:7:22-78
 uses-permission#android.permission.READ_EXTERNAL_STORAGE
 ADDED from [:image_picker] G:\MangoHub\mangohub-mobile-delivery\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-80
 	android:name
@@ -353,6 +352,10 @@ ADDED from [:image_picker] G:\MangoHub\mangohub-mobile-delivery\build\image_pick
 		ADDED from [:image_picker] G:\MangoHub\mangohub-mobile-delivery\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:18:17-72
 	android:name
 		ADDED from [:image_picker] G:\MangoHub\mangohub-mobile-delivery\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:17:17-67
+uses-permission#android.permission.ACCESS_COARSE_LOCATION
+ADDED from [:location] G:\MangoHub\mangohub-mobile-delivery\build\location\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-81
+	android:name
+		ADDED from [:location] G:\MangoHub\mangohub-mobile-delivery\build\location\intermediates\library_manifest\debug\AndroidManifest.xml:7:22-78
 service#com.google.firebase.components.ComponentDiscoveryService
 ADDED from [:cloud_firestore] G:\MangoHub\mangohub-mobile-delivery\build\cloud_firestore\intermediates\library_manifest\debug\AndroidManifest.xml:8:9-12:19
 MERGED from [:firebase_core] G:\MangoHub\mangohub-mobile-delivery\build\firebase_core\intermediates\library_manifest\debug\AndroidManifest.xml:8:9-12:19

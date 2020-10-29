@@ -11,7 +11,7 @@
         android:label="MangoHub Mobile Delivery"
         android:icon="@mipmap/ic_launcher">
         <meta-data android:name="com.google.android.geo.API_KEY"
-                   android:value="AIzaSyAEpoBFxvVpzbg9pQgpKuWELNyH9pcKBf4"/>
+                   android:value="AIzaSyDhOoTKiPahx0kxP77CsMoQFcI61ivN4PU"/>
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

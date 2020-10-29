@@ -30,6 +30,7 @@ class LocationService{
   }
 
   LocationService(){
+
     location.onLocationChanged.listen((locationData) {
       if (locationData != null) {
         _locationController.add(UserLocation(

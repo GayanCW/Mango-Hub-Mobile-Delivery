@@ -9,6 +9,20 @@ class UserLocation{
 
 }
 
+class MyLocation{
+
+  double longitude;
+  double latitude;
+
+  MyLocation({this.latitude = 0.00,this.longitude=0.00});
+
+  MyLocation.fromJson(Map<String, dynamic> json) {
+    latitude = json['latitude'];
+    longitude = json['longitude'];
+  }
+
+}
+
 
 class AllOrderCompanyIds{
   final String sIds;

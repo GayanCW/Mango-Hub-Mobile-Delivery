@@ -24,15 +24,15 @@
 22    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 22-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:8:5-79
 22-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:8:22-76
-23    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-23-->[:location] G:\MangoHub\mangohub-mobile-delivery\build\location\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-81
-23-->[:location] G:\MangoHub\mangohub-mobile-delivery\build\location\intermediates\library_manifest\debug\AndroidManifest.xml:7:22-78
-24    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-24-->[:image_picker] G:\MangoHub\mangohub-mobile-delivery\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-80
-24-->[:image_picker] G:\MangoHub\mangohub-mobile-delivery\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:7:22-77
-25    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- Include required permissions for Google Maps API to run. -->
-25-->[:image_picker] G:\MangoHub\mangohub-mobile-delivery\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:8:5-81
-25-->[:image_picker] G:\MangoHub\mangohub-mobile-delivery\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:8:22-78
+23    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+23-->[:image_picker] G:\MangoHub\mangohub-mobile-delivery\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-80
+23-->[:image_picker] G:\MangoHub\mangohub-mobile-delivery\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:7:22-77
+24    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+24-->[:image_picker] G:\MangoHub\mangohub-mobile-delivery\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:8:5-81
+24-->[:image_picker] G:\MangoHub\mangohub-mobile-delivery\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:8:22-78
+25    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- Include required permissions for Google Maps API to run. -->
+25-->[:location] G:\MangoHub\mangohub-mobile-delivery\build\location\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-81
+25-->[:location] G:\MangoHub\mangohub-mobile-delivery\build\location\intermediates\library_manifest\debug\AndroidManifest.xml:7:22-78
 26    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 26-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\7a446382788d38111f4082b02aeda717\play-services-maps-17.0.0\AndroidManifest.xml:23:5-79
 26-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\7a446382788d38111f4082b02aeda717\play-services-maps-17.0.0\AndroidManifest.xml:23:22-76
@@ -66,7 +66,7 @@
 41-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:13:9-14:77
 42            android:name="com.google.android.geo.API_KEY"
 42-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:13:20-65
-43            android:value="AIzaSyAEpoBFxvVpzbg9pQgpKuWELNyH9pcKBf4" />
+43            android:value="AIzaSyDhOoTKiPahx0kxP77CsMoQFcI61ivN4PU" />
 43-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:14:20-75
 44
 45        <activity

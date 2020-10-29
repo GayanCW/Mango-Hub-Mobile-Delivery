@@ -1,4 +1,4 @@
-import 'dart:async';
+import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,7 +9,7 @@ import 'package:mangoHub/src/models/APImodels/GetNearbyCompaniesModel.dart';
 import 'package:mangoHub/src/models/APImodels/OrderModel.dart';
 import 'package:mangoHub/src/models/UImodels/LocationModel.dart';
 import 'package:mangoHub/src/services/GoogleService.dart';
-import 'package:mangoHub/src/shared/Colors.dart';
+
 
 
 
@@ -22,12 +22,14 @@ class MapSample extends StatefulWidget {
 class MapSampleState extends State<MapSample> {
   double _myLatitude = 0.00;
   double _myLongitude = 0.00;
+  double lat,lang;
+
   Location location = Location();
   GoogleMapController _mapController;
   bool _showMapStyle = false;
   bool apiCallState = false;
   List<OrderProductList> productList = new List<OrderProductList>();
-  List<OrderAditionalCharges> aditionalChargesList = new List<OrderAditionalCharges>();
+  List<OrderAditionalCharges> additionalChargesList = new List<OrderAditionalCharges>();
 
   static final _initialCameraPosition = CameraPosition(
     target: LatLng(6.767679, 79.893027),
@@ -49,25 +51,34 @@ class MapSampleState extends State<MapSample> {
     }
   }
 
-
-  @override
-  void initState() {
-    super.initState();
-    _showMapStyle=true;
-    LocationService().getLocationPermission();
-    listenFirestoreChange();
-
+  double calculateDistance(lat1, lon1, lat2, lon2){
+    var p = 0.017453292519943295;
+    var c = cos;
+    var a = 0.5 - c((lat2 - lat1) * p)/2 +
+        c(lat1 * p) * c(lat2 * p) *
+            (1 - c((lon2 - lon1) * p))/2;
+    return 12742 * asin(sqrt(a));
   }
 
 
   @override
+  void initState() {
+    super.initState();
+    LocationService().getLocationPermission();
+    // listenFirestoreChange();
+    // apiCallState = true;
+
+  }
+
+
+  /*@override
   Widget build(BuildContext context) {
     return BlocListener<GetNearbyCompaniesBloc,GetNearbyCompaniesState>(
       listener: (context, state){
         if(state is GetNearbyCompaniesSuccess) {
           orderAllDetails.clear();
           productList.clear();
-          aditionalChargesList.clear();
+          additionalChargesList.clear();
           nearbyCompaniesList.clear();
 
           for (int index = 0; index < state.getNearbyCompanies.nearbyCompanies.length; index++) {
@@ -98,68 +109,107 @@ class MapSampleState extends State<MapSample> {
             );
           }
 
-            for (int index1 = 0; index1< /*allOrderCompanies.length*/5; index1++) {
-
+            for (int index1 = 0; index1 < allOrderCompanies.length; index1++) {
               for (int index2 = 0; index2 < nearbyCompaniesList.length; index2++) {
                 if(allOrderCompanies[index1].orderBranchId == nearbyCompaniesList[index2].sId){
-                  OrderGeo singleGeo= OrderGeo();
-                    singleGeo.shop =   allOrderCompanies[index1].orderGeo.shop;
-                    singleGeo.delivery =  allOrderCompanies[index1].orderGeo.delivery;
-
-                  for(int prodIndex=0; prodIndex<allOrderCompanies[index1].orderProductList.length; prodIndex++) {
-                    productList.add(OrderProductList(
-                      stockId:allOrderCompanies[index1].orderProductList[prodIndex].stockId,
-                      stockBaseProductId: allOrderCompanies[index1].orderProductList[prodIndex].stockBaseProductId,
-                      stockVariantId: allOrderCompanies[index1].orderProductList[prodIndex].stockVariantId,
-                      stockVariantTag: allOrderCompanies[index1].orderProductList[prodIndex].stockVariantTag,
-                      stockUnitCost: allOrderCompanies[index1].orderProductList[prodIndex].stockUnitCost,
-                      stockUnitPrice: allOrderCompanies[index1].orderProductList[prodIndex].stockUnitPrice,
-                      stockUnitDiscountType: allOrderCompanies[index1].orderProductList[prodIndex].stockUnitDiscountType,
-                      stockUnitDiscountValue: allOrderCompanies[index1].orderProductList[prodIndex].stockUnitDiscountValue,
-                      stockUnitDiscountAmount: allOrderCompanies[index1].orderProductList[prodIndex].stockUnitDiscountAmount,
-                      stockQty: allOrderCompanies[index1].orderProductList[prodIndex].stockQty,
-                      stockCompany: allOrderCompanies[index1].orderProductList[prodIndex].stockCompany,
-                    ));
+                  *//*if(allOrderCompanies[index1].orderGeo.delivery!= null) {
+                     lat = double.parse(
+                        allOrderCompanies[index1].orderGeo.delivery.split(
+                            ',')[0]);
+                     lang = double.parse(
+                        allOrderCompanies[index1].orderGeo.delivery.split(
+                            ',')[1]);
+                  }else{
+                     lat = 6.79888;
+                     lang = 79.89999;
                   }
+                  if(calculateDistance(_myLatitude,_myLongitude, lat,lang)<10000.00) {*//*
+                    OrderGeo singleGeo = OrderGeo();
+                    singleGeo.shop = allOrderCompanies[index1].orderGeo.shop;
+                    singleGeo.delivery = allOrderCompanies[index1].orderGeo.delivery;
 
-                  for(int acIndex=0; acIndex<allOrderCompanies[index1].orderAditionalCharges.length; acIndex++) {
-                    aditionalChargesList.add(OrderAditionalCharges(
-                      type: allOrderCompanies[index1].orderAditionalCharges[acIndex].type,
-                      amount: allOrderCompanies[index1].orderAditionalCharges[acIndex].amount,
-                    ));
-                  }
+                    for (int prodIndex = 0; prodIndex <
+                        allOrderCompanies[index1].orderProductList
+                            .length; prodIndex++) {
+                      productList.add(OrderProductList(
+                        stockId: allOrderCompanies[index1]
+                            .orderProductList[prodIndex].stockId,
+                        stockBaseProductId: allOrderCompanies[index1]
+                            .orderProductList[prodIndex].stockBaseProductId,
+                        stockVariantId: allOrderCompanies[index1]
+                            .orderProductList[prodIndex].stockVariantId,
+                        stockVariantTag: allOrderCompanies[index1]
+                            .orderProductList[prodIndex].stockVariantTag,
+                        stockUnitCost: allOrderCompanies[index1]
+                            .orderProductList[prodIndex].stockUnitCost,
+                        stockUnitPrice: allOrderCompanies[index1]
+                            .orderProductList[prodIndex].stockUnitPrice,
+                        stockUnitDiscountType: allOrderCompanies[index1]
+                            .orderProductList[prodIndex].stockUnitDiscountType,
+                        stockUnitDiscountValue: allOrderCompanies[index1]
+                            .orderProductList[prodIndex].stockUnitDiscountValue,
+                        stockUnitDiscountAmount: allOrderCompanies[index1]
+                            .orderProductList[prodIndex]
+                            .stockUnitDiscountAmount,
+                        stockQty: allOrderCompanies[index1]
+                            .orderProductList[prodIndex].stockQty,
+                        stockCompany: allOrderCompanies[index1]
+                            .orderProductList[prodIndex].stockCompany,
+                      ));
+                    }
+
+                    for (int acIndex = 0; acIndex <
+                        allOrderCompanies[index1].orderAditionalCharges
+                            .length; acIndex++) {
+                      additionalChargesList.add(OrderAditionalCharges(
+                        type: allOrderCompanies[index1]
+                            .orderAditionalCharges[acIndex].type,
+                        amount: allOrderCompanies[index1]
+                            .orderAditionalCharges[acIndex].amount,
+                      ));
+                    }
 
                     orderAllDetails.add(OrderModel(
                       orderProductList: productList,
-                      orderAditionalCharges: aditionalChargesList,
+                      orderAditionalCharges: additionalChargesList,
                       orderGeo: singleGeo,
                       sId: allOrderCompanies[index1].sId,
                       orderDate: allOrderCompanies[index1].orderDate,
                       orderCompany: allOrderCompanies[index1].orderCompany,
                       orderBranchId: allOrderCompanies[index1].orderBranchId,
-                      orderCustomerId: allOrderCompanies[index1].orderCustomerId,
-                      orderCustomerName: allOrderCompanies[index1].orderCustomerName,
-                      orderCustomerMobile: allOrderCompanies[index1].orderCustomerMobile,
-                      orderPaymentMethod: allOrderCompanies[index1].orderPaymentMethod,
+                      orderCustomerId: allOrderCompanies[index1]
+                          .orderCustomerId,
+                      orderCustomerName: allOrderCompanies[index1]
+                          .orderCustomerName,
+                      orderCustomerMobile: allOrderCompanies[index1]
+                          .orderCustomerMobile,
+                      orderPaymentMethod: allOrderCompanies[index1]
+                          .orderPaymentMethod,
                       orderAmount: allOrderCompanies[index1].orderAmount,
                       orderDiscount: allOrderCompanies[index1].orderDiscount,
                       orderTotal: allOrderCompanies[index1].orderTotal,
-                      orderAdvancePayment: allOrderCompanies[index1].orderAdvancePayment,
+                      orderAdvancePayment: allOrderCompanies[index1]
+                          .orderAdvancePayment,
                       orderStatus: allOrderCompanies[index1].orderStatus,
-                      orderStatusString: allOrderCompanies[index1].orderStatusString,
+                      orderStatusString: allOrderCompanies[index1]
+                          .orderStatusString,
                       orderType: allOrderCompanies[index1].orderType,
-                      orderAcceptedUserId: allOrderCompanies[index1].orderAcceptedUserId,
+                      orderAcceptedUserId: allOrderCompanies[index1]
+                          .orderAcceptedUserId,
                       orderInvoiceId: allOrderCompanies[index1].orderInvoiceId,
-                      orderDeliveryPersonId: allOrderCompanies[index1].orderDeliveryPersonId,
+                      orderDeliveryPersonId: allOrderCompanies[index1]
+                          .orderDeliveryPersonId,
                       createdAt: allOrderCompanies[index1].createdAt,
                       updatedAt: allOrderCompanies[index1].updatedAt,
                       iV: allOrderCompanies[index1].iV,
                     ));
+                  // }
                 }
               }
             }
 
-            print(orderAllDetails.length);
+          // OrdersState().refreshPage();
+          //   print("shops: ${orderAllDetails.length}");
 
         }
         if(state is GetNearbyCompaniesFailed){
@@ -187,9 +237,9 @@ class MapSampleState extends State<MapSample> {
       });
     });
     // streamSub.cancel();
-  }
-
-  Widget buildGoogleMap(BuildContext context) {
+  }*/
+  @override
+  Widget build(BuildContext context) {
     Size _size = MediaQuery.of(context).size;
     return StreamBuilder<UserLocation>(
       stream: LocationService().locationStream,
@@ -202,10 +252,14 @@ class MapSampleState extends State<MapSample> {
             LoaderFormState.hideLoader(context);
           }
         }*/
+        if(!snapshot.hasData){
+          Center(child: Text('Loading . . .'),);
+        }
         if(snapshot.hasData) {
           _myLatitude = snapshot.data.latitude;
           _myLongitude = snapshot.data.longitude;
-          if(apiCallState==true){
+
+          /*if(apiCallState==true){
             BlocProvider.of<GetNearbyCompaniesBloc>(context).add(
               GetNearbyCompanies(
                   latitude: _myLatitude,
@@ -213,16 +267,17 @@ class MapSampleState extends State<MapSample> {
                   distance: 10000.00
               ));
           }
-          apiCallState = false;
+          apiCallState = false;*/
+          if (_mapController != null) {
+            _mapController.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
+                bearing: 0.0,
+                target: LatLng(snapshot.data.latitude, snapshot.data.longitude),
+                tilt: 0,
+                zoom: 18.00
+            )));
+          }
         }
-        if (_mapController != null) {
-          _mapController.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
-              bearing: 0.0,
-              target: LatLng(snapshot.data.latitude, snapshot.data.longitude),
-              tilt: 0,
-              zoom: 18.00
-          )));
-        }
+
         return Stack(
           children: [
             Container(
@@ -268,7 +323,7 @@ class MapSampleState extends State<MapSample> {
             //
             //   ),
             // ),
-            Container(
+            /*Container(
               margin: EdgeInsets.only(top: _size.height*0.5),
               height: 50.0,
               width: 200.0,
@@ -280,7 +335,7 @@ class MapSampleState extends State<MapSample> {
                   Text(_myLongitude.toString()),
                 ],
               ),
-            ),
+            ),*/
           ],
         );
       }

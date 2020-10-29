@@ -1,6 +1,8 @@
+
 import 'package:flutter/material.dart';
 import 'package:mangoHub/src/screens/Home.dart';
 import 'package:mangoHub/src/services/CloudFirestore.dart';
+import 'package:mangoHub/src/shared/Colors.dart';
 
 import 'drawer.dart';
 
@@ -18,13 +20,15 @@ class _DashboardState extends State<Dashboard> {
   Widget build(BuildContext context) {
     final _tabs = [
       // ProfileScreen(),
+      Text('Profile'),
       // Details(),
-      FirebaseInitialize(),
+      // FirebaseInitialize(),
       Home(),
       // MyHomePage(title: 'Flutter Circle Progress')
       // OrderPage(),
       // Details()
-      Test()
+      Text('Details'),
+      // Test()
     ];
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -52,7 +56,7 @@ class _DashboardState extends State<Dashboard> {
 
           currentIndex:  _selectedIndex,
           type: BottomNavigationBarType.fixed,
-          fixedColor: Colors.blue[600],
+          fixedColor: mangoOrange,
           onTap: _onItemTapped,
 
 

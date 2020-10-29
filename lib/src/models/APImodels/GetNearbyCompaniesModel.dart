@@ -1,4 +1,5 @@
 List<NearbyCompanies> nearbyCompaniesList = new List<NearbyCompanies>();
+List<NearbyCompanies> orderCompanyDetails = new List<NearbyCompanies>();
 
 class GetNearbyCompaniesModel {
   List<NearbyCompanies> nearbyCompanies;

@@ -14,8 +14,8 @@ class Home extends StatelessWidget {
           centerTitle: true,
           backgroundColor: mangoOrange,
         ),
-        body: FirebaseInitialize2(),
-        // body: Orders(),
+        // body: FirebaseInitialize2(),
+        body: Orders(),
       ),
     );
   }
