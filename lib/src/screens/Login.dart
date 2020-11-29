@@ -5,9 +5,10 @@ import 'package:mangoHub/src/components/AlertBox.dart';
 import 'package:mangoHub/src/components/Buttons.dart';
 import 'package:mangoHub/src/components/LoaderForm.dart';
 import 'package:mangoHub/src/components/TextFormField.dart';
+import 'package:mangoHub/src/screens/Dashboard.dart';
 import 'package:mangoHub/src/shared/Colors.dart';
+import 'package:mangoHub/src/shared/Repository.dart';
 import 'package:string_validator/string_validator.dart';
-import 'Intro.dart';
 
 /*Login Page Completed */
 
@@ -25,6 +26,8 @@ class _LoginState extends State<Login> {
   final TextEditingController email = TextEditingController();
   final TextEditingController password = TextEditingController();
 
+  Repository _repository = new Repository();
+
   void _toggle1() {
     setState(() {
       _passwordVisible = !_passwordVisible;
@@ -35,6 +38,7 @@ class _LoginState extends State<Login> {
       Navigator.pop(context);
     });
   }
+
   @override
   void initState() {
     super.initState();
@@ -45,136 +49,155 @@ class _LoginState extends State<Login> {
   Widget buildLoginUI(BuildContext context) {
     Size _size = MediaQuery.of(context).size;
 
-    return SingleChildScrollView(
-      child: Stack(
-        children: [
-          Container(
-            color: mangoOrange,
-            height: _size.height*0.35,
-            child: Padding(
-              padding: EdgeInsets.all(10.0),
-              child: Center(
-                child: Text(
-                  "Let's Start with Login!",
-                  style: TextStyle(fontSize: _size.height*0.04, color: mangoWhite),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'SignUp Page',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      ),
+      home: Scaffold(
+        backgroundColor: mangoGrey,
+        body: GestureDetector(
+          child: SingleChildScrollView(
+            child: Stack(
+              children: [
+                Container(
+                  color: mangoOrange,
+                  height: _size.height*0.45,
+                  width: double.infinity,
+                  child: Padding(
+                    padding: EdgeInsets.only(top: _size.height*0.07),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Image.asset("assets/images/mangohub_logo.png", height: _size.height*0.15,),
+                        SizedBox(height: _size.height*0.02,),
+                        Text(
+                          "Welcome to MangoHub",
+                          style: TextStyle(fontSize: _size.height*0.04, color: mangoGrey, fontWeight: FontWeight.w400, letterSpacing: 1.2),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
-              ),
-            ),
-          ),
-          Container(
-            // height: _size.height*0.4,
-            height: 340.0,
-            margin: EdgeInsets.only(
-              top: _size.height*0.28,
-              left: _size.width*0.06,
-              right: _size.width*0.06,
-            ),
-            padding: EdgeInsets.symmetric(horizontal: _size.width*0.05),
-            decoration: BoxDecoration(
-                color: mangoWhite,
-                borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                boxShadow: [
-                  BoxShadow(
-                    color: mangoShadow,
-                    offset: Offset(2.0, 2.0),
-                    blurRadius: 10.0,
-                    spreadRadius: 1.0,
+                Container(
+                  // height: _size.height*0.4,
+                  height: 280.0,
+                  margin: EdgeInsets.only(
+                    top: _size.height*0.3,
+                    left: _size.width*0.06,
+                    right: _size.width*0.06,
                   ),
-                ]),
-            child: Form(
-              key: _formKey,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  SingleTextFormField(
-                    inputText: email,
-                    inputTextVisible: false,
-                    labelText: "Username",
-                    hintText: "Enter Your Email",
-                    iconButton: null,
-                    textInputType: TextInputType.emailAddress,
-                    validatorFunction: (value){
-                      if(value.isEmpty){
-                        return "Required";
-                      }
-                      else if(isEmail(value) == false){
-                        return "Invalid Email Type";
-                      }
-                      else if(loginFailedState==true && matches(errorMessage, 'user')==true){
-                        // email.clear();
-                        return "Invalid User";
-                      }
-                    },
+                  padding: EdgeInsets.symmetric(horizontal: 10.0),
+                  decoration: BoxDecoration(
+                      color: mangoWhite,
+                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                      boxShadow: [
+                        BoxShadow(
+                          color: mangoWhite,
+                          offset: Offset(2.0, 2.0),
+                          blurRadius: 2.0,
+                          spreadRadius: 1.0,
+                        ),
+                      ]),
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        SingleTextFormField(
+                          inputText: email,
+                          inputTextVisible: false,
+                          labelText: "Username",
+                          hintText: "Enter Your Email",
+                          iconButton: null,
+                          textInputType: TextInputType.emailAddress,
+                          validatorFunction: (value){
+                            if(value.isEmpty){
+                              return "Required";
+                            }
+                            else if(isEmail(value) == false){
+                              return "Invalid Email Type";
+                            }
+                            else if(loginFailedState==true && matches(errorMessage, 'user')==true){
+                              // email.clear();
+                              return "Invalid User";
+                            }
+                          },
+                        ),
+                        SingleTextFormField(
+                          inputText: password,
+                          inputTextVisible: !_passwordVisible,
+                          // labelText: "Password",
+                          hintText: "Enter Your Password",
+                          iconButton: IconButton(
+                            icon: Icon(_passwordVisible == false
+                                ? Icons.visibility
+                                : Icons.visibility_off, color: mangoOrange,),
+                            onPressed: (){
+                              _toggle1();
+                            },),
+                          textInputType: TextInputType.text,
+                          validatorFunction: (value){
+                            if(value.isEmpty){
+                              return "Required";
+                            }
+                            else if(loginFailedState==true && matches(errorMessage, 'password')==true){
+                              // password.clear();
+                              return "Invalid Password";
+                            }
+                          },
+                        ),
+                        FlatButtonComp(
+                            text: "Login",
+                            press: (){
+                              loginFailedState = false;
+                              errorMessage = "";
+                              if(!_formKey.currentState.validate()){
+                                return;
+                              }
+                              else {
+                                FocusScope.of(context).requestFocus(FocusNode()); //  hide keyboard from setState & page routing
+                                LoaderFormState.showLoader(context, 'Please wait...');
+                                BlocProvider.of<LoginBloc>(context).add(
+                                    GetLoginDetails(email: email.text, password: password.text));
+                              }
+                            }
+                        ),
+                      ],
+                    ),
                   ),
-                  SingleTextFormField(
-                    inputText: password,
-                    inputTextVisible: !_passwordVisible,
-                    // labelText: "Password",
-                    hintText: "Enter Your Password",
-                    iconButton: IconButton(
-                      icon: Icon(_passwordVisible == false
-                          ? Icons.visibility_off
-                          : Icons.visibility),
-                      onPressed: (){
-                        _toggle1();
-                      },),
-                    textInputType: TextInputType.text,
-                    validatorFunction: (value){
-                      if(value.isEmpty){
-                        return "Required";
-                      }
-                      else if(loginFailedState==true && matches(errorMessage, 'password')==true){
-                        // password.clear();
-                        return "Invalid Password";
-                      }
-                    },
-                  ),
-                  SizedBox(
-                    height: _size.height*0.02,
-                  ),
-                  FlatButtonComp(
-                    text: "Login",
-                    press: (){
-                      loginFailedState = false;
-                      errorMessage = "";
-                      if(!_formKey.currentState.validate()){
-                        return;
-                      }
-                      else {
-                        FocusScope.of(context).requestFocus(FocusNode()); //  hide keyboard from setState & page routing
-                        LoaderFormState.showLoader(context, 'Please wait...');
-                        BlocProvider.of<LoginBloc>(context).add(
-                          GetLoginDetails(email: email.text, password: password.text));
-                      }
-                    }
-                  ),
-                ],
-              ),
-            ),
-          ),
+                ),
 
-          Container(
-            width: double.infinity,
-            margin: EdgeInsets.only(top: _size.height*0.84, left: _size.width*0.15, right: _size.width*0.15),
-            child: NamedButtonComp(
-                text: "I forgot password",
-                press: () {
-                  Navigator.pushNamed(context, '/resetPassword');
-                }
+                Container(
+                  width: double.infinity,
+                  margin: EdgeInsets.only(top: _size.height*0.3+300.0, left: _size.width*0.15, right: _size.width*0.15),
+                  child: NamedButtonComp(
+                      text: "I don't have an account",
+                      press: () {
+                        Navigator.pushNamed(context, '/signUp');
+                      }
+                  ),
+                ),
+                Container(
+                  width: double.infinity,
+                  margin: EdgeInsets.only(top: _size.height*0.3+530.0, left: _size.width*0.15, right: _size.width*0.15),
+                  child: NamedButtonComp(
+                      text: "I forgot password",
+                      press: () {
+                        Navigator.pushNamed(context, '/resetPassword');
+                      }
+                  ),
+                ),
+              ],
             ),
           ),
-          Container(
-            width: double.infinity,
-            margin: EdgeInsets.only(top: _size.height*0.84+40.0, left: _size.width*0.15, right: _size.width*0.15),
-            child: NamedButtonComp(
-                text: "I don't have an account",
-                press: () {
-                  Navigator.pushNamed(context, '/signUp');
-                }
-            ),
-          ),
-        ],
+          onTap: () {
+            FocusScope.of(context).requestFocus(FocusNode()); //  hide keyboard when clicking outside TextField/anywhere on screen
+          },
+        ),
       ),
     );
   }
@@ -186,10 +209,11 @@ class _LoginState extends State<Login> {
     return BlocListener<LoginBloc,LoginState>(
       listener: (context, state){
         if(state is LoginSuccess){
+          _repository.addValue('loginStatus', 'alreadyLogin');
           FocusScope.of(context).requestFocus(FocusNode()); //  hide keyboard from setState & page routing
           LoaderFormState.hideLoader(context);
             if(state.loginUser.login.loginType == "driver" && state.loginUser.login.loginStatus == false){
-              Navigator.of(context).push(MaterialPageRoute(builder: (context)=> Tabs(pageTitle: 'MangoHub'),));
+              Navigator.of(context).push(MaterialPageRoute(builder: (context)=> Dashboard(),));
             }
         }
         else if(state is LoginFailed){
@@ -205,7 +229,7 @@ class _LoginState extends State<Login> {
         else if(state is LoginFailedException){
           FocusScope.of(context).requestFocus(FocusNode()); //  hide keyboard from setState & page routing
           LoaderFormState.hideLoader(context);
-          showAlertDialog(context, state.errorObject);
+          showAlertDialog(context, 'Failed',state.errorObject);
 
         }
       },

@@ -61,7 +61,7 @@ class _ViewUserPageState extends State<ViewUserPage> {
 
               for(int prodIndex=0; prodIndex<snapshot.data.documents[index]['order_product_list'].length; prodIndex++){
                 productList.add(OrderProductList(
-                  stockId: snapshot.data.documents[index]['order_product_list'][prodIndex]['stock_id'],
+                  stockBaseProductCode: snapshot.data.documents[index]['order_product_list'][prodIndex]['stock_id'],
                   stockBaseProductId: snapshot.data.documents[index]['order_product_list'][prodIndex]['stock_base_product_id'],
                   stockVariantId: snapshot.data.documents[index]['order_product_list'][prodIndex]['stock_variant_id'],
                   stockVariantTag: snapshot.data.documents[index]['order_product_list'][prodIndex]['stock_variant_tag'],

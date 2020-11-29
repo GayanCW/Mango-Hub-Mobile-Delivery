@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
 import 'package:mangoHub/src/models/APImodels/LoginUser.dart';
+import 'package:mangoHub/src/shared/Repository.dart';
 import 'package:meta/meta.dart';
 import 'package:http/http.dart' as http;
 
@@ -11,6 +12,7 @@ part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   LoginBloc() : super(LoginInitial());
+  Repository repository = Repository();
 
   @override
   Stream<LoginState> mapEventToState(
@@ -29,6 +31,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
       if (response.statusCode == 200) {
         var loginResponse = jsonDecode(response.body);
+        repository.addValue('token', LoginUser.fromJson(loginResponse).token.toString());
+        repository.addValue('userProfileId', LoginUser.fromJson(loginResponse).login.userProfileId.toString());
         yield LoginSuccess(LoginUser.fromJson(loginResponse));
       }
       if (response.statusCode >= 400) {

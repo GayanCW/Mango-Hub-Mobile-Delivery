@@ -1,6 +1,45 @@
+/*List<OrderModel> allOrderCompanies = new List<OrderModel>();
+List<OrderModel> orderAllDetails = new List<OrderModel>();*/
+
 List<OrderModel> nearbyOrders = new List<OrderModel>();
-List<OrderModel> allOrderCompanies = new List<OrderModel>();
-List<OrderModel> orderAllDetails = new List<OrderModel>();
+List<OrderModel> acceptedOrder = new List<OrderModel>();
+List<OrderModel> deliveryHistory = new List<OrderModel>();
+List<DeliveryHistoryModel> deliveryHistoryAsDays = new List<DeliveryHistoryModel>();
+// List deliveryHistoryAsDays = [];
+// List deliveryHistoryAsDays = [];
+
+
+class DeliveryHistoryModel {
+  List<OrderModel> orderModel;
+  DeliveryHistoryModel({this.orderModel});
+
+  DeliveryHistoryModel.fromJson(json) {
+    List<dynamic> fixedLengthList = json;
+    if(json==null) return;
+    try{
+      orderModel = OrderModel.listFromJson(fixedLengthList);
+    }catch(e){
+      print(e);
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    return {'orderModel': orderModel};
+  }
+  static List<DeliveryHistoryModel> listFromJson(List<dynamic> json) {
+    return json == null
+        ? new List<DeliveryHistoryModel>()
+        : json.map((value) => new DeliveryHistoryModel.fromJson(value)).toList();
+  }
+  static Map<String, DeliveryHistoryModel> mapFromJson(Map<String, Map<String, dynamic>> json) {
+    var map = new Map<String, DeliveryHistoryModel>();
+    if (json != null && json.length > 0) {
+      json.forEach((String key, Map<String, dynamic> value) =>
+      map[key] = new DeliveryHistoryModel.fromJson(value));
+    }
+    return map;
+  }
+}
 
 class OrderModel {
   OrderGeo orderGeo;
@@ -129,6 +168,20 @@ class OrderModel {
     data['__v'] = this.iV;
     return data;
   }
+
+  static List<OrderModel> listFromJson(List<dynamic> json) {
+    return json == null
+        ? new List<OrderModel>()
+        : json.map((value) => new OrderModel.fromJson(value)).toList();
+  }
+  static Map<String, OrderModel> mapFromJson(Map<String, Map<String, dynamic>> json) {
+    var map = new Map<String, OrderModel>();
+    if (json != null && json.length > 0) {
+      json.forEach((String key, Map<String, dynamic> value) =>
+      map[key] = new OrderModel.fromJson(value));
+    }
+    return map;
+  }
 }
 
 class OrderGeo {
@@ -151,7 +204,7 @@ class OrderGeo {
 }
 
 class OrderProductList {
-  String stockId;
+  String stockBaseProductCode;
   String stockBaseProductId;
   String stockVariantId;
   String stockVariantTag;
@@ -164,7 +217,7 @@ class OrderProductList {
   String stockCompany;
 
   OrderProductList(
-      {this.stockId,
+      {this.stockBaseProductCode,
         this.stockBaseProductId,
         this.stockVariantId,
         this.stockVariantTag,
@@ -177,7 +230,7 @@ class OrderProductList {
         this.stockCompany});
 
   OrderProductList.fromJson(Map<String, dynamic> json) {
-    stockId = json['stock_id'];
+    stockBaseProductCode = json['stock_base_product_code'];
     stockBaseProductId = json['stock_base_product_id'];
     stockVariantId = json['stock_variant_id'];
     stockVariantTag = json['stock_variant_tag'];
@@ -192,7 +245,7 @@ class OrderProductList {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['stock_id'] = this.stockId;
+    data['stock_base_product_code'] = this.stockBaseProductCode;
     data['stock_base_product_id'] = this.stockBaseProductId;
     data['stock_variant_id'] = this.stockVariantId;
     data['stock_variant_tag'] = this.stockVariantTag;

@@ -1,13 +1,10 @@
 
 import 'dart:math';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:mangoHub/src/blocs/GetNearbyCompanies/get_nearby_companies_bloc.dart';
 import 'package:mangoHub/src/components/CircleProgress.dart';
-import 'package:mangoHub/src/components/LoaderForm.dart';
 import 'package:mangoHub/src/googleMap/GoogleMapObj.dart';
 import 'package:mangoHub/src/models/APImodels/GetNearbyCompaniesModel.dart';
 import 'package:mangoHub/src/models/APImodels/OrderModel.dart';
@@ -103,7 +100,6 @@ class OrdersState extends State<Orders> with SingleTickerProviderStateMixin{
   @override
   void initState() {
     super.initState();
-    // sendMyCurrentLocation();
     getMyLocation();
     progressController = AnimationController(vsync: this,duration: Duration(milliseconds: 2000));
     animation = Tween<double>(begin: 0.0,end: 100.0).animate(progressController)..addListener((){
@@ -131,6 +127,15 @@ class OrdersState extends State<Orders> with SingleTickerProviderStateMixin{
     if(position.latitude!=null && position.longitude!=null) {
       _myLatitude = position.latitude;
       _myLongitude = position.longitude;
+
+      print(_myLatitude);
+      print(_myLongitude);
+
+      setState(() {});
+    }
+    else{
+      _myLatitude = 0.00;
+      _myLongitude = 0.00;
       setState(() {});
     }
   }
@@ -151,6 +156,7 @@ class OrdersState extends State<Orders> with SingleTickerProviderStateMixin{
     });
   }
 
+
   @override
   Widget build(BuildContext context) {
     Size _size = MediaQuery.of(context).size;
@@ -165,8 +171,7 @@ class OrdersState extends State<Orders> with SingleTickerProviderStateMixin{
             nearbyOrders.clear();
               for (int index = 0; index <
                   snapshot.data.documents.length; index++) {
-                // productList.clear();
-                // additionalChargesList.clear();
+
                 _shopLatitude = double.parse(
                     snapshot.data.documents[index]['order_geo']['shop'].split(
                         ',')[0]);
@@ -199,12 +204,11 @@ class OrdersState extends State<Orders> with SingleTickerProviderStateMixin{
                   singleGeo.delivery =
                   snapshot.data.documents[index]['order_geo']['delivery'];
 
-                  // productList.clear();
                   for (int prodIndex = 0; prodIndex <
                       snapshot.data.documents[index]['order_product_list']
                           .length; prodIndex++) {
                     productList.add(OrderProductList(
-                      stockId: snapshot.data
+                      stockBaseProductCode: snapshot.data
                           .documents[index]['order_product_list'][prodIndex]['stock_id'],
                       stockBaseProductId: snapshot.data
                           .documents[index]['order_product_list'][prodIndex]['stock_base_product_id'],
@@ -229,7 +233,6 @@ class OrdersState extends State<Orders> with SingleTickerProviderStateMixin{
                     ));
                   }
 
-                  // additionalChargesList.clear();
                   for (int acIndex = 0; acIndex <
                       snapshot.data.documents[index]['order_aditional_charges']
                           .length; acIndex++) {
@@ -297,16 +300,16 @@ class OrdersState extends State<Orders> with SingleTickerProviderStateMixin{
 
             // print(nearbyOrders.toString());
 
-
-
-
+          }
+          else{
+            return Text('Waiting...!');
           }
           return Stack(
             children: [
-              Container(
-                  height: _size.height*0.65,
-                  child: MapSample()
-              ),
+              // Container(
+              //     height: _size.height*0.65,
+              //     child: MapSample()
+              // ),
               Container(
                 margin: EdgeInsets.only(top: _size.height*0.65, left: 10.0, right: 10.0),
                 // color: Colors.orange,
@@ -338,7 +341,7 @@ class OrdersState extends State<Orders> with SingleTickerProviderStateMixin{
                       )
                   ),
                   onTap: (){
-                    Navigator.of(context).push(MaterialPageRoute(builder: (context)=> OrderLocation(selectedIndex: orderSkipCount, myLatitude: _myLatitude, myLongitude: _myLongitude,)));
+                    // Navigator.of(context).push(MaterialPageRoute(builder: (context)=> OrderLocation(selectedIndex: orderSkipCount, myLatitude: _myLatitude, myLongitude: _myLongitude,)));
                   },
                 ):
                 Container(child: Center(child: Text('Waiting...')),),
@@ -396,4 +399,7 @@ class OrdersState extends State<Orders> with SingleTickerProviderStateMixin{
     );
 
   }
+
+
 }
+

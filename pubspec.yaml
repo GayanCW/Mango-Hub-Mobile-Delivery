@@ -44,6 +44,14 @@ dependencies:
   flutter_spinkit: "^4.1.2"
   sliding_up_panel: ^1.0.2
 
+  shared_preferences: ^0.5.12+4
+  flutter_polyline_points: ^0.2.4
+  flutter_secure_storage: '^3.3.2'
+  android_intent: ^0.3.7+7
+
+  intl:
+  qr_flutter: ^3.2.0
+
 
 
 dev_dependencies:
@@ -99,4 +107,4 @@ flutter:
 flutter_icons:
   android: true
   ios: true
-  image_path: "assets/images/delivery-man2.jpg"
+  image_path: "assets/images/boy_01.png"

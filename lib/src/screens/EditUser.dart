@@ -97,11 +97,14 @@ class _EditUserState extends State<EditUser> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
+        backgroundColor: mangoGrey,
         appBar: AppBar(
+          backgroundColor: mangoOrange,
           title: Text(
-            "Edit profile",
-            style: TextStyle(fontSize: 26.0, fontWeight: FontWeight.w400),
+            "Edit profile".toUpperCase(),
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: mangoWhite),
           ),
+          centerTitle: true,
           actions: [
             IconButton(
                 icon: Icon(
@@ -118,7 +121,6 @@ class _EditUserState extends State<EditUser> {
               onPressed: () {
                 Navigator.pop(context);
               }),
-          backgroundColor: mangoOrange,
           elevation: 0,
         ),
         body: GestureDetector(
@@ -132,13 +134,14 @@ class _EditUserState extends State<EditUser> {
                 ),
                 Container(
                   margin: EdgeInsets.only(top: 150.0),
+                  width: double.infinity,
                   padding: EdgeInsets.only(
-                    top: 100,
+                    top: 80,
                     left: 10.0,
                     right: 10.0,
                   ),
                   decoration: BoxDecoration(
-                      color: mangoBlack,
+                      color: mangoGrey,
                       borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(40.0),
                           topRight: Radius.circular(40.0))),
@@ -150,14 +153,14 @@ class _EditUserState extends State<EditUser> {
                           Container(
                             padding: EdgeInsets.all(15.0),
                             decoration: BoxDecoration(
-                                color: mangoBlack,
+                                color: mangoWhite,
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(10.0)),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: mangoShadow,
+                                    color: mangoWhite,
                                     offset: Offset(2.0, 2.0),
-                                    blurRadius: 10.0,
+                                    blurRadius: 2.0,
                                     spreadRadius: 1.0,
                                   ),
                                 ]),
@@ -171,7 +174,7 @@ class _EditUserState extends State<EditUser> {
                                       "Edit your name",
                                       style: TextStyle(
                                           fontSize: 25.0,
-                                          fontWeight: FontWeight.w300, color: mangoText,),
+                                          fontWeight: FontWeight.w300, color: mangoBlackText,),
                                     ),
                                   ),
                                 ),
@@ -206,20 +209,21 @@ class _EditUserState extends State<EditUser> {
                               ],
                             ),
                           ),
+                          SizedBox(height: 10.0,),
                           Container(
                             margin: EdgeInsets.only(
                               top: 5.0,
                             ),
                             padding: EdgeInsets.all(15.0),
                             decoration: BoxDecoration(
-                                color: mangoBlack,
+                                color: mangoWhite,
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(10.0)),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: mangoShadow,
+                                    color: mangoWhite,
                                     offset: Offset(2.0, 2.0),
-                                    blurRadius: 10.0,
+                                    blurRadius: 2.0,
                                     spreadRadius: 1.0,
                                   ),
                                 ]),
@@ -232,8 +236,8 @@ class _EditUserState extends State<EditUser> {
                                     child: Text(
                                       "Edit your Address",
                                       style: TextStyle(
-                                          fontSize: 25.0,
-                                          fontWeight: FontWeight.w300, color: mangoText),
+                                        fontSize: 25.0,
+                                        fontWeight: FontWeight.w300, color: mangoBlackText,),
                                     ),
                                   ),
                                 ),
@@ -424,17 +428,32 @@ class _EditUserState extends State<EditUser> {
                   alignment: Alignment.center,
                   child: Container(
                     height: 200.0, width: 200.0,
-                    // margin: EdgeInsets.only(top: 5.0),
+                    margin: EdgeInsets.only(top: 5.0),
                     // color: Colors.green,
                     child: Stack(
                       children: [
-                        CircleAvatar(
+                        Container(
+                            /*margin: EdgeInsets.only(top: 20, bottom: 20),
+                            width: 200.0,
+                            height: 200.0,*/
+                            decoration: BoxDecoration(
+                                color: mangoOrange,
+                                image: DecorationImage(
+                                    image: (_image == null)
+                                        ? AssetImage("assets/images/delivery-man2.jpg")
+                                        : FileImage(_image),
+                                    fit: BoxFit.cover),
+                                borderRadius: BorderRadius.all(Radius.circular(100.0)),
+                                boxShadow: [
+                                  BoxShadow(blurRadius: 5.0, color: Colors.grey)
+                                ])),
+                        /*CircleAvatar(
                           backgroundColor: Colors.white,
                           radius: 100,
                           backgroundImage: (_image == null)
-                              ? AssetImage("assets/images/avengers.jpg")
+                              ? AssetImage("assets/images/delivery-man2.jpg")
                               : FileImage(_image),
-                        ),
+                        ),*/
                         Align(
                           alignment: Alignment.bottomRight,
                           child: Container(
@@ -484,14 +503,14 @@ class _EditUserState extends State<EditUser> {
               print("district: ${state.editUser.userAddress.district}");
               print("city: ${state.editUser.userAddress.city}");
               print("EditUser Success");
-              showAlertDialogWithPop(context, "Update Success");
+          showAlertDialog(context, 'Success','Registered Successfully');
         }
         if (state is EditUserFailed) {}
         if (state is EditUserFailedException) {
           FocusScope.of(context).requestFocus(
               FocusNode()); //  hide keyboard from setState & page routing
           LoaderFormState.hideLoader(context);
-          showAlertDialog(context, state.errorObject);
+          showAlertDialog(context, 'Failed',state.errorObject);
 
         }
       },

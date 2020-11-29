@@ -10,8 +10,10 @@ Color mangoBlue = HexColor('#064E9D');
 Color mangoWhite = Colors.white;
 Color mangoRed = Colors.red;
 
-// Color mangoBlack = Colors.black;
-Color mangoBlack = Colors.white;
+Color mangoBlack = Colors.black;
+// Color mangoBlack = Colors.white;
+
+
 
 
 
@@ -20,8 +22,10 @@ Color mangoShadow = Colors.grey[200];
 
 
 // Color mangoShadow = Colors.black;
-// Color mangoText = Colors.white;
-Color mangoText = Colors.black;
+Color mangoText = Colors.white;
+
+Color mangoBlackText = Colors.black;
+Color mangoGrey = Colors.grey[900];
 
 
 

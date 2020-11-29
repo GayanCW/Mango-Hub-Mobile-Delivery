@@ -190,8 +190,8 @@ class _SignUpState extends State<SignUp> {
              hintText: "Enter Your Password",
              iconButton: IconButton(
                icon: Icon(_passwordVisible == false
-                   ? Icons.visibility_off
-                   : Icons.visibility),
+                   ? Icons.visibility
+                   : Icons.visibility_off, color: mangoOrange,),
                onPressed: (){
                  _toggle1();
                },),
@@ -210,7 +210,7 @@ class _SignUpState extends State<SignUp> {
              iconButton: IconButton(
                icon: Icon(_reEnteredPasswordVisible == false
                    ? Icons.visibility_off
-                   : Icons.visibility),
+                   : Icons.visibility,),
                onPressed: (){
                  // _toggle2();
                },),
@@ -447,39 +447,40 @@ class _SignUpState extends State<SignUp> {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: Scaffold(
+        backgroundColor: mangoGrey,
         body: GestureDetector(  // GestureDetector use for hide soft input keyboard after clicking outside TextField/anywhere on screen
           child: SingleChildScrollView(
             child: Stack(
               children: [
                 Container(
                   color: mangoOrange,
-                  height: _size.height*0.35,
+                  height: _size.height*0.45,
+                  width: double.infinity,
+                  alignment: Alignment.topCenter,
                   child: Padding(
-                    padding: EdgeInsets.all(10.0),
-                    child: Center(
-                      child: Text(
-                        "Create Your Account",
-                        style: TextStyle(fontSize: _size.height*0.04, color: mangoWhite),
-                      ),
+                    padding: EdgeInsets.only(top: _size.height*0.2),
+                    child: Text(
+                      "Create Your Account",
+                      style: TextStyle(fontSize: _size.height*0.04, color: mangoGrey, fontWeight: FontWeight.w400, letterSpacing: 1.2),
                     ),
                   ),
                 ),
                 Container(
                   height: 500,
                   margin: EdgeInsets.only(
-                    top: _size.height*0.28,
+                    top: _size.height*0.3,
                     left: _size.width*0.06,
                     right: _size.width*0.06,
                   ),
-                  padding: EdgeInsets.only(top: 20.0),
+                  padding: EdgeInsets.only(top: 10.0),
                   decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: mangoWhite,
                       borderRadius: BorderRadius.all(Radius.circular(10.0)),
                       boxShadow: [
                         BoxShadow(
-                          color: mangoShadow,
+                          color: mangoWhite,
                           offset: Offset(2.0, 2.0),
-                          blurRadius: 10.0,
+                          blurRadius: 2.0,
                           spreadRadius: 1.0,
                         ),
                       ]
@@ -490,7 +491,7 @@ class _SignUpState extends State<SignUp> {
                       Container(
                         // color: Colors.blue,
                         height: 440.0,
-                        margin: EdgeInsets.symmetric(horizontal: _size.width*0.05),
+                        margin: EdgeInsets.symmetric(horizontal: 10.0),
                         child: PageView(
                           controller: _pageController,
                           scrollDirection: Axis.horizontal,
@@ -504,11 +505,12 @@ class _SignUpState extends State<SignUp> {
                       Container(
                         // color: Colors.orange,
                         height: 30,
-                        margin: EdgeInsets.symmetric(horizontal: _size.width*0.05),
+                        margin: EdgeInsets.symmetric(horizontal: 10.0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Container(
+                              // color: Colors.red,
                               child: (pageIndex>0 && pageIndex<=widgetSliders.length)?NamedButtonComp(
                                   text: "< Back",
                                   press: () {
@@ -543,15 +545,18 @@ class _SignUpState extends State<SignUp> {
                     ],
                   ),
                 ),
-                Container(
-                  width: double.infinity,
-                  margin: EdgeInsets.only(top: _size.height*0.84+40.0, left: _size.width*0.15, right: _size.width*0.15),
-                  child: NamedButtonComp(
-                      text: "I have an account",
-                      press: () {
-                        // Navigator.pushNamedAndRemoveUntil(context, '/myApp', (route) => false);
-                        Navigator.pop(context);
-                      }
+                Visibility(
+                  visible: pageIndex==0?true:false,
+                  child: Container(
+                    width: double.infinity,
+                    margin: EdgeInsets.only(top: _size.height*0.93, left: _size.width*0.15, right: _size.width*0.15),
+                    child: NamedButtonComp(
+                        text: "I have an account",
+                        press: () {
+                          // Navigator.pushNamedAndRemoveUntil(context, '/myApp', (route) => false);
+                          Navigator.pop(context);
+                        }
+                    ),
                   ),
                 ),
               ],
@@ -596,7 +601,7 @@ class _SignUpState extends State<SignUp> {
           if(state is SignUpFailedException){
             FocusScope.of(context).requestFocus(FocusNode()); //  hide keyboard from setState & page routing
             LoaderFormState.hideLoader(context);
-            showAlertDialog(context, state.errorObject);
+            showAlertDialog(context, 'Failed',state.errorObject);
           }
       },
       child: BlocBuilder<SignUpBloc, SignUpState>(

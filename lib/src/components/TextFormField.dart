@@ -103,7 +103,7 @@ class _SingleEditTextFormFieldState extends State<SingleEditTextFormField> {
         children: [
           Text(
             widget.title,
-            style: TextStyle(fontSize: 18.0, color: mangoText),
+            style: TextStyle(fontSize: 18.0, color: mangoBlackText),
           ),
           // SizedBox(
           //   height: 5.0,
@@ -115,7 +115,7 @@ class _SingleEditTextFormFieldState extends State<SingleEditTextFormField> {
             decoration: InputDecoration(
               counterText: "",
               hintText: widget.hintText,
-              hintStyle: TextStyle(color: mangoWhite),
+              hintStyle: TextStyle(color: Colors.grey),
               enabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(color: mangoOrange),
               ),

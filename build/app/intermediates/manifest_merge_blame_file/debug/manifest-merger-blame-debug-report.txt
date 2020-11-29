@@ -5,7 +5,7 @@
 5    android:versionName="1.0.0" >
 6
 7    <uses-sdk
-8        android:minSdkVersion="16"
+8        android:minSdkVersion="18"
 9        android:targetSdkVersion="28" />
 10    <!--
 11         Flutter needs it to communicate with the running application
@@ -24,15 +24,15 @@
 22    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 22-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:8:5-79
 22-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:8:22-76
-23    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-23-->[:image_picker] G:\MangoHub\mangohub-mobile-delivery\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-80
-23-->[:image_picker] G:\MangoHub\mangohub-mobile-delivery\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:7:22-77
-24    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-24-->[:image_picker] G:\MangoHub\mangohub-mobile-delivery\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:8:5-81
-24-->[:image_picker] G:\MangoHub\mangohub-mobile-delivery\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:8:22-78
-25    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- Include required permissions for Google Maps API to run. -->
-25-->[:location] G:\MangoHub\mangohub-mobile-delivery\build\location\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-81
-25-->[:location] G:\MangoHub\mangohub-mobile-delivery\build\location\intermediates\library_manifest\debug\AndroidManifest.xml:7:22-78
+23    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+23-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:9:5-81
+23-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:9:22-78
+24    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+24-->[:image_picker] G:\MangoHub\mangohub-mobile-delivery\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-80
+24-->[:image_picker] G:\MangoHub\mangohub-mobile-delivery\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:7:22-77
+25    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- Include required permissions for Google Maps API to run. -->
+25-->[:image_picker] G:\MangoHub\mangohub-mobile-delivery\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:8:5-81
+25-->[:image_picker] G:\MangoHub\mangohub-mobile-delivery\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:8:22-78
 26    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 26-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\7a446382788d38111f4082b02aeda717\play-services-maps-17.0.0\AndroidManifest.xml:23:5-79
 26-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\7a446382788d38111f4082b02aeda717\play-services-maps-17.0.0\AndroidManifest.xml:23:22-76
@@ -52,37 +52,37 @@
 33-->[com.google.android.gms:play-services-measurement:17.6.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\a8b806c2ca4ea066a6a2f472df9c62db\play-services-measurement-17.6.0\AndroidManifest.xml:26:22-107
 34
 35    <application
-35-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:9:5-49:19
+35-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:11:5-51:19
 36        android:name="io.flutter.app.FlutterApplication"
-36-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:10:9-57
+36-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:12:9-57
 37        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
 37-->[androidx.core:core:1.1.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\fdb7f764bae631c34cad86862de08b65\core-1.1.0\AndroidManifest.xml:24:18-86
 38        android:debuggable="true"
 39        android:icon="@mipmap/ic_launcher"
-39-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:12:9-43
+39-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:14:9-43
 40        android:label="MangoHub Mobile Delivery" >
-40-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:11:9-49
+40-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:13:9-49
 41        <meta-data
-41-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:13:9-14:77
+41-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:15:9-16:77
 42            android:name="com.google.android.geo.API_KEY"
-42-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:13:20-65
+42-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:15:20-65
 43            android:value="AIzaSyDhOoTKiPahx0kxP77CsMoQFcI61ivN4PU" />
-43-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:14:20-75
+43-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:16:20-75
 44
 45        <activity
-45-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:15:9-43:20
+45-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:17:9-45:20
 46            android:name="com.example.mangoHub.MainActivity"
-46-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:16:13-41
+46-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:18:13-41
 47            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
-47-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:19:13-163
+47-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:21:13-163
 48            android:hardwareAccelerated="true"
-48-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:20:13-47
+48-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:22:13-47
 49            android:launchMode="singleTop"
-49-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:17:13-43
+49-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:19:13-43
 50            android:theme="@style/LaunchTheme"
-50-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:18:13-47
+50-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:20:13-47
 51            android:windowSoftInputMode="adjustResize" >
-51-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:21:13-55
+51-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:23:13-55
 52
 53            <!--
 54                 Specifies an Android theme to apply to this Activity as soon as
@@ -91,11 +91,11 @@
 57                 to determine the Window background behind the Flutter UI.
 58            -->
 59            <meta-data
-59-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:26:13-29:17
+59-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:28:13-31:17
 60                android:name="io.flutter.embedding.android.NormalTheme"
-60-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:27:15-70
+60-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:29:15-70
 61                android:resource="@style/NormalTheme" />
-61-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:28:15-52
+61-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:30:15-52
 62            <!--
 63                 Displays an Android View that continues showing the launch screen
 64                 Drawable until Flutter paints its first frame, then this splash
@@ -104,21 +104,21 @@
 67                 Flutter's first frame.
 68            -->
 69            <meta-data
-69-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:35:13-38:17
+69-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:37:13-40:17
 70                android:name="io.flutter.embedding.android.SplashScreenDrawable"
-70-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:36:15-79
+70-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:38:15-79
 71                android:resource="@drawable/launch_background" />
-71-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:37:15-61
+71-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:39:15-61
 72
 73            <intent-filter>
-73-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:39:13-42:29
+73-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:41:13-44:29
 74                <action android:name="android.intent.action.MAIN" />
-74-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:40:17-68
-74-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:40:25-66
+74-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:42:17-68
+74-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:42:25-66
 75
 76                <category android:name="android.intent.category.LAUNCHER" />
-76-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:41:17-76
-76-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:41:27-74
+76-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:43:17-76
+76-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:43:27-74
 77            </intent-filter>
 78        </activity>
 79        <!--
@@ -126,11 +126,11 @@
 81             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java
 82        -->
 83        <meta-data
-83-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:46:9-48:33
+83-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:48:9-50:33
 84            android:name="flutterEmbedding"
-84-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:47:13-44
+84-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:49:13-44
 85            android:value="2" />
-85-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:48:13-30
+85-->G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:50:13-30
 86
 87        <provider
 87-->[:image_picker] G:\MangoHub\mangohub-mobile-delivery\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:11:9-19:20

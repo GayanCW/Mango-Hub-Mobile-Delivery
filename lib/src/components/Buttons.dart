@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mangoHub/src/shared/Colors.dart';
 
@@ -13,14 +14,18 @@ class FlatButtonComp extends StatelessWidget {
     Size _size = MediaQuery.of(context).size;
 
     return FlatButton(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10.0)
+      ),
         color: mangoOrange,
         splashColor: Colors.orange,
         disabledColor: mangoOrange,
         child: Container(
+          height: 60.0,
           child: Center(
             child: Text(
               text,
-              style: TextStyle(color: mangoWhite, fontSize: _size.height*0.02),
+              style: TextStyle(color: mangoWhite, fontSize: _size.height*0.03),
             ),
           ),
         ),
@@ -64,13 +69,12 @@ class NamedButtonComp extends StatelessWidget {
     Size _size = MediaQuery.of(context).size;
 
     return FlatButton(
-      color: Colors.white12,
-      splashColor: Colors.white,
+      color: Colors.transparent,
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
         child: Text(
           text,
-          style: TextStyle(color: Colors.black54, fontSize: _size.height*0.019),
+          style: TextStyle(color: mangoOrange, fontSize: _size.height*0.019),
         ),
       ),
       onPressed: press,

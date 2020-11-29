@@ -7,11 +7,7 @@ import 'package:location/location.dart';
 import 'package:mangoHub/src/blocs/GetNearbyCompanies/get_nearby_companies_bloc.dart';
 import 'package:mangoHub/src/models/APImodels/GetNearbyCompaniesModel.dart';
 import 'package:mangoHub/src/models/APImodels/OrderModel.dart';
-import 'package:mangoHub/src/models/UImodels/LocationModel.dart';
-import 'package:mangoHub/src/services/GoogleService.dart';
-
-
-
+import 'package:mangoHub/src/services/Services.dart';
 
 
 class MapSample extends StatefulWidget {
@@ -64,7 +60,7 @@ class MapSampleState extends State<MapSample> {
   @override
   void initState() {
     super.initState();
-    LocationService().getLocationPermission();
+    // LocationService().getLocationPermission();
     // listenFirestoreChange();
     // apiCallState = true;
 
