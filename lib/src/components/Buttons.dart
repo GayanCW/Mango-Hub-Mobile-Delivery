@@ -56,7 +56,6 @@ Widget flatButtonComp2(BuildContext context,String text,Function press) {
   );
 }
 
-
 // ignore: must_be_immutable
 class NamedButtonComp extends StatelessWidget {
   String text;

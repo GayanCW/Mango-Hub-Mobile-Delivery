@@ -51,17 +51,11 @@ class FirebaseServices {
           }
       );
 
-      /*Future.delayed(const Duration(seconds: 10), (){
+      Future.delayed(const Duration(seconds: 10), (){
         print('time passing');
         return _fireStoreDataBase.collection('Drivers').document(
             _driverModel.orderCustomerId).setData(_driverModel.toJson());
-      });*/
-      // Timer _timer = new
-      /*Timer(const Duration(seconds: 10), ()
-      {
-        print('time passingggg');
-      });*/
-
+      });
 
   }
 
@@ -81,6 +75,7 @@ class LocationService {
         _locationController.add(UserLocation(
           latitude: locationData.latitude,
           longitude: locationData.longitude,
+          speed: locationData.speed
         ));
       }
     });
@@ -91,7 +86,8 @@ class UserLocation {
 
   final double longitude;
   final double latitude;
+  final double speed;
 
-  UserLocation({this.latitude = 0.00,this.longitude=0.00});
+  UserLocation({this.latitude = 0.00,this.longitude=0.00, this.speed});
 
 }

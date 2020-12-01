@@ -9,13 +9,11 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:location/location.dart';
 import 'package:mangoHub/src/blocs/DeliveryFlow/delivery_flow_bloc.dart';
-// import 'package:mangoHub/src/blocs/AcceptDelivery/accept_delivery_bloc.dart';
 import 'package:mangoHub/src/blocs/GetNearbyCompanies/get_nearby_companies_bloc.dart';
 import 'package:mangoHub/src/components/AlertBox.dart';
 import 'package:mangoHub/src/models/APImodels/GetNearbyCompaniesModel.dart';
 import 'package:mangoHub/src/models/APImodels/OrderModel.dart';
 import 'package:mangoHub/src/services/Services.dart';
-import 'package:mangoHub/src/shared/BoxDecorations.dart';
 import 'package:mangoHub/src/shared/Colors.dart';
 import 'package:mangoHub/src/shared/Repository.dart';
 import 'package:provider/provider.dart';
@@ -38,9 +36,9 @@ class _OrderLocationState extends State<OrderLocation> {
 
   final FirebaseServices _firebaseServices = FirebaseServices();
   Repository _repository = new Repository();
-  PanelController _panelController1 = new PanelController();
   final oCcy = new NumberFormat("#,##0.00", "en_US");
 
+  int delay=0;
 
   Location location = Location();
   GoogleMapController _mapController;
@@ -112,30 +110,6 @@ class _OrderLocationState extends State<OrderLocation> {
     return 12742 * asin(sqrt(a));
   }
 
-  void _setMarkers(double _latitude, double _longitude, BitmapDescriptor bitIcon){
-      _markers.add(
-        Marker(
-            markerId: MarkerId("My Location"),
-            position: LatLng(_latitude, _longitude),
-            // rotation: newLocalData.heading,
-            draggable: false,
-            zIndex: 0,
-            flat: false,
-            anchor: Offset(0.5, 1.09),
-            icon: BitmapDescriptor.defaultMarker
-            // icon: bitIcon,
-        ),
-      );
-      _mapController.animateCamera(
-          CameraUpdate.newCameraPosition(CameraPosition(
-              bearing: 0.0,
-              target: LatLng(_latitude,_longitude),
-              tilt: 0,
-              zoom: 10.00
-          )));
-      markerCreateState=false;
-  }
-
   void _setNewMarkers(double _latitude, double _longitude, BitmapDescriptor bitIcon){
       _markers.add(
         Marker(
@@ -203,81 +177,12 @@ class _OrderLocationState extends State<OrderLocation> {
     }
   }
 
-
   void _getNearbyCompany(double latitude, double longitude, BuildContext context){
     BlocProvider.of<GetNearbyCompaniesBloc>(context).add(
         GetNearbyCompanies(
             latitude: latitude,
             longitude: longitude,
             distance: 500000.00
-        )
-    );
-  }
-
-  void _sendAcceptDelivery(int index, BuildContext context)async{
-
-    String _userProfileId = await _repository.readData('userProfileId');
-    print(_userProfileId);
-
-    /*AcceptDeliveryOrderGeo _acceptDeliveryOrderGeo = new AcceptDeliveryOrderGeo(
-        shop: nearbyOrders[index].orderGeo.shop,
-        delivery: nearbyOrders[index].orderGeo.delivery
-    );
-    BlocProvider.of<DeliveryFlowBloc>(context).add(
-        AcceptDelivery(
-            orderGeo:  _acceptDeliveryOrderGeo,
-            orderProductList: nearbyOrders[index].orderProductList,
-            orderAdditionalCharges: nearbyOrders[index].orderAditionalCharges,
-            sId:  nearbyOrders[index].sId,
-            orderDate:  nearbyOrders[index].orderDate,
-            orderCompany: nearbyOrders[index].orderCompany,
-            orderBranchId:  nearbyOrders[index].orderBranchId,
-            orderCustomerId:  nearbyOrders[index].orderCustomerId,
-            orderCustomerName:  nearbyOrders[index].orderCustomerName,
-            orderCustomerMobile:  nearbyOrders[index].orderCustomerMobile,
-            orderPaymentMethod: nearbyOrders[index].orderPaymentMethod,
-            orderAmount:  nearbyOrders[index].orderAmount,
-            orderDiscount:  nearbyOrders[index].orderDiscount,
-            orderTotal: nearbyOrders[index].orderTotal,
-            orderStatus:  nearbyOrders[index].orderStatus,
-            orderStatusString:  nearbyOrders[index].orderStatusString,
-            orderType:  nearbyOrders[index].orderType,
-            orderAcceptedUserId:  nearbyOrders[index].orderAcceptedUserId,
-            orderInvoiceId: nearbyOrders[index].orderInvoiceId,
-            orderDeliveryPersonId:  _userProfileId
-        )
-    );*/
-
-    GeoCoordinates _geoCoordinates = new GeoCoordinates(
-        shop: nearbyOrders[index].orderGeo.shop,
-        delivery: nearbyOrders[index].orderGeo.delivery
-    );
-    DeliveryFlow _deliveryFlow = new DeliveryFlow(
-        orderGeo:  _geoCoordinates,
-        orderProductList: nearbyOrders[index].orderProductList,
-        orderAdditionalCharges: nearbyOrders[index].orderAditionalCharges,
-        sId:  nearbyOrders[index].sId,
-        orderDate:  nearbyOrders[index].orderDate,
-        orderCompany: nearbyOrders[index].orderCompany,
-        orderBranchId:  nearbyOrders[index].orderBranchId,
-        orderCustomerId:  nearbyOrders[index].orderCustomerId,
-        orderCustomerName:  nearbyOrders[index].orderCustomerName,
-        orderCustomerMobile:  nearbyOrders[index].orderCustomerMobile,
-        orderPaymentMethod: nearbyOrders[index].orderPaymentMethod,
-        orderAmount:  nearbyOrders[index].orderAmount,
-        orderDiscount:  nearbyOrders[index].orderDiscount,
-        orderTotal: nearbyOrders[index].orderTotal,
-        orderStatus:  nearbyOrders[index].orderStatus,
-        orderStatusString:  nearbyOrders[index].orderStatusString,
-        orderType:  nearbyOrders[index].orderType,
-        orderAcceptedUserId:  nearbyOrders[index].orderAcceptedUserId,
-        orderInvoiceId: nearbyOrders[index].orderInvoiceId,
-        orderDeliveryPersonId:  _userProfileId
-    );
-
-    BlocProvider.of<DeliveryFlowBloc>(context).add(
-        AcceptDelivery(
-            _deliveryFlow
         )
     );
   }
@@ -307,7 +212,7 @@ class _OrderLocationState extends State<OrderLocation> {
         orderDiscount:  acceptedOrder[index].orderDiscount,
         orderTotal: acceptedOrder[index].orderTotal,
         orderStatus:  acceptedOrder[index].orderStatus,
-        orderStatusString:  acceptedOrder[index].orderStatusString,
+        orderStatusString:  acceptedOrder[index].orderStatusString.toLowerCase(),
         orderType:  acceptedOrder[index].orderType,
         orderAcceptedUserId:  acceptedOrder[index].orderAcceptedUserId,
         orderInvoiceId: acceptedOrder[index].orderInvoiceId,
@@ -319,11 +224,7 @@ class _OrderLocationState extends State<OrderLocation> {
         AcceptDelivery(_deliveryFlow)
       );
     }
-    if(flow == 'HandoverOrder'){
-      BlocProvider.of<DeliveryFlowBloc>(context).add(
-          HandoverOrder(_deliveryFlow)
-      );
-    }
+
     if(flow == 'DeliveredOrder'){
       BlocProvider.of<DeliveryFlowBloc>(context).add(
           DeliveredOrder(_deliveryFlow)
@@ -375,23 +276,25 @@ class _OrderLocationState extends State<OrderLocation> {
       // print("My Location : ${_latLang.latitude} / ${_latLang.longitude}");
       // print(_acceptedOrder.orderStatusString.toLowerCase());
 
-      /*_firebaseServices.addDriver(
-          acceptedOrder[0].orderCustomerId,
-          acceptedOrder[0].orderGeo.shop,
-          acceptedOrder[0].orderGeo.delivery,
-        "${_latLang.latitude},${_latLang.longitude}"
-      );*/
+      /*if(delay == 0) {
+        delay = 5;
+        Timer.periodic(Duration(seconds: delay), (timer) {
+          delay = 0;
+          print(DateTime.now());
+        });
+      }*/
 
-      /*Timer(Duration(seconds: 10), () {
-        print(DateTime.now());
-      });*/
-      Future.delayed(const Duration(seconds: 5), () {
+      if(_latLang.speed>0.5) {
+        Future.delayed(const Duration(seconds: 10), () {
+          _firebaseServices.addDriver(
+              acceptedOrder[0].orderCustomerId,
+              acceptedOrder[0].orderGeo.shop,
+              acceptedOrder[0].orderGeo.delivery,
+              "${_latLang.latitude},${_latLang.longitude}"
+          );
+        });
+      }
 
-        print('delay');
-
-      });
-
-////////////////////////////////////////////////////////////////////////////////
       if(_locationId == 'shop') {
         _orderStatusString = 'accepted';
           if(markerCreateState==true) {
@@ -404,14 +307,12 @@ class _OrderLocationState extends State<OrderLocation> {
               _buttonEnabled('auto');
             }
             if(acceptedOrder[0].orderStatusString.toLowerCase()=='handover'){
-              // setState(() {
                 _markers.clear();
                 polylineCoordinates.clear();
                 markerCreateState=true;
                 buttonVisibility=false;
                 _locationId='buyer';
                 _orderStatusString='picked';
-              // });
             }
             else{
               _getPolyline(_latLang.latitude, _latLang.longitude, shopLat, shopLong);
@@ -433,11 +334,10 @@ class _OrderLocationState extends State<OrderLocation> {
               _buttonEnabled('auto');
             }
             else {
-              _getPolyline(shopLat, shopLong, deliveryLat, deliveryLong); // neeed to change _getPolyline(_latLang.latitude, _latLang.longitude, deliveryLat, deliveryLong)
+              _getPolyline(shopLat, shopLong, deliveryLat, deliveryLong); // need to change _getPolyline(_latLang.latitude, _latLang.longitude, deliveryLat, deliveryLong)
             }
           }
       }
-////////////////////////////////////////////////////////////////////////////////
 
     }
 
@@ -483,8 +383,6 @@ class _OrderLocationState extends State<OrderLocation> {
                   onPressed: (buttonVisibility==false)?null:(){
 
                     setState(() {
-                      // _orderStatusString='picking';
-                      // _panelController1.open();
                       showReceiptDialog(context,
                           'Order Details',
                           acceptedOrder[0].orderPaymentMethod,
@@ -838,8 +736,6 @@ class _OrderLocationState extends State<OrderLocation> {
             BlocListener<GetNearbyCompaniesBloc,GetNearbyCompaniesState>(
               listener: (context, state){
                 if(state is GetNearbyCompaniesSuccess){
-                  // print('charges: ');
-                  // print(nearbyOrders[widget.selectedIndex].orderAditionalCharges.length.toString());
                   int index = 0;
                   while (index < state.getNearbyCompanies.nearbyCompanies.length) {
                     NearbyCompanies _companyDetails = state.getNearbyCompanies.nearbyCompanies[index];
@@ -916,91 +812,6 @@ class _OrderLocationState extends State<OrderLocation> {
         ),
     );
 
-    /*return  MultiBlocListener(
-      listeners: [
-        BlocListener<GetNearbyCompaniesBloc,GetNearbyCompaniesState>(
-          listener: (context, state){
-            if(state is GetNearbyCompaniesSuccess){
-              // print('charges: ');
-              // print(nearbyOrders[widget.selectedIndex].orderAditionalCharges.length.toString());
-              int index = 0;
-              while (index < state.getNearbyCompanies.nearbyCompanies.length) {
-                NearbyCompanies _companyDetails = state.getNearbyCompanies.nearbyCompanies[index];
-
-                print(_companyDetails.sId);
-                if(nearbyOrders[widget.selectedIndex].orderBranchId == _companyDetails.sId){
-                  BranchAddress _branchAddress = BranchAddress(
-                      addressLine1: _companyDetails.branchAddress.addressLine1,
-                      addressLine2: _companyDetails.branchAddress.addressLine2,
-                      country: _companyDetails.branchAddress.country,
-                      district: _companyDetails.branchAddress.district,
-                      city: _companyDetails.branchAddress.city,
-                      zipCode: _companyDetails.branchAddress.zipCode
-                  );
-                  orderCompanyDetails.add(
-                      NearbyCompanies(
-                          branchAddress: _branchAddress,
-                          sId: _companyDetails.sId,
-                          branchName: _companyDetails.branchName,
-                          branchTel: _companyDetails.branchTel,
-                          branchLocation: _companyDetails.branchLocation,
-                          branchStatus: _companyDetails.branchStatus,
-                          branchStatusString: _companyDetails.branchStatusString,
-                          branchType: _companyDetails.branchType,
-                          branchCompany: _companyDetails.branchCompany,
-                          createdAt: _companyDetails.createdAt,
-                          updatedAt: _companyDetails.updatedAt,
-                          iV: _companyDetails.iV
-                      )
-                  );
-
-                  index=state.getNearbyCompanies.nearbyCompanies.length;
-                }
-                else{
-                  index++;
-                }
-              }
-              totalPrice = 0.00;
-              totalAdditionalCharges = 0.00;
-
-              for(int index=0; index<nearbyOrders[widget.selectedIndex].orderAditionalCharges.length; index++){
-                totalAdditionalCharges = totalAdditionalCharges + nearbyOrders[widget.selectedIndex].orderAditionalCharges[index].amount;
-              }
-              totalPrice = nearbyOrders[widget.selectedIndex].orderTotal + totalAdditionalCharges;
-              print(totalAdditionalCharges.toString());
-
-              print("pro: ${nearbyOrders[widget.selectedIndex].orderProductList.length}");
-              print(nearbyOrders[widget.selectedIndex].orderBranchId);
-            }
-            if(state is GetNearbyCompaniesFailed){
-
-            }
-            if(state is GetNearbyCompaniesFailedException){
-
-            }
-          }
-        ),
-
-        BlocListener<AcceptDeliveryBloc,AcceptDeliveryState>(
-            listener: (context, state){
-              if(state is AcceptDeliverySuccess){
-
-              }
-              if(state is AcceptDeliveryFailed){
-
-              }
-              if(state is AcceptDeliveryFailedException){
-
-              }
-            }
-        ),
-      ],
-      child: BlocBuilder<GetNearbyCompaniesBloc,GetNearbyCompaniesState>(
-        builder: (context,state){
-          return buildUI(context);
-        }
-      ),
-    );*/
   }
 }
 

@@ -1,0 +1,20 @@
+# Referenced at G:\MangoHub\mangohub-mobile-delivery\build\app\intermediates\merged_manifests\release\AndroidManifest.xml:32
+-keep class androidx.core.app.CoreComponentFactory { <init>(); }
+# Referenced at G:\MangoHub\mangohub-mobile-delivery\build\app\intermediates\merged_manifests\release\AndroidManifest.xml:41
+-keep class com.example.mangoHub.MainActivity { <init>(); }
+# Referenced at G:\MangoHub\mangohub-mobile-delivery\build\app\intermediates\merged_manifests\release\AndroidManifest.xml:117
+-keep class com.google.android.gms.common.api.GoogleApiActivity { <init>(); }
+# Referenced at G:\MangoHub\mangohub-mobile-delivery\build\app\intermediates\merged_manifests\release\AndroidManifest.xml:139
+-keep class com.google.android.gms.measurement.AppMeasurementJobService { <init>(); }
+# Referenced at G:\MangoHub\mangohub-mobile-delivery\build\app\intermediates\merged_manifests\release\AndroidManifest.xml:129
+-keep class com.google.android.gms.measurement.AppMeasurementReceiver { <init>(); }
+# Referenced at G:\MangoHub\mangohub-mobile-delivery\build\app\intermediates\merged_manifests\release\AndroidManifest.xml:135
+-keep class com.google.android.gms.measurement.AppMeasurementService { <init>(); }
+# Referenced at G:\MangoHub\mangohub-mobile-delivery\build\app\intermediates\merged_manifests\release\AndroidManifest.xml:83
+-keep class com.google.firebase.components.ComponentDiscoveryService { <init>(); }
+# Referenced at G:\MangoHub\mangohub-mobile-delivery\build\app\intermediates\merged_manifests\release\AndroidManifest.xml:122
+-keep class com.google.firebase.provider.FirebaseInitProvider { <init>(); }
+# Referenced at G:\MangoHub\mangohub-mobile-delivery\build\app\intermediates\merged_manifests\release\AndroidManifest.xml:32
+-keep class io.flutter.app.FlutterApplication { <init>(); }
+# Referenced at G:\MangoHub\mangohub-mobile-delivery\build\app\intermediates\merged_manifests\release\AndroidManifest.xml:104
+-keep class io.flutter.plugins.imagepicker.ImagePickerFileProvider { <init>(); }

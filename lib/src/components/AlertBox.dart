@@ -8,39 +8,7 @@ import 'package:mangoHub/src/shared/Colors.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'dart:ui' as ui;
 
-// showAlertDialog(BuildContext context,String message) {
-//
-//   // set up the button
-//   Widget okButton = FlatButton(
-//     child: Text("Ok"),
-//     onPressed: () {
-//       FocusScope.of(context).requestFocus(FocusNode());
-//     },
-//   );
-//   Widget cancleButton = FlatButton(
-//     child: Text("Cancle"),
-//     onPressed: () {
-//       // Navigator.pop(context);
-//       FocusScope.of(context).requestFocus(FocusNode());
-//     },
-//   );
-//
-//   AlertDialog alert = AlertDialog(// set up the AlertDialog
-//     // title: Text("Testing"),
-//     content: Text(message),
-//     actions: [
-//       cancleButton,
-//       okButton,
-//     ],
-//   );
-//   showDialog(   // show the dialog
-//     context: context,
-//     builder: (BuildContext context) {
-//       return alert;
-//     },
-//   );
-//
-// }
+String capitalize(String s) => s[0].toUpperCase() + s.substring(1);
 
 showAlertDialogWithPop(BuildContext context,String message)async{
 
@@ -56,7 +24,6 @@ showAlertDialogWithPop(BuildContext context,String message)async{
   );
 
 }
-String capitalize(String s) => s[0].toUpperCase() + s.substring(1);
 
 void showAlertDialog(BuildContext context, String header, String body) {
   // flutter defined function

@@ -82,7 +82,6 @@ class _NewOrdersState extends State<NewOrders> with SingleTickerProviderStateMix
   void initState(){
     super.initState();
     getOrderSkipCount();
-    // _repository.deleteData('skipCount');
     progressController = AnimationController(vsync: this,duration: Duration(milliseconds: 2000));
     animation = Tween<double>(begin: 0.0,end: 100.0).animate(progressController)..addListener((){
       setState(() {});
@@ -98,7 +97,6 @@ class _NewOrdersState extends State<NewOrders> with SingleTickerProviderStateMix
     nearbyOrders.clear();
 
     if(orderList != null && _latLang != null ) {
-      // print("My Location : ${_latLang.latitude} / ${_latLang.longitude}");
       if(orderList.isNotEmpty){
         for (int index = 0; index < orderList.length; index++) {
           _shopLatitude = double.parse(
@@ -130,8 +128,8 @@ class _NewOrdersState extends State<NewOrders> with SingleTickerProviderStateMix
           // print("delivery: $deliveryDistance");
 
           if (shopDistance < 500.00 && deliveryDistance < 500.00) {
-            // if(orderList[index].orderDeliveryPersonId == ""){
-              // if(orderList[index].orderStatusString == "Preparing" || orderList[index].orderStatusString == "Ready"){
+            if(orderList[index].orderDeliveryPersonId == ""){
+              if(orderList[index].orderStatusString.toLowerCase() == "preparing" || orderList[index].orderStatusString.toLowerCase() == "ready"){
                 OrderGeo singleGeo = OrderGeo();
                 singleGeo.shop =
                     orderList[index].orderGeo.shop;
@@ -164,8 +162,8 @@ class _NewOrdersState extends State<NewOrders> with SingleTickerProviderStateMix
                   updatedAt: orderList[index].updatedAt,
                   iV: orderList[index].iV,
                 ));
-              // }
-            // }
+              }
+            }
           }
         }
       }
@@ -218,7 +216,6 @@ class _NewOrdersState extends State<NewOrders> with SingleTickerProviderStateMix
                         SizedBox(height: 30,),
                         Text(nearbyOrders[orderSkipCount].orderCustomerName ,style: TextStyle(fontSize: 25, fontWeight: FontWeight.w800, color: Colors.white)),
                         Text('Rs. '+oCcy.format(nearbyOrders[orderSkipCount].orderAmount) ,style: TextStyle(fontSize: 25, fontWeight: FontWeight.w800, color: mangoOrange)),
-                        // Text("Your order is ${shopDistance.toStringAsFixed(1)} km away", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w300)),
                         SizedBox(height: 10,),
                       ],
                     )
@@ -227,7 +224,6 @@ class _NewOrdersState extends State<NewOrders> with SingleTickerProviderStateMix
                   acceptedOrder.add(
                       nearbyOrders[selectedOrder]
                   );
-                  // Navigator.of(context).push(MaterialPageRoute(builder: (context)=> OrderLocation(selectedIndex: selectedOrder, myLatitude: _latLang.latitude, myLongitude: _latLang.longitude,)));
                   Navigator.of(context).push(MaterialPageRoute(builder: (context)=> OrderLocation(sId: nearbyOrders[selectedOrder].sId, orderBranchId: nearbyOrders[selectedOrder].orderBranchId, myLatitude: _latLang.latitude, myLongitude: _latLang.longitude,)));
                 },
               ),
