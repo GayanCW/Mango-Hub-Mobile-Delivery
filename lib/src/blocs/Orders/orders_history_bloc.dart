@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
 import 'package:mangoHub/src/models/APImodels/OrderModel.dart';
+import 'package:mangoHub/src/shared/GlobalData.dart';
 import 'package:meta/meta.dart';
 import 'package:http/http.dart' as http;
 
@@ -23,11 +24,11 @@ class OrdersHistoryBloc extends Bloc<OrdersHistoryEvent, OrdersHistoryState> {
 
   Stream<OrdersHistoryState> _getOrdersHistory(GetOrdersHistory event) async*{
 
-    final String apiUrl = "https://app-a5e00a51-0c5e-4dce-a2df-5662105ba7f4.cleverapps.io/inventory/deliveryorders?order_delivery_person_id="
-        "${event.userProfileId}";
+    // final String apiUrl = "https://app-a5e00a51-0c5e-4dce-a2df-5662105ba7f4.cleverapps.io/inventory/deliveryorders?order_delivery_person_id="
+    //     "${event.userProfileId}";
 
     try{
-      final response = await http.get(apiUrl,
+      final response = await http.get(mainPath+"/inventory/deliveryorders?order_delivery_person_id=${event.userProfileId}",
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
           'Authorization': event.token,

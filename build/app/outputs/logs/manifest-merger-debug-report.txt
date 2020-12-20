@@ -8,6 +8,7 @@ MERGED from G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidMan
 MERGED from [:flutter_secure_storage] G:\MangoHub\mangohub-mobile-delivery\build\flutter_secure_storage\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-11:12
 MERGED from [:android_intent] G:\MangoHub\mangohub-mobile-delivery\build\android_intent\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
 MERGED from [:hexcolor] G:\MangoHub\mangohub-mobile-delivery\build\hexcolor\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
+MERGED from [:device_info] G:\MangoHub\mangohub-mobile-delivery\build\device_info\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
 MERGED from [:google_maps_flutter] G:\MangoHub\mangohub-mobile-delivery\build\google_maps_flutter\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
 MERGED from [:image_picker] G:\MangoHub\mangohub-mobile-delivery\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-22:12
 MERGED from [:flutter_plugin_android_lifecycle] G:\MangoHub\mangohub-mobile-delivery\build\flutter_plugin_android_lifecycle\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
@@ -209,6 +210,8 @@ MERGED from [:android_intent] G:\MangoHub\mangohub-mobile-delivery\build\android
 MERGED from [:android_intent] G:\MangoHub\mangohub-mobile-delivery\build\android_intent\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:hexcolor] G:\MangoHub\mangohub-mobile-delivery\build\hexcolor\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:hexcolor] G:\MangoHub\mangohub-mobile-delivery\build\hexcolor\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:device_info] G:\MangoHub\mangohub-mobile-delivery\build\device_info\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:device_info] G:\MangoHub\mangohub-mobile-delivery\build\device_info\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:google_maps_flutter] G:\MangoHub\mangohub-mobile-delivery\build\google_maps_flutter\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:google_maps_flutter] G:\MangoHub\mangohub-mobile-delivery\build\google_maps_flutter\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:image_picker] G:\MangoHub\mangohub-mobile-delivery\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44

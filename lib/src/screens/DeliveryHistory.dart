@@ -131,7 +131,24 @@ class _DeliveryHistoryState extends State<DeliveryHistory> {
             children: [
               Padding(
                 padding: const EdgeInsets.all(10.0),
-                child: Text(deliveryHistoryAsDays[selectedIndex].orderModel[0].orderDate.split('T')[0], style: TextStyle(fontSize: 25, fontWeight: FontWeight.w800, color: Colors.white)),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(deliveryHistoryAsDays[selectedIndex].orderModel[0].orderDate.split('T')[0], style: TextStyle(fontSize: 25, fontWeight: FontWeight.w800, color: Colors.white)),
+                    IconButton(
+                      onPressed: (){
+                        print("press");
+                        setState(() {
+                          pageIndex--;
+                        });
+                      },
+                      icon: Icon(Icons.arrow_back,
+                          size: 30,
+                          color: mangoOrange
+                      ),
+                    ),
+                  ],
+                ),
               ),
               Container(
                 height: MediaQuery.of(context).size.height,
@@ -168,9 +185,9 @@ class _DeliveryHistoryState extends State<DeliveryHistory> {
                               IconButton(
                                 onPressed: (){
                                   print("press");
-                                  setState(() {
-                                    pageIndex--;
-                                  });
+                                  // setState(() {
+                                  //   pageIndex--;
+                                  // });
                                 },
                                 icon: Icon(Icons.keyboard_arrow_down_outlined,
                                     size: 30,

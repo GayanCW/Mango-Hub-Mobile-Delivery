@@ -98,7 +98,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                 ),
                 Container(
                   width: double.infinity,
-                  margin: EdgeInsets.only(top: _size.height*0.3+530.0, left: _size.width*0.15, right: _size.width*0.15),
+                  margin: EdgeInsets.only(top: _size.height*0.25+530.0, left: _size.width*0.15, right: _size.width*0.15),
                   child: NamedButtonComp(
                       text: "I remember my password",
                       press: () {

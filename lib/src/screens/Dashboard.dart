@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mangoHub/src/blocs/Authentication/authentication_bloc.dart';
 import 'package:mangoHub/src/screens/DeliveryHistory.dart';
 import 'package:mangoHub/src/screens/Earnings.dart';
-import 'package:mangoHub/src/screens/EditUser.dart';
 import 'package:mangoHub/src/screens/Home.dart';
+import 'package:mangoHub/src/screens/OrderLocation.dart';
 import 'package:mangoHub/src/screens/ProfileScreen.dart';
+import 'package:mangoHub/src/screens/UpdateUser.dart';
 import 'package:mangoHub/src/shared/Colors.dart';
 import 'package:mangoHub/src/shared/Repository.dart';
-import 'Login.dart';
 
 class Dashboard extends StatefulWidget {
   @override
@@ -16,6 +18,18 @@ class Dashboard extends StatefulWidget {
 class _DashboardState extends State<Dashboard> {
   int _selectedIndex = 1;
   Repository _repository = new Repository();
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+  List<String> _appBarTitle = [
+    'Earnings',
+    'Orders',
+    'Delivery History'
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +51,9 @@ class _DashboardState extends State<Dashboard> {
             builder: (BuildContext context) {
               return IconButton(
                 icon: const Icon(Icons.menu),
-                onPressed: () => Scaffold.of(context).openDrawer(),
+                onPressed: () {
+                  Scaffold.of(context).openDrawer();
+                },
                 tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
               );
             },
@@ -74,6 +90,7 @@ class _DashboardState extends State<Dashboard> {
       ),
       routes: <String, WidgetBuilder>{
         '/dashboard': (BuildContext context) => Dashboard(),
+        '/orderLocation': (BuildContext context) => OrderLocation(),
       },
     );
 
@@ -142,6 +159,7 @@ class _DashboardState extends State<Dashboard> {
                         leading: Icon(Icons.person, color: mangoOrange, size: 25,),
                         title: Text("About me", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400, color: Colors.white)),
                         onTap: (){
+                          // LocationService().closeStream();
                           Navigator.of(context).push(MaterialPageRoute(builder: (context)=> ProfileScreen()));
                         },
                       ),
@@ -155,7 +173,7 @@ class _DashboardState extends State<Dashboard> {
                         title: Text("Settings", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400, color: Colors.white)),
                         onTap: (){
                           // Navigator.pushNamed(context, '/editUser');
-                          Navigator.of(context).push(MaterialPageRoute(builder: (context)=> EditUser()));
+                          Navigator.of(context).push(MaterialPageRoute(builder: (context)=> UpdateUser()));
                         },
                       ),
                       ListTile(
@@ -175,10 +193,16 @@ class _DashboardState extends State<Dashboard> {
             child: ListTile(
               leading: Icon(Icons.logout, color: mangoOrange, size: 25,),
               title: Text("logout", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400, color: Colors.white)),
-              onTap: (){
-                _repository.deleteData('loginStatus');
-                Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => false);
+              onTap: () async{
+                _repository.deleteAllData();
+                Navigator.pushNamedAndRemoveUntil(context, '/loginUser', (route) => false);
 
+                // String _token = await _repository.readData('token');
+                // BlocProvider.of<AuthenticationBloc>(context).add(
+                //     LogoutUser(
+                //       token: _token,
+                //     )
+                // );
               },
             ),
           ),
@@ -187,16 +211,5 @@ class _DashboardState extends State<Dashboard> {
     );
   }
 
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
-  List<String> _appBarTitle = [
-    'Earnings',
-    'Orders',
-    'Delivery History'
-  ];
 
 }

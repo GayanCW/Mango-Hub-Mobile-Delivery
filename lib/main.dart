@@ -1,17 +1,15 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mangoHub/src/blocs/Authentication/authentication_bloc.dart';
 import 'package:mangoHub/src/blocs/DeliveryFlow/delivery_flow_bloc.dart';
-import 'package:mangoHub/src/blocs/EditUser/edit_user_bloc.dart';
 import 'package:mangoHub/src/blocs/GetNearbyCompanies/get_nearby_companies_bloc.dart';
-import 'package:mangoHub/src/blocs/Login/login_bloc.dart';
 import 'package:mangoHub/src/blocs/Orders/orders_history_bloc.dart';
-import 'package:mangoHub/src/blocs/SignUp/signUp_bloc.dart';
-import 'package:mangoHub/src/screens/EditUser.dart';
 import 'package:mangoHub/src/screens/Intro.dart';
-import 'package:mangoHub/src/screens/Login.dart';
+import 'package:mangoHub/src/screens/LoginUser.dart';
 import 'package:mangoHub/src/screens/ResetPassword.dart';
-import 'package:mangoHub/src/screens/SignUp.dart';
+import 'package:mangoHub/src/screens/SignUpUser.dart';
+import 'package:mangoHub/src/screens/UpdateUser.dart';
 import 'package:mangoHub/src/shared/Colors.dart';
 
 //My API key "AIzaSyAEpoBFxvVpzbg9pQgpKuWELNyH9pcKBf4"
@@ -22,12 +20,10 @@ void main() async {
   await Firebase.initializeApp();
 
     runApp(MultiBlocProvider(providers: [
-        BlocProvider<LoginBloc>(create: (BuildContext context) => LoginBloc()),
-        BlocProvider<SignUpBloc>(create: (BuildContext context) => SignUpBloc()),
-        BlocProvider<EditUserBloc>(create: (BuildContext context) => EditUserBloc()),
         BlocProvider<GetNearbyCompaniesBloc>(create: (BuildContext context) => GetNearbyCompaniesBloc()),
         BlocProvider<DeliveryFlowBloc>(create: (BuildContext context) => DeliveryFlowBloc()),
         BlocProvider<OrdersHistoryBloc>(create: (BuildContext context) => OrdersHistoryBloc()),
+        BlocProvider<AuthenticationBloc>(create: (BuildContext context) => AuthenticationBloc()),
       ], child: MyApp()));
   }
 
@@ -59,10 +55,10 @@ class MyApp extends StatelessWidget {
       ),
       routes: <String, WidgetBuilder>{
         '/myApp': (BuildContext context) => MyApp(),
-        '/login': (BuildContext context) => Login(),
-        '/signUp': (BuildContext context) => SignUp(),
+        '/loginUser': (BuildContext context) => LoginUser(),
+        '/signUpUser': (BuildContext context) => SignUpUser(),
         '/resetPassword': (BuildContext context) => ResetPassword(),
-        '/editUser': (BuildContext context) => EditUser(),
+        '/updateUser': (BuildContext context) => UpdateUser(),
       },
     );
   }

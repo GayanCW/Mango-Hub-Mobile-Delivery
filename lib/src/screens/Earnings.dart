@@ -11,6 +11,7 @@ class Earnings extends StatefulWidget {
 
 class _EarningsState extends State<Earnings> {
   var rng = new Random();
+  DateTime now = DateTime.now();
   final oCcy = new NumberFormat("#,##0.00", "en_US");
   List<double> prices = [
     2550.00,
@@ -35,6 +36,10 @@ class _EarningsState extends State<Earnings> {
     300.00,
     2100.00,
     1000.00,
+  ];
+
+  List<String> months = [
+    'January','February','March','April','May','June','July','August','September','October','November','December'
   ];
 
   @override
@@ -84,7 +89,7 @@ class _EarningsState extends State<Earnings> {
               child: Row(
                 children: [
                   Text("Last 30 Days - ", style: TextStyle(color: Colors.white,fontSize: 25, fontWeight: FontWeight.w700),),
-                  Text("[ November 2020 ]", style: TextStyle(color: Colors.white,fontSize: 18, fontWeight: FontWeight.w300),),
+                  Text('[ '+ months[now.month-1] +' '+ now.year.toString() +' ]', style: TextStyle(color: Colors.white,fontSize: 18, fontWeight: FontWeight.w300),),
                 ],
               ),
             ),

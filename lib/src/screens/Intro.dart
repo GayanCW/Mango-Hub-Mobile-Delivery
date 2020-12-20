@@ -2,10 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
 import 'package:mangoHub/src/screens/Dashboard.dart';
+import 'package:mangoHub/src/screens/LoginUser.dart';
 import 'package:mangoHub/src/shared/Colors.dart';
 import 'package:mangoHub/src/shared/Repository.dart';
-import 'Login.dart';
-
 
 
 class Intro extends StatefulWidget {
@@ -28,16 +27,17 @@ class _IntroState extends State<Intro> {
       Navigator.of(context).push(MaterialPageRoute(builder: (context)=> Dashboard(),));
     }
     else{
-      Navigator.of(context).push(MaterialPageRoute(builder: (context)=> Login(),));
+      Navigator.of(context).push(MaterialPageRoute(builder: (context)=> LoginUser(),));
+
     }
   }
 
-  Future<void> getLocationPermission() async{
-    _serviceEnabled = await location.serviceEnabled();
-    if (_serviceEnabled == true) {
-      routePage();
-    }
-  }
+  // Future<void> getLocationPermission() async{
+  //   _serviceEnabled = await location.serviceEnabled();
+  //   if (_serviceEnabled == true) {
+  //     routePage();
+  //   }
+  // }
 
   @override
   void initState() {

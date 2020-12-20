@@ -5,18 +5,33 @@ abstract class DeliveryFlowState {}
 
 class DeliveryFlowInitial extends DeliveryFlowState {}
 
-class DeliveryFlowSuccess extends DeliveryFlowState{
-  DeliveryFlowSuccess(this.response);
+class AcceptedDeliverySuccess extends DeliveryFlowState{
+  AcceptedDeliverySuccess(this.response);
   final String response;
 }
 
-class DeliveryFlowFailed extends DeliveryFlowState{
-  DeliveryFlowFailed(this.response);
+class AcceptedDeliveryFailed extends DeliveryFlowState{
+  AcceptedDeliveryFailed(this.response);
   final String response;
 }
 
-class DeliveryFlowFailedException extends DeliveryFlowState{
-  DeliveryFlowFailedException(this.errorObject);
+class AcceptedDeliveryFailedException extends DeliveryFlowState{
+  AcceptedDeliveryFailedException(this.errorObject);
+  final String errorObject;
+}
+////////////////////////////////////////////////////////////////////////////////
+class DeliveredDeliverySuccess extends DeliveryFlowState{
+  DeliveredDeliverySuccess(this.response);
+  final String response;
+}
+
+class DeliveredDeliveryFailed extends DeliveryFlowState{
+  DeliveredDeliveryFailed(this.response);
+  final String response;
+}
+
+class DeliveredDeliveryFailedException extends DeliveryFlowState{
+  DeliveredDeliveryFailedException(this.errorObject);
   final String errorObject;
 }
 

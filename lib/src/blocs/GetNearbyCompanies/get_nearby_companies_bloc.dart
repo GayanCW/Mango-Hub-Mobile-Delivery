@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
 import 'package:mangoHub/src/models/APImodels/GetNearbyCompaniesModel.dart';
+import 'package:mangoHub/src/shared/GlobalData.dart';
 import 'package:meta/meta.dart';
 import 'package:http/http.dart' as http;
 
@@ -23,11 +24,11 @@ class GetNearbyCompaniesBloc extends Bloc<GetNearbyCompaniesEvent, GetNearbyComp
 
   Stream<GetNearbyCompaniesState> _getNearbyCompanies(GetNearbyCompanies event) async*{
 
-    final String apiUrl = "https://app-a5e00a51-0c5e-4dce-a2df-5662105ba7f4.cleverapps.io/public/companies-nearby?"
-                          "geo=${event.latitude},${event.longitude}&distance=${event.distance}";
+    // final String apiUrl = "https://app-a5e00a51-0c5e-4dce-a2df-5662105ba7f4.cleverapps.io/public/companies-nearby?"
+    //                       "geo=${event.latitude},${event.longitude}&distance=${event.distance}";
 
     try{
-      final response = await http.get(apiUrl);
+      final response = await http.get(mainPath+"/public/companies-nearby?geo=${event.latitude},${event.longitude}&distance=${event.distance}");
 
       GetNearbyCompaniesModel _nearbyCompanies = new GetNearbyCompaniesModel();
 

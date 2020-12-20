@@ -1,12 +1,8 @@
-/*List<OrderModel> allOrderCompanies = new List<OrderModel>();
-List<OrderModel> orderAllDetails = new List<OrderModel>();*/
 
 List<OrderModel> nearbyOrders = new List<OrderModel>();
 List<OrderModel> acceptedOrder = new List<OrderModel>();
 List<OrderModel> deliveryHistory = new List<OrderModel>();
 List<DeliveryHistoryModel> deliveryHistoryAsDays = new List<DeliveryHistoryModel>();
-// List deliveryHistoryAsDays = [];
-// List deliveryHistoryAsDays = [];
 
 
 class DeliveryHistoryModel {
@@ -52,6 +48,7 @@ class OrderModel {
   String orderCustomerId;
   String orderCustomerName;
   String orderCustomerMobile;
+  String orderNote;
   String orderPaymentMethod;
   int orderAmount;
   int orderDiscount;
@@ -116,6 +113,7 @@ class OrderModel {
     orderCustomerId = json['order_customer_id'];
     orderCustomerName = json['order_customer_name'];
     orderCustomerMobile = json['order_customer_mobile'];
+    orderNote = json['order_note'];
     orderPaymentMethod = json['order_payment_method'];
     orderAmount = json['order_amount'];
     orderDiscount = json['order_discount'];
@@ -152,6 +150,7 @@ class OrderModel {
     data['order_customer_id'] = this.orderCustomerId;
     data['order_customer_name'] = this.orderCustomerName;
     data['order_customer_mobile'] = this.orderCustomerMobile;
+    data['order_note'] = this.orderNote;
     data['order_payment_method'] = this.orderPaymentMethod;
     data['order_amount'] = this.orderAmount;
     data['order_discount'] = this.orderDiscount;

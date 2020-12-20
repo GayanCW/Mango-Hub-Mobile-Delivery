@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:location/location.dart';
 import 'package:mangoHub/src/services/Services.dart';
 
 
@@ -10,9 +10,9 @@ class GoogleMapMyLocation extends StatefulWidget {
 }
 
 class GoogleMapMyLocationState extends State<GoogleMapMyLocation> {
-  Location location = Location();
+
+  GeoLocationServices _locationServices = GeoLocationServices();
   GoogleMapController _mapController;
-  bool _showMapStyle = false;
   double _myLatitude = 0.00;
   double _myLongitude = 0.00;
 
@@ -23,15 +23,16 @@ class GoogleMapMyLocationState extends State<GoogleMapMyLocation> {
   );
 
   void _onMapCreated(GoogleMapController controller) {
-    _toggleMapStyle();
+    // _toggleMapStyle();
     _mapController = controller;
+    _toggleMapStyle(false);
   }
 
-  void _toggleMapStyle() async {
-    String style = await DefaultAssetBundle.of(context).loadString('assets/googleMap/map_style2.json');
+  void _toggleMapStyle(bool style) async {
+    String _style = await DefaultAssetBundle.of(context).loadString('assets/googleMap/map_style2.json');
 
-    if (_showMapStyle==true) {
-      _mapController.setMapStyle(style);
+    if (style) {
+      _mapController.setMapStyle(_style);
     } else {
       _mapController.setMapStyle(null);
     }
@@ -45,9 +46,8 @@ class GoogleMapMyLocationState extends State<GoogleMapMyLocation> {
 
   @override
   Widget build(BuildContext context) {
-    Size _size = MediaQuery.of(context).size;
-    return StreamBuilder<UserLocation>(
-        stream: LocationService().locationStream,
+    /*return StreamBuilder<Position>(
+        stream: _locationServices.getMyLiveLocation(),
         builder: (context, snapshot){
 
           if(!snapshot.hasData){
@@ -81,6 +81,19 @@ class GoogleMapMyLocationState extends State<GoogleMapMyLocation> {
             ],
           );
         }
+    );*/
+    return Stack(
+      children: [
+        Container(
+          child: GoogleMap(
+            onMapCreated: _onMapCreated,
+            mapType: MapType.normal,
+            initialCameraPosition: _initialCameraPosition,
+            myLocationEnabled: true,
+            myLocationButtonEnabled: true,
+          ),
+        ),
+      ],
     );
   }
 }
