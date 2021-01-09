@@ -1,9 +1,12 @@
 import 'dart:async';
 import 'dart:collection';
 import 'dart:math';
+import 'dart:typed_data';
+import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -94,13 +97,15 @@ class _OrderLocationState extends State<OrderLocation> {
 
   void _setSourceAndDestinationIcons() async {
     BitmapDescriptor.fromAssetImage(
-        ImageConfiguration(devicePixelRatio: 2.0, size:  Size(5, 8)), 'assets/googleMap/driving_pin.png')
+        ImageConfiguration(size:  Size(24, 24)),
+        'assets/googleMap/delivery_man.png')
         .then((onValue) {
       sourceIcon = onValue;
     });
 
-    BitmapDescriptor.fromAssetImage(ImageConfiguration(devicePixelRatio: 2.0, size:  Size(5, 8)),
-        'assets/googleMap/buyer_pin.png')
+    BitmapDescriptor.fromAssetImage(
+        ImageConfiguration(size:  Size(24, 24)),
+        'assets/googleMap/shop.png')
         .then((onValue) {
       destinationIcon = onValue;
     });
@@ -124,9 +129,9 @@ class _OrderLocationState extends State<OrderLocation> {
             draggable: false,
             zIndex: 0,
             flat: false,
-            anchor: Offset(0.5, 1.0),
-            icon: BitmapDescriptor.defaultMarker
-            // icon: bitIcon,
+            anchor: Offset(0.5, 0.5),
+            // icon: BitmapDescriptor.defaultMarker
+            icon: bitIcon,
         ),
       );
       _mapController.animateCamera(
@@ -142,7 +147,7 @@ class _OrderLocationState extends State<OrderLocation> {
   _addPolyLine() {
     PolylineId id = PolylineId("poly");
     Polyline polyline = Polyline(
-        polylineId: id, color: mangoBlue, points: polylineCoordinates, width: 10, startCap: Cap.roundCap, endCap: Cap.buttCap);
+        polylineId: id, color: mangoBlue, points: polylineCoordinates, width: 2, startCap: Cap.roundCap, endCap: Cap.buttCap);
     polylines[id] = polyline;
     // setState(() {});
   }
@@ -188,7 +193,7 @@ class _OrderLocationState extends State<OrderLocation> {
     );
   }
 
-  void _selectDeliveryFlow(String flow , int index, BuildContext context)async{
+  void _deliveryFlow(String flow , int index, BuildContext context)async{
 
     String _userProfileId = await _repository.readData('userProfileId');
     print(_userProfileId);
@@ -279,9 +284,14 @@ class _OrderLocationState extends State<OrderLocation> {
     _locationId = 'shop';
     markerCreateState=true;
 
-    _setSourceAndDestinationIcons();
+    getBytesFromAsset('assets/googleMap/shop.png', 128).then((onValue) {
+      sourceIcon =BitmapDescriptor.fromBytes(onValue);
+
+    });
+
+    // _setSourceAndDestinationIcons();
     _getNearbyCompany(widget.myLatitude, widget.myLongitude, context);
-    _selectDeliveryFlow('AcceptDelivery', 0, context);
+    _deliveryFlow('AcceptDelivery', 0, context);
 
   }
 
@@ -317,7 +327,7 @@ class _OrderLocationState extends State<OrderLocation> {
       if(_locationId == 'shop') {
         _orderStatusString = 'accepted';
           if(markerCreateState==true) {
-            // _buttonEnabled('time'); // must be commented..................
+            _buttonEnabled('time'); // must be commented..................
             _setNewMarkers(shopLat, shopLong, sourceIcon);
               if(_locationUpdate==true){
                 _getPolyline(_locationData.latitude, _locationData.longitude, shopLat, shopLong);
@@ -389,7 +399,7 @@ class _OrderLocationState extends State<OrderLocation> {
               polylines: Set<Polyline>.of(polylines.values),
               myLocationEnabled: true,
               myLocationButtonEnabled: true,
-              zoomControlsEnabled: false,
+              zoomControlsEnabled: true,
             ),
           ),
 
@@ -427,7 +437,7 @@ class _OrderLocationState extends State<OrderLocation> {
                     borderRadius: BorderRadius.circular(8.0),
                   ),
                   onPressed: (buttonVisibility==false)?null:(){
-                    _selectDeliveryFlow('DeliveredOrder', 0, context);
+                    _deliveryFlow('DeliveredOrder', 0, context);
                     setState(() {
                       _markers.clear();
                       polylineCoordinates.clear();
@@ -444,7 +454,8 @@ class _OrderLocationState extends State<OrderLocation> {
             alignment: Alignment.topRight,
             child: Container(
               margin: EdgeInsets.only(
-                  top: _size.height * 0.41,
+                  top: _size.height * 0.25,
+                  // top: _size.height * 0.41,
                   right: 15.0),
               child: CircleAvatar(
                 radius: 30,
@@ -756,6 +767,13 @@ class _OrderLocationState extends State<OrderLocation> {
       //     return
       //   }),
     );
+  }
+
+  static Future<Uint8List> getBytesFromAsset(String path, int width) async {
+    ByteData data = await rootBundle.load(path);
+    Codec codec = await instantiateImageCodec(data.buffer.asUint8List(), targetWidth: width);
+    FrameInfo fi = await codec.getNextFrame();
+    return (await fi.image.toByteData(format: ImageByteFormat.png)).buffer.asUint8List();
   }
 }
 

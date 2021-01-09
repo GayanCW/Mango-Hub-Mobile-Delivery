@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:mangoHub/src/components/CircleProgress.dart';
 import 'package:mangoHub/src/googleMap/GoogleMapMyLocation.dart';
@@ -65,6 +66,12 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     skipCountString = await _repository.readData('skipCount');
     skipCountInt = int.parse((skipCountString == null) ? '0' : skipCountString);
   }
+
+  // void _onMapCreated(GoogleMapController controller) {
+  //   // _toggleMapStyle();
+  //   _mapController = controller;
+  //   _toggleMapStyle(false);
+  // }
 
   @override
   void initState() {
@@ -163,7 +170,20 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
               Container(
                 height: _size.height * 0.65,
                 child: GoogleMapMyLocation(),
+
+
               ),
+
+              // Container(
+              //   child: GoogleMap(
+              //     onMapCreated: _onMapCreated,
+              //     mapType: MapType.normal,
+              //     initialCameraPosition: _initialCameraPosition,
+              //     myLocationEnabled: true,
+              //     myLocationButtonEnabled: true,
+              //   ),
+              // ),
+
               Container(
                 margin: EdgeInsets.only(
                     top: _size.height * 0.65, left: 10.0, right: 10.0),

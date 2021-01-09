@@ -1,8 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:location/location.dart';
-import 'package:mangoHub/src/screens/Dashboard.dart';
-import 'package:mangoHub/src/screens/LoginUser.dart';
 import 'package:mangoHub/src/shared/Colors.dart';
 import 'package:mangoHub/src/shared/Repository.dart';
 
@@ -14,30 +11,24 @@ class Intro extends StatefulWidget {
 
 class _IntroState extends State<Intro> {
 
-  bool _serviceEnabled;
-  PermissionStatus _permissionGranted;
-  Location location = Location();
-
   Repository _repository = new Repository();
 
   Future<void> routePage() async{
     String _loginStatus = await _repository.readData('loginStatus');
 
     if(_loginStatus == 'alreadyLogin'){
-      Navigator.of(context).push(MaterialPageRoute(builder: (context)=> Dashboard(),));
+      // Navigator.of(context).push(MaterialPageRoute(builder: (context)=> Dashboard(),));
+
+      Future.delayed(const Duration(seconds: 2), () {
+        Navigator.pushNamedAndRemoveUntil(context, '/dashboard', (route) => false);
+      });
     }
     else{
-      Navigator.of(context).push(MaterialPageRoute(builder: (context)=> LoginUser(),));
+      // Navigator.of(context).push(MaterialPageRoute(builder: (context)=> LoginUser(),));
+      Navigator.pushNamedAndRemoveUntil(context, '/loginUser', (route) => false);
 
     }
   }
-
-  // Future<void> getLocationPermission() async{
-  //   _serviceEnabled = await location.serviceEnabled();
-  //   if (_serviceEnabled == true) {
-  //     routePage();
-  //   }
-  // }
 
   @override
   void initState() {
@@ -47,12 +38,20 @@ class _IntroState extends State<Intro> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        'MangoHub Mobile Delivery',
-        style: TextStyle(fontSize: 50.0, fontWeight: FontWeight.w800, color: mangoOrange, ),
-        textAlign: TextAlign.center,
-      ),
+    return Stack(
+      children: [
+        Positioned(
+          top: 150.0,
+          left: 50.0,
+          right: 50.0,
+          child: Image.asset("assets/images/logo.png",width: MediaQuery.of(context).size.width*0.7)
+        ),
+        Positioned(
+          bottom: 10.0,
+          child: Image.asset("assets/images/intro_background.png", width: MediaQuery.of(context).size.width),
+        )
+
+      ]
     );
 
   }

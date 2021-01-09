@@ -45,19 +45,6 @@ class UpdateUserFailedException extends AuthenticationState{
   final String errorObject;
 }
 ////////////////////////////////////////////////////////////////////////////////
-class LogoutUserSuccess extends AuthenticationState{
-  LogoutUserSuccess(this.authentication);
-  final Authentication authentication;
-}
-class LogoutUserFailed extends AuthenticationState{
-  LogoutUserFailed(this.authentication);
-  final Authentication authentication;
-}
-class LogoutUserFailedException extends AuthenticationState{
-  LogoutUserFailedException(this.errorObject);
-  final String errorObject;
-}
-////////////////////////////////////////////////////////////////////////////////
 class GetMyProfileSuccess extends AuthenticationState{
   GetMyProfileSuccess(this.authentication);
   final Authentication authentication;
@@ -71,3 +58,17 @@ class GetMyProfileFailedException extends AuthenticationState{
   final String errorObject;
 }
 ////////////////////////////////////////////////////////////////////////////////
+class ImageUploadSuccess extends AuthenticationState {
+  ImageUploadSuccess(this.fileUploadResponse);
+  final FileUploadResponse fileUploadResponse;
+}
+
+class ImageUploadFailed extends AuthenticationState {
+  ImageUploadFailed(this.fileUploadResponse);
+  final FileUploadResponse fileUploadResponse;
+}
+
+class ImageUploadFailedException extends AuthenticationState {
+  ImageUploadFailedException(this.errorObject);
+  final String errorObject;
+}

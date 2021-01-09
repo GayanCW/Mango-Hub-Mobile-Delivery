@@ -26,7 +26,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
 
   void _getMyProfile()async{
-    String _token = await _repository.readData('token');
     _login = await _repository.readData('login');
     _user = await _repository.readData('user');
     if(_login!=null) {

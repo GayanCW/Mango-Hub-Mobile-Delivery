@@ -16,6 +16,7 @@ Color mangoShadow = Colors.grey[200];
 Color mangoText = Colors.white;
 
 Color mangoBlackText = Colors.black;
+Color mangoWhiteText = Colors.white;
 Color mangoGrey = Colors.grey[900];
 
 

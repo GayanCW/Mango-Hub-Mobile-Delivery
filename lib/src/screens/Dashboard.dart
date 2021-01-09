@@ -1,9 +1,13 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mangoHub/src/blocs/Authentication/authentication_bloc.dart';
+import 'package:mangoHub/src/models/APImodels/AuthenticationModel.dart';
 import 'package:mangoHub/src/screens/DeliveryHistory.dart';
 import 'package:mangoHub/src/screens/Earnings.dart';
 import 'package:mangoHub/src/screens/Home.dart';
+import 'package:mangoHub/src/screens/LoginUser.dart';
 import 'package:mangoHub/src/screens/OrderLocation.dart';
 import 'package:mangoHub/src/screens/ProfileScreen.dart';
 import 'package:mangoHub/src/screens/UpdateUser.dart';
@@ -17,7 +21,9 @@ class Dashboard extends StatefulWidget {
 
 class _DashboardState extends State<Dashboard> {
   int _selectedIndex = 1;
-  Repository _repository = new Repository();
+  Repository _repository  = new Repository();
+  User user = new User();
+  String _user;
 
   void _onItemTapped(int index) {
     setState(() {
@@ -25,11 +31,25 @@ class _DashboardState extends State<Dashboard> {
     });
   }
 
+  void _getMyProfile()async{
+    _user = await _repository.readData('user');
+    if(_user!=null) {
+      user = User.fromJson(jsonDecode(_user));
+    }
+    setState(() {});
+  }
+
   List<String> _appBarTitle = [
     'Earnings',
     'Orders',
     'Delivery History'
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    _getMyProfile();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +82,7 @@ class _DashboardState extends State<Dashboard> {
             IconButton(icon: Icon(Icons.online_prediction), onPressed: (){}),
           ],
         ),
-        drawer: drawer(),
+        drawer: (user!=null)?drawer():null,
         body: _tabs[_selectedIndex],
         bottomNavigationBar: BottomNavigationBar(
           items: <BottomNavigationBarItem>[
@@ -90,7 +110,9 @@ class _DashboardState extends State<Dashboard> {
       ),
       routes: <String, WidgetBuilder>{
         '/dashboard': (BuildContext context) => Dashboard(),
+        '/loginUser': (BuildContext context) => LoginUser(),
         '/orderLocation': (BuildContext context) => OrderLocation(),
+        '/updateUser': (BuildContext context) => UpdateUser(),
       },
     );
 
@@ -106,51 +128,46 @@ class _DashboardState extends State<Dashboard> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                GestureDetector(
-                  child: Container(
-                    width: double.infinity,
-                    padding: EdgeInsets.all(10.0),
-                    margin: EdgeInsets.only(top: 30.0),
-                    color: Colors.orange,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        Container(
-                          margin: EdgeInsets.only(left: 10.0, right: 10.0),
-                          width: 70.0,
-                          height: 70.0,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            image: DecorationImage(
-                              image: AssetImage("assets/images/delivery-man2.jpg"),
-                              fit: BoxFit.cover,
-                            ),
+                Container(
+                  width: double.infinity,
+                  padding: EdgeInsets.all(10.0),
+                  margin: EdgeInsets.only(top: 30.0),
+                  height: 200.0,
+                  color: mangoBlack,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Container(
+                        margin: EdgeInsets.only(left: 10.0, right: 10.0),
+                        width: 100.0,
+                        height: 100.0,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.red,
+                          image: DecorationImage(
+                            image: AssetImage("assets/images/delivery-man2.jpg"),
+                            fit: BoxFit.cover,
                           ),
                         ),
-                        Container(
-                          width: 100.0,
-                          height: 50.0,
-                          margin: EdgeInsets.only(left:10.0),
-                          child: Column(
-                            children: <Widget>[
-                              Text(
-                                "Mango Driver",
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 20.0
-                                ),
+                      ),
+                      Container(
+                        height: 50.0,
+                        margin: EdgeInsets.only(top:20.0),
+                        child: Column(
+                          children: <Widget>[
+                            Text(
+                        user.userFirstName+" "+user.userLastName,
+                              style: TextStyle(
+                                  color: mangoWhiteText,
+                                  fontSize: 30.0
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                  onTap: () {
-                    // Navigator.of(context).push(MaterialPageRoute(
-                    //     builder: (context) => ProfileScreen()));
-                  },
                 ),
                 Container(
                   child: Column(
@@ -159,7 +176,6 @@ class _DashboardState extends State<Dashboard> {
                         leading: Icon(Icons.person, color: mangoOrange, size: 25,),
                         title: Text("About me", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400, color: Colors.white)),
                         onTap: (){
-                          // LocationService().closeStream();
                           Navigator.of(context).push(MaterialPageRoute(builder: (context)=> ProfileScreen()));
                         },
                       ),
@@ -172,7 +188,6 @@ class _DashboardState extends State<Dashboard> {
                         leading: Icon(Icons.settings, color: mangoOrange, size: 25,),
                         title: Text("Settings", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400, color: Colors.white)),
                         onTap: (){
-                          // Navigator.pushNamed(context, '/editUser');
                           Navigator.of(context).push(MaterialPageRoute(builder: (context)=> UpdateUser()));
                         },
                       ),
@@ -193,16 +208,9 @@ class _DashboardState extends State<Dashboard> {
             child: ListTile(
               leading: Icon(Icons.logout, color: mangoOrange, size: 25,),
               title: Text("logout", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400, color: Colors.white)),
-              onTap: () async{
+              onTap: () {
                 _repository.deleteAllData();
                 Navigator.pushNamedAndRemoveUntil(context, '/loginUser', (route) => false);
-
-                // String _token = await _repository.readData('token');
-                // BlocProvider.of<AuthenticationBloc>(context).add(
-                //     LogoutUser(
-                //       token: _token,
-                //     )
-                // );
               },
             ),
           ),

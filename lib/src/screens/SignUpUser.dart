@@ -77,11 +77,14 @@ class _SignUpUserState extends State<SignUpUser> {
   }
 
   Future<dynamic> _getImage() async{
-    var image = await ImagePicker.pickImage(source: ImageSource.gallery);
+    var image = await ImagePicker.pickImage(source: ImageSource.camera);
     setState(() {
       _image = image;
-      print("image:");
-      print(_image);
+
+      BlocProvider.of<AuthenticationBloc>(context).add(
+          GetSignUpUserDetails()
+      );
+
     });
   }
 
@@ -177,7 +180,7 @@ class _SignUpUserState extends State<SignUpUser> {
             SingleTextFormField(
               inputText: email,
               inputTextVisible: false,
-              labelText: "Username",
+              labelText: "Email",
               hintText: "Enter Your Email",
               iconButton: null,
               textInputType: TextInputType.emailAddress,
@@ -424,6 +427,7 @@ class _SignUpUserState extends State<SignUpUser> {
                 }
               },
             ),
+
             FlatButton(
               onPressed: _getImage,
               child: (_image==null)? Icon(
@@ -449,42 +453,42 @@ class _SignUpUserState extends State<SignUpUser> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            SingleTextFormField(
-              maxLength: 10,
-              inputText: mobileNum,
-              labelText: "Mobile Number",
-              inputTextVisible: false,
-              hintText: "07x xxxxxxx",
-              iconButton: null,
-              textInputType: TextInputType.phone,
-              validatorFunction: (value){
-                if(value.isEmpty){
-                  return "Required";
-                }
-                else if((mobileNum.text[0] != '0' || mobileNum.text[1] != '7') || (mobileNum.text[0] != '0' && mobileNum.text[1] != '7') ){
-                  return "Error Number";
-                }
-                else if(isLength(mobileNum.text, 10,10) == false){
-                  return "Error Length";
-                }
-
-              },
-            ),
-            FlatButton(
-              onPressed: _getImage,
-              child: (_image==null)? Icon(
-                Icons.image,
-                size: 80,
-              ): Image.file(
-                _image,
-                fit: BoxFit.cover,
-                height: 150,
-                // width: _size.width*0.5,
-              ),
-            ),
-            SizedBox(
-              height: _size.height*0.02,
-            ),
+            // SingleTextFormField(
+            //   maxLength: 10,
+            //   inputText: mobileNum,
+            //   labelText: "Mobile Number",
+            //   inputTextVisible: false,
+            //   hintText: "07x xxxxxxx",
+            //   iconButton: null,
+            //   textInputType: TextInputType.phone,
+            //   validatorFunction: (value){
+            //     if(value.isEmpty){
+            //       return "Required";
+            //     }
+            //     else if((mobileNum.text[0] != '0' || mobileNum.text[1] != '7') || (mobileNum.text[0] != '0' && mobileNum.text[1] != '7') ){
+            //       return "Error Number";
+            //     }
+            //     else if(isLength(mobileNum.text, 10,10) == false){
+            //       return "Error Length";
+            //     }
+            //
+            //   },
+            // ),
+            // FlatButton(
+            //   onPressed: _getImage,
+            //   child: (_image==null)? Icon(
+            //     Icons.image,
+            //     size: 80,
+            //   ): Image.file(
+            //     _image,
+            //     fit: BoxFit.cover,
+            //     height: 150,
+            //     // width: _size.width*0.5,
+            //   ),
+            // ),
+            // SizedBox(
+            //   height: _size.height*0.02,
+            // ),
             FlatButtonComp(
                 text: "Register",
                 press: () {
@@ -689,17 +693,11 @@ class _SignUpUserState extends State<SignUpUser> {
           FocusScope.of(context).requestFocus(FocusNode()); //  hide keyboard from setState & page routing
           LoaderFormState.hideLoader(context);
           if(state.authentication.success == true){
-              print("Email: ${state.authentication.login.loginEmail}");
-              print("ProfileId: ${state.authentication.login.userProfileId}");
-              print("loginStates: ${state.authentication.login.loginStatus}");
-              print("loginStatusString: ${state.authentication.login.loginStatusString}");
               print("SignUp Success");
             goBack();
             showAlertDialog(context, 'SignUp' ,"SignUp Success");
           }
           if(state.authentication.success == false){
-              print("Success: ${state.authentication.success}");
-              print("Exist: ${state.authentication.exist}");
               print("You Already SignIn ");
             goBack();
             showAlertDialog(context, 'SignUp', "You Already SignIn");

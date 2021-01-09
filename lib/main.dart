@@ -5,6 +5,7 @@ import 'package:mangoHub/src/blocs/Authentication/authentication_bloc.dart';
 import 'package:mangoHub/src/blocs/DeliveryFlow/delivery_flow_bloc.dart';
 import 'package:mangoHub/src/blocs/GetNearbyCompanies/get_nearby_companies_bloc.dart';
 import 'package:mangoHub/src/blocs/Orders/orders_history_bloc.dart';
+import 'package:mangoHub/src/screens/Dashboard.dart';
 import 'package:mangoHub/src/screens/Intro.dart';
 import 'package:mangoHub/src/screens/LoginUser.dart';
 import 'package:mangoHub/src/screens/ResetPassword.dart';
@@ -31,7 +32,6 @@ void main() async {
 
 class MyApp extends StatelessWidget {
 
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -54,24 +54,13 @@ class MyApp extends StatelessWidget {
         ),
       ),
       routes: <String, WidgetBuilder>{
-        '/myApp': (BuildContext context) => MyApp(),
+        '/dashboard': (BuildContext context) => Dashboard(),
         '/loginUser': (BuildContext context) => LoginUser(),
         '/signUpUser': (BuildContext context) => SignUpUser(),
         '/resetPassword': (BuildContext context) => ResetPassword(),
-        '/updateUser': (BuildContext context) => UpdateUser(),
       },
     );
   }
 }
 
-/*class RunAfterLogin extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home:Tabs(pageTitle: 'MangoHub'),
-      // home:FirebaseInitialize(),
-    );
-  }
-}*/
 

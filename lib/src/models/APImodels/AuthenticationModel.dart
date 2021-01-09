@@ -6,10 +6,11 @@ class Authentication {
   String token;
   String expiresIn;
   String msg;
+  String message;
   Login login;
   User user;
 
-  Authentication({this.success, this.exist, this.token, this.expiresIn, this.msg, this.login, this.user});
+  Authentication({this.success, this.exist, this.token, this.expiresIn, this.msg,this.message, this.login, this.user});
 
   Authentication.fromJson(Map<String, dynamic> json) {
     success = json['success'];
@@ -17,6 +18,7 @@ class Authentication {
     token = json['token'];
     expiresIn = json['expiresIn'];
     msg = json['msg'];
+    message = json['message'];
     login = json['login'] != null ? new Login.fromJson(json['login']) : null;
     user = json['user'] != null ? new User.fromJson(json['user']) : null;
   }
@@ -28,6 +30,7 @@ class Authentication {
     data['token'] = this.token;
     data['expiresIn'] = this.expiresIn;
     data['msg'] = this.msg;
+    data['message'] = this.message;
     if (this.login != null) {
       data['login'] = this.login.toJson();
     }

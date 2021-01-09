@@ -18,12 +18,25 @@ class GetUpdateUserDetails extends AuthenticationEvent {
   final Authentication authentication;
 }
 
-class LogoutUser extends AuthenticationEvent {
-  LogoutUser({this.token});
-  final String token;
-}
-
 class GetMyProfile extends AuthenticationEvent {
   GetMyProfile({this.token});
   final String token;
 }
+
+class PasswordResetRequest extends AuthenticationEvent {
+  PasswordResetRequest({this.email});
+  final String email;
+}
+
+class PasswordReset extends AuthenticationEvent {
+  PasswordReset({this.password, this.token});
+  final String password;
+  final String token;
+}
+
+class ImageUpload extends AuthenticationEvent {
+  ImageUpload({this.image});
+  final File image;
+}
+
+

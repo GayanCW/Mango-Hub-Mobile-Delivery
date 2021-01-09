@@ -52,6 +52,8 @@ dependencies:
   intl:
   qr_flutter: ^3.2.0
   device_info: ^1.0.0
+  path: ^1.6.4
+  path_provider: ^1.5.1
 
 
 

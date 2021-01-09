@@ -227,6 +227,9 @@ class _LoginUserState extends State<LoginUser> {
           },
         ),
       ),
+      routes: <String, WidgetBuilder>{
+        '/dashboard': (BuildContext context) => Dashboard(),
+      },
     );
   }
 
@@ -245,11 +248,6 @@ class _LoginUserState extends State<LoginUser> {
               );
             }
         }
-        // if(state is LoginUserSuccess){
-        //   FocusScope.of(context).requestFocus(FocusNode()); //  hide keyboard from setState & page routing
-        //   if(state.authentication.login.loginType.toLowerCase() == "driver" && state.authentication.login.loginStatus == false){
-        //   }
-        // }
         if(state is LoginUserFailed){
           FocusScope.of(context).requestFocus(FocusNode()); //  hide keyboard from setState & page routing
           LoaderFormState.hideLoader(context);
@@ -275,7 +273,8 @@ class _LoginUserState extends State<LoginUser> {
               )
           );
           LoaderFormState.hideLoader(context);
-          Navigator.of(context).push(MaterialPageRoute(builder: (context)=> Dashboard(),));
+          // Navigator.of(context).push(MaterialPageRoute(builder: (context)=> Dashboard(),));
+          Navigator.pushNamedAndRemoveUntil(context, '/dashboard', (route) => false);
 
         }
         if(state is GetMyProfileFailed){

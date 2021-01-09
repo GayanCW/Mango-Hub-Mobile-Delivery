@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mangoHub/src/blocs/Authentication/authentication_bloc.dart';
 import 'package:mangoHub/src/components/Buttons.dart';
 import 'package:mangoHub/src/components/TextFormField.dart';
 import 'package:mangoHub/src/shared/Colors.dart';
+import 'package:string_validator/string_validator.dart';
 
 class ResetPassword extends StatefulWidget {
   @override
@@ -11,15 +14,8 @@ class ResetPassword extends StatefulWidget {
 class _ResetPasswordState extends State<ResetPassword> {
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  final TextEditingController mobileNum = TextEditingController();
+  final TextEditingController email = TextEditingController();
 
-  void validate() {
-    if (_formKey.currentState.validate()) {
-      print("validated");
-    } else {
-      print("Not Validated");
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +23,7 @@ class _ResetPasswordState extends State<ResetPassword> {
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: '',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
@@ -72,25 +68,43 @@ class _ResetPasswordState extends State<ResetPassword> {
                         ),
                       ]),
                   child: Form(
+                    key: _formKey,
                     child: Column(
-                      key: _formKey,
-                      // autovalidate: true,
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
                         SingleTextFormField(
-                          inputText: mobileNum,
-                          labelText: "Mobile Number",
-                          inputTextVisible: true,
-                          hintText: "+94 xx xxxxxxx",
+                          inputText: email,
+                          inputTextVisible: false,
+                          labelText: "Email",
+                          hintText: "Enter Your Email",
                           iconButton: null,
+                          textInputType: TextInputType.emailAddress,
+                          validatorFunction: (value){
+                            if(value.isEmpty){
+                              return "Required";
+                            }
+                            if(isEmail(value) == false){
+                              return "invalid Email type";
+                            }
+                          },
                         ),
                         SizedBox(
                           height: _size.height*0.02,
                         ),
                         FlatButtonComp(
                           text: "Send link",
-                          press: (){},
+                          press: (){
+                            if(!_formKey.currentState.validate()){
+                              return;
+                            }
+                            else {
+                              BlocProvider.of<AuthenticationBloc>(context)
+                                .add(PasswordResetRequest(
+                                  email: email.text
+                                ));
+                            }
+                          },
                         ),
                       ],
                     ),
