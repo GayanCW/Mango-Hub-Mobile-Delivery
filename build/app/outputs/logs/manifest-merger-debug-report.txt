@@ -13,8 +13,7 @@ MERGED from [:google_maps_flutter] G:\MangoHub\mangohub-mobile-delivery\build\go
 MERGED from [:image_picker] G:\MangoHub\mangohub-mobile-delivery\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-22:12
 MERGED from [:flutter_plugin_android_lifecycle] G:\MangoHub\mangohub-mobile-delivery\build\flutter_plugin_android_lifecycle\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
 MERGED from [:geolocator] G:\MangoHub\mangohub-mobile-delivery\build\geolocator\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
-MERGED from [:location] G:\MangoHub\mangohub-mobile-delivery\build\location\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-10:12
-MERGED from [:location_web] G:\MangoHub\mangohub-mobile-delivery\build\location_web\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
+MERGED from [:path_provider] G:\MangoHub\mangohub-mobile-delivery\build\path_provider\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
 MERGED from [:cloud_firestore] G:\MangoHub\mangohub-mobile-delivery\build\cloud_firestore\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-15:12
 MERGED from [:shared_preferences] G:\MangoHub\mangohub-mobile-delivery\build\shared_preferences\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
 MERGED from [:firebase_core] G:\MangoHub\mangohub-mobile-delivery\build\firebase_core\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-15:12
@@ -61,8 +60,8 @@ MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] C:\Users\Gayan I5\.gr
 MERGED from [androidx.documentfile:documentfile:1.0.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\c9b2d7ceb417280870b2e4b56bb7ccf7\documentfile-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\33bc7170fdba097af0e8a99e37bef98e\localbroadcastmanager-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.print:print:1.0.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\9764f1b78bfcb75454627bb577c55ef5\print-1.0.0\AndroidManifest.xml:17:1-22:12
-MERGED from [com.google.firebase:protolite-well-known-types:17.1.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\c7c20c3d0a97718cc19d235aa2fb18e4\protolite-well-known-types-17.1.0\AndroidManifest.xml:2:1-11:12
 MERGED from [io.grpc:grpc-android:1.28.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\03e476d95e07a9b8862ce5805013a6d4\grpc-android-1.28.0\AndroidManifest.xml:2:1-13:12
+MERGED from [com.google.firebase:protolite-well-known-types:17.1.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\c7c20c3d0a97718cc19d235aa2fb18e4\protolite-well-known-types-17.1.0\AndroidManifest.xml:2:1-11:12
 INJECTED from G:\MangoHub\mangohub-mobile-delivery\android\app\src\debug\AndroidManifest.xml:1:1-7:12
 INJECTED from G:\MangoHub\mangohub-mobile-delivery\android\app\src\debug\AndroidManifest.xml:1:1-7:12
 INJECTED from G:\MangoHub\mangohub-mobile-delivery\android\app\src\debug\AndroidManifest.xml:1:1-7:12
@@ -82,14 +81,10 @@ INJECTED from G:\MangoHub\mangohub-mobile-delivery\android\app\src\debug\Android
 		ADDED from G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:1:11-69
 uses-permission#android.permission.ACCESS_FINE_LOCATION
 ADDED from G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:8:5-79
-MERGED from [:location] G:\MangoHub\mangohub-mobile-delivery\build\location\intermediates\library_manifest\debug\AndroidManifest.xml:8:5-79
-MERGED from [:location] G:\MangoHub\mangohub-mobile-delivery\build\location\intermediates\library_manifest\debug\AndroidManifest.xml:8:5-79
 	android:name
 		ADDED from G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:8:22-76
 uses-permission#android.permission.ACCESS_COARSE_LOCATION
 ADDED from G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:9:5-81
-MERGED from [:location] G:\MangoHub\mangohub-mobile-delivery\build\location\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-81
-MERGED from [:location] G:\MangoHub\mangohub-mobile-delivery\build\location\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-81
 	android:name
 		ADDED from G:\MangoHub\mangohub-mobile-delivery\android\app\src\main\AndroidManifest.xml:9:22-78
 application
@@ -220,10 +215,8 @@ MERGED from [:flutter_plugin_android_lifecycle] G:\MangoHub\mangohub-mobile-deli
 MERGED from [:flutter_plugin_android_lifecycle] G:\MangoHub\mangohub-mobile-delivery\build\flutter_plugin_android_lifecycle\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:geolocator] G:\MangoHub\mangohub-mobile-delivery\build\geolocator\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:geolocator] G:\MangoHub\mangohub-mobile-delivery\build\geolocator\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
-MERGED from [:location] G:\MangoHub\mangohub-mobile-delivery\build\location\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
-MERGED from [:location] G:\MangoHub\mangohub-mobile-delivery\build\location\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
-MERGED from [:location_web] G:\MangoHub\mangohub-mobile-delivery\build\location_web\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
-MERGED from [:location_web] G:\MangoHub\mangohub-mobile-delivery\build\location_web\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:path_provider] G:\MangoHub\mangohub-mobile-delivery\build\path_provider\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:path_provider] G:\MangoHub\mangohub-mobile-delivery\build\path_provider\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:cloud_firestore] G:\MangoHub\mangohub-mobile-delivery\build\cloud_firestore\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:cloud_firestore] G:\MangoHub\mangohub-mobile-delivery\build\cloud_firestore\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:shared_preferences] G:\MangoHub\mangohub-mobile-delivery\build\shared_preferences\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
@@ -316,10 +309,10 @@ MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] C:\User
 MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\33bc7170fdba097af0e8a99e37bef98e\localbroadcastmanager-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.print:print:1.0.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\9764f1b78bfcb75454627bb577c55ef5\print-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.print:print:1.0.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\9764f1b78bfcb75454627bb577c55ef5\print-1.0.0\AndroidManifest.xml:20:5-44
-MERGED from [com.google.firebase:protolite-well-known-types:17.1.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\c7c20c3d0a97718cc19d235aa2fb18e4\protolite-well-known-types-17.1.0\AndroidManifest.xml:7:5-9:41
-MERGED from [com.google.firebase:protolite-well-known-types:17.1.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\c7c20c3d0a97718cc19d235aa2fb18e4\protolite-well-known-types-17.1.0\AndroidManifest.xml:7:5-9:41
 MERGED from [io.grpc:grpc-android:1.28.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\03e476d95e07a9b8862ce5805013a6d4\grpc-android-1.28.0\AndroidManifest.xml:7:5-9:41
 MERGED from [io.grpc:grpc-android:1.28.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\03e476d95e07a9b8862ce5805013a6d4\grpc-android-1.28.0\AndroidManifest.xml:7:5-9:41
+MERGED from [com.google.firebase:protolite-well-known-types:17.1.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\c7c20c3d0a97718cc19d235aa2fb18e4\protolite-well-known-types-17.1.0\AndroidManifest.xml:7:5-9:41
+MERGED from [com.google.firebase:protolite-well-known-types:17.1.0] C:\Users\Gayan I5\.gradle\caches\transforms-2\files-2.1\c7c20c3d0a97718cc19d235aa2fb18e4\protolite-well-known-types-17.1.0\AndroidManifest.xml:7:5-9:41
 INJECTED from G:\MangoHub\mangohub-mobile-delivery\android\app\src\debug\AndroidManifest.xml
 INJECTED from G:\MangoHub\mangohub-mobile-delivery\android\app\src\debug\AndroidManifest.xml
 	android:targetSdkVersion

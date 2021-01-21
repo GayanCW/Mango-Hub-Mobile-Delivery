@@ -5,7 +5,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:mangoHub/src/components/CircleProgress.dart';
-import 'package:mangoHub/src/googleMap/GoogleMapMyLocation.dart';
+import 'package:mangoHub/src/components/LoaderForm.dart';
 import 'package:mangoHub/src/models/APImodels/OrderModel.dart';
 import 'package:mangoHub/src/screens/OrderLocation.dart';
 import 'package:mangoHub/src/services/Services.dart';
@@ -21,13 +21,14 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   final FirebaseServices _firebaseService = new FirebaseServices();
   final GeoLocationServices _locationServices = GeoLocationServices();
+  GoogleMapController _mapController;
   Repository _repository = new Repository();
   DateTime now = DateTime.now();
 
   AnimationController progressController;
   Animation<double> animation;
   int orderSkipCount = 0;
-  int skipCountInt;
+  int skipCountInt = 0;
   String skipCountString;
   bool skipState = false;
   int selectedOrder = 0;
@@ -42,14 +43,25 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
 
   final oCcy = new NumberFormat("#,##0.00", "en_US");
 
-  // double calculateDistance(lat1, lon1, lat2, lon2) {
-  //   double p = 0.017453292519943295;
-  //   double a = 0.5 -
-  //       cos((lat2 - lat1) * p) / 2 +
-  //       cos(lat1 * p) * cos(lat2 * p) * (1 - cos((lon2 - lon1) * p)) / 2;
-  //
-  //   return 12742 * asin(sqrt(a));
-  // }
+  static final _initialCameraPosition = CameraPosition(
+    target: LatLng(6.767679, 79.893027),
+    zoom: 16,
+  );
+
+  void onMapCreated(GoogleMapController controller) {
+    toggleMapStyle(false);
+    _mapController = controller;
+  }
+
+  void toggleMapStyle(bool style) async {
+    String _style = await DefaultAssetBundle.of(context).loadString('assets/googleMap/map_style2.json');
+
+    if (style) {
+      _mapController.setMapStyle(_style);
+    } else {
+      _mapController.setMapStyle(null);
+    }
+  }
 
   void _restartAnimation() {
     progressController.value = 0.0;
@@ -63,25 +75,55 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   }
 
   void getOrderSkipCount() async {
+    bool isDateChanged = await identifyDateChange();
+    if(isDateChanged){
+      _repository.deleteData('skipCount');
+    }
     skipCountString = await _repository.readData('skipCount');
     skipCountInt = int.parse((skipCountString == null) ? '0' : skipCountString);
   }
 
-  // void _onMapCreated(GoogleMapController controller) {
-  //   // _toggleMapStyle();
-  //   _mapController = controller;
-  //   _toggleMapStyle(false);
-  // }
+  Future<bool>  identifyDateChange() async{
+    bool isChanged = false;
+    int year, month, day;
+    String storedLocalTime = await _repository.readData('stored_local_time');
+
+    if(storedLocalTime != null){
+      year = int.parse(storedLocalTime.split('-')[0]);
+      month = int.parse(storedLocalTime.split('-')[1]);
+      day = int.parse(storedLocalTime.split('-')[2].split(' ')[0]);
+
+      if(year != now.year){isChanged =  true;}
+      if(month != now.month){isChanged =  true;}
+      if(day != now.day){isChanged =  true;}
+
+    } else{
+      _repository.addValue('stored_local_time', now.toString());
+    }
+
+    if(isChanged){
+      _repository.addValue('stored_local_time', now.toString());
+    }
+
+    return isChanged;
+
+  }
+
+
 
   @override
   void initState() {
     super.initState();
+
     getOrderSkipCount();
     progressController = AnimationController(vsync: this, duration: Duration(milliseconds: 2000));
     animation = Tween<double>(begin: 0.0, end: 100.0).animate(progressController)
           ..addListener(() {
             setState(() {});
           });
+
+
+
   }
 
 
@@ -93,60 +135,86 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
 
 
     if (orderList != null && _locationData != null) {
-      print("My Location : ${_locationData.latitude} / ${_locationData.longitude} / ${_locationData.speed}");
+      // print("My Location : ${_locationData.latitude} / ${_locationData.longitude} / ${_locationData.speed}");
+
+      if(_mapController != null) {
+        _mapController.animateCamera(
+            CameraUpdate.newCameraPosition(CameraPosition(
+                bearing: 0.0,
+                target: LatLng(_locationData.latitude, _locationData.longitude),
+                tilt: 0,
+                zoom: 12.00
+            )));
+      }
 
       if (orderList.isNotEmpty) {
         for (int index = 0; index < orderList.length; index++) {
-          _shopLatitude =
-              double.parse(orderList[index].orderGeo.shop.split(',')[0]);
-          _shopLongitude =
-              double.parse(orderList[index].orderGeo.shop.split(',')[1]);
+          if (orderList[index].orderGeo != null && orderList[index].orderGeo.delivery != "" && orderList[index].orderGeo.shop != "") {
+            _shopLatitude =
+                double.parse(orderList[index].orderGeo.shop.split(',')[0]);
+            _shopLongitude =
+                double.parse(orderList[index].orderGeo.shop.split(',')[1]);
 
-          _deliveryLatitude =
-              double.parse(orderList[index].orderGeo.delivery.split(',')[0]);
-          _deliveryLongitude =
-              double.parse(orderList[index].orderGeo.delivery.split(',')[1]);
+            _deliveryLatitude =
+                double.parse(orderList[index].orderGeo.delivery.split(',')[0]);
+            _deliveryLongitude =
+                double.parse(orderList[index].orderGeo.delivery.split(',')[1]);
 
-          shopDistance = Geolocator.distanceBetween(_locationData.latitude, _locationData.longitude, _shopLatitude, _shopLongitude);
-          deliveryDistance = Geolocator.distanceBetween(_locationData.latitude, _locationData.longitude, _deliveryLatitude, _deliveryLongitude);
+            shopDistance = Geolocator.distanceBetween(
+                _locationData.latitude, _locationData.longitude, _shopLatitude,
+                _shopLongitude);
+            deliveryDistance = Geolocator.distanceBetween(
+                _locationData.latitude, _locationData.longitude,
+                _deliveryLatitude, _deliveryLongitude);
 
-          if (shopDistance < 500000.00 /*&& deliveryDistance < 500.00*/) {
-            if (orderList[index].orderDeliveryPersonId == "") {
-              if (orderList[index].orderStatusString.toLowerCase() == "preparing" ||
-                  orderList[index].orderStatusString.toLowerCase() == "ready") {
-                OrderGeo singleGeo = OrderGeo();
-                singleGeo.shop = orderList[index].orderGeo.shop;
-                singleGeo.delivery = orderList[index].orderGeo.delivery;
+            // var strToDateTime = DateTime.parse(orderList[index].updatedAt);
+            // final convertLocal = strToDateTime.toLocal();
+            // print(convertLocal);
+            // print(now.toUtc());
 
-                nearbyOrders.add(OrderModel(
-                  orderProductList: orderList[index].orderProductList,
-                  orderAditionalCharges: orderList[index].orderAditionalCharges,
-                  orderGeo: singleGeo,
-                  sId: orderList[index].sId,
-                  orderDate: orderList[index].orderDate,
-                  orderCompany: orderList[index].orderCompany,
-                  orderBranchId: orderList[index].orderBranchId,
-                  orderCustomerId: orderList[index].orderCustomerId,
-                  orderCustomerName: orderList[index].orderCustomerName,
-                  orderCustomerMobile: orderList[index].orderCustomerMobile,
-                  orderPaymentMethod: orderList[index].orderPaymentMethod,
-                  orderAmount: orderList[index].orderAmount,
-                  orderDiscount: orderList[index].orderDiscount,
-                  orderTotal: orderList[index].orderTotal,
-                  orderAdvancePayment: orderList[index].orderAdvancePayment,
-                  orderStatus: orderList[index].orderStatus,
-                  orderStatusString: orderList[index]
-                      .orderStatusString
-                      .toString()
-                      .toLowerCase(),
-                  orderType: orderList[index].orderType,
-                  orderAcceptedUserId: orderList[index].orderAcceptedUserId,
-                  orderInvoiceId: orderList[index].orderInvoiceId,
-                  orderDeliveryPersonId: orderList[index].orderDeliveryPersonId,
-                  createdAt: orderList[index].createdAt,
-                  updatedAt: orderList[index].updatedAt,
-                  iV: orderList[index].iV,
-                ));
+
+            if (shopDistance < 500000.00 /*&& deliveryDistance < 500.00*/) {
+              if (orderList[index].orderDeliveryPersonId == "") {
+                if (orderList[index].orderStatusString.toLowerCase() ==
+                    "preparing" ||
+                    orderList[index].orderStatusString.toLowerCase() ==
+                        "ready") {
+                  OrderGeo singleGeo = OrderGeo();
+                  singleGeo.shop = orderList[index].orderGeo.shop;
+                  singleGeo.delivery = orderList[index].orderGeo.delivery;
+
+                  nearbyOrders.add(OrderModel(
+                    orderProductList: orderList[index].orderProductList,
+                    orderAdditionalCharges: orderList[index]
+                        .orderAdditionalCharges,
+                    orderGeo: singleGeo,
+                    sId: orderList[index].sId,
+                    orderDate: orderList[index].orderDate,
+                    orderCompany: orderList[index].orderCompany,
+                    orderBranchId: orderList[index].orderBranchId,
+                    orderCustomerId: orderList[index].orderCustomerId,
+                    orderCustomerName: orderList[index].orderCustomerName,
+                    orderCustomerMobile: orderList[index].orderCustomerMobile,
+                    orderPaymentMethod: orderList[index].orderPaymentMethod,
+                    orderAmount: orderList[index].orderAmount,
+                    orderDiscount: orderList[index].orderDiscount,
+                    orderTotal: orderList[index].orderTotal,
+                    orderAdvancePayment: orderList[index].orderAdvancePayment,
+                    orderStatus: orderList[index].orderStatus,
+                    orderStatusString: orderList[index]
+                        .orderStatusString
+                        .toString()
+                        .toLowerCase(),
+                    orderType: orderList[index].orderType,
+                    orderAcceptedUserId: orderList[index].orderAcceptedUserId,
+                    orderInvoiceId: orderList[index].orderInvoiceId,
+                    orderDeliveryPersonId: orderList[index]
+                        .orderDeliveryPersonId,
+                    createdAt: orderList[index].createdAt,
+                    updatedAt: orderList[index].updatedAt,
+                    iV: orderList[index].iV,
+                  ));
+                }
               }
             }
           }
@@ -169,20 +237,14 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             children: [
               Container(
                 height: _size.height * 0.65,
-                child: GoogleMapMyLocation(),
-
-
+                child: GoogleMap(
+                  onMapCreated: onMapCreated,
+                  mapType: MapType.normal,
+                  initialCameraPosition: _initialCameraPosition,
+                  myLocationEnabled: true,
+                  myLocationButtonEnabled: true,
+                ),
               ),
-
-              // Container(
-              //   child: GoogleMap(
-              //     onMapCreated: _onMapCreated,
-              //     mapType: MapType.normal,
-              //     initialCameraPosition: _initialCameraPosition,
-              //     myLocationEnabled: true,
-              //     myLocationButtonEnabled: true,
-              //   ),
-              // ),
 
               Container(
                 margin: EdgeInsets.only(
@@ -245,16 +307,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                               onTap: () {
                                 acceptedOrder.clear();
                                 acceptedOrder.add(nearbyOrders[selectedOrder]);
-
-                                // Navigator.of(context).push(MaterialPageRoute( //pushReplacement
-                                //   builder: (_) => OrderLocation(
-                                //     sId: acceptedOrder[0].sId,
-                                //     orderBranchId:
-                                //     acceptedOrder[0].orderBranchId,
-                                //     myLatitude: _locationData.latitude,
-                                //     myLongitude: _locationData.longitude,
-                                //   )));
-
+                                LoaderFormState.showLoader(context, 'Loading . . .');
                                 Navigator.pushAndRemoveUntil(context, MaterialPageRoute( //pushReplacement
                                     builder: (_) => OrderLocation(
                                       sId: acceptedOrder[0].sId,
@@ -363,44 +416,46 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   )),
             ],
           )
-        : Center(
-            child: AlertDialog(
-            contentPadding: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 0.0),
-            backgroundColor: Colors.transparent,
-            elevation: 0,
-            content: ClipRRect(
-              borderRadius: BorderRadius.vertical(
-                  top: Radius.circular(30.0), bottom: Radius.circular(30.0)),
-              child: Container(
-                height: 60,
-                width: 50,
-                child: new Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      child: CircularProgressIndicator(
-                        backgroundColor: Colors.orange,
-                      ),
-                      // color: Colors.red,
-                      height: 30,
-                      width: 30,
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(left: 20, top: 10),
-                      child: Text(
-                        'Loading     ',
-                        style: TextStyle(
-                            color: mangoWhite,
-                            fontSize: 14.0,
-                            fontWeight: FontWeight.w600),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ));
+        : Container(
+          //   child: AlertDialog(
+          //   contentPadding: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 0.0),
+          //   backgroundColor: Colors.transparent,
+          //   elevation: 0,
+          //   content: ClipRRect(
+          //     borderRadius: BorderRadius.vertical(
+          //         top: Radius.circular(30.0), bottom: Radius.circular(30.0)),
+          //     child: Container(
+          //       height: 60,
+          //       width: 50,
+          //       child: new Column(
+          //         mainAxisAlignment: MainAxisAlignment.center,
+          //         crossAxisAlignment: CrossAxisAlignment.center,
+          //         children: [
+          //           Container(
+          //             child: CircularProgressIndicator(
+          //               backgroundColor: Colors.orange,
+          //             ),
+          //             // color: Colors.red,
+          //             height: 30,
+          //             width: 30,
+          //           ),
+          //           Container(
+          //             margin: EdgeInsets.only(left: 20, top: 10),
+          //             child: Text(
+          //               'Loading     ',
+          //               style: TextStyle(
+          //                   color: mangoWhite,
+          //                   fontSize: 14.0,
+          //                   fontWeight: FontWeight.w600),
+          //             ),
+          //           ),
+          //         ],
+          //       ),
+          //     ),
+          //   ),
+          // )
+          color: mangoGrey,
+        );
 
   }
 
@@ -413,7 +468,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         ),
 
         StreamProvider(
-          create: (BuildContext context) => _locationServices.getMyLiveLocation()
+          create: (BuildContext context) => _locationServices.getMyLiveLocation(10000, 0)
         ),
 
     ],

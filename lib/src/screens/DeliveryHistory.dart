@@ -74,7 +74,7 @@ class _DeliveryHistoryState extends State<DeliveryHistory> {
                             Row(
                               children: [
                                 Text("Date  ", style: TextStyle(fontSize: 25, fontWeight: FontWeight.w800, color: Colors.grey[900])),
-                                Text(deliveryHistoryAsDays[index].orderModel[0].orderDate.split('T')[0], style: TextStyle(fontSize: 25, fontWeight: FontWeight.w800, color: mangoOrange)),
+                                Text(DateTime.parse(deliveryHistoryAsDays[index].orderModel[0].updatedAt).toLocal().toString().split(' ')[0], style: TextStyle(fontSize: 25, fontWeight: FontWeight.w800, color: mangoOrange)),
                               ],
                             ),
                             SizedBox(height: 6.0,),
@@ -82,18 +82,8 @@ class _DeliveryHistoryState extends State<DeliveryHistory> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                Text("Number of Orders  ", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800, color: Colors.grey[900])),
-                                /*Card(
-                                  elevation: 0,
-                                    shape: RoundedRectangleBorder(
-                                      side: BorderSide(color: Colors.green[900]),
-                                      borderRadius: BorderRadius.circular(10.0),
-                                    ),
+                                Text("Number of Delivered  ", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800, color: Colors.grey[900])),
 
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Text(deliveryHistoryAsDays[index].orderModel.length.toString(), style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800, color: Colors.grey[900])),
-                                  )),*/
                                 Text(deliveryHistoryAsDays[index].orderModel.length.toString(), style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800, color: Colors.grey[900])),
 
                               ],
@@ -134,7 +124,7 @@ class _DeliveryHistoryState extends State<DeliveryHistory> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(deliveryHistoryAsDays[selectedIndex].orderModel[0].orderDate.split('T')[0], style: TextStyle(fontSize: 25, fontWeight: FontWeight.w800, color: Colors.white)),
+                    Text(DateTime.parse(deliveryHistoryAsDays[selectedIndex].orderModel[0].updatedAt).toLocal().toString().split(' ')[0], style: TextStyle(fontSize: 25, fontWeight: FontWeight.w800, color: Colors.white)),
                     IconButton(
                       onPressed: (){
                         print("press");
@@ -177,7 +167,7 @@ class _DeliveryHistoryState extends State<DeliveryHistory> {
                                     children: <Widget>[
                                       Text(deliveryHistoryAsDays[selectedIndex].orderModel[index].orderCustomerName, style: TextStyle(fontSize: 25, fontWeight: FontWeight.w800, color: Colors.grey[900])),
                                       Text('Rs. '+oCcy.format(deliveryHistoryAsDays[selectedIndex].orderModel[index].orderTotal), style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800, color: Colors.green)),
-                                      Text("Time "+deliveryHistoryAsDays[selectedIndex].orderModel[index].orderDate.split('T')[1].split('.')[0], style: TextStyle(fontSize: 12, fontWeight: FontWeight.w800, color: Colors.grey[900])),
+                                      Text("Time "+DateTime.parse(deliveryHistoryAsDays[selectedIndex].orderModel[index].updatedAt).toLocal().toString().split(' ')[1].split('.')[0], style: TextStyle(fontSize: 12, fontWeight: FontWeight.w800, color: Colors.grey[900])),
                                     ],
                                   ),
                                 ),
@@ -227,89 +217,277 @@ class _DeliveryHistoryState extends State<DeliveryHistory> {
       listeners: [
         BlocListener<OrdersHistoryBloc,OrdersHistoryState>(
             listener: (context, state){
-              if(state is GetOrdersHistorySuccess){
-                int _nowDay = now.day;
+
+              if(state is GetOrdersHistorySuccess) {
                 deliveryHistory.clear();
                 deliveryHistoryAsDays.clear();
+                bool isStoring = false;
+                bool isSwitching = false;
+                bool isLooping = false;
+                List<OrderModel> _deliveryHistory = new List<OrderModel>();
 
-                for(int index=state.deliveryHistoryModel.orderModel.length; index>0; index--){
-                  OrderModel _deliveryHistory = state.deliveryHistoryModel.orderModel[index-1];
+                int year, month, day, hour, minutes;
+                double seconds;
+                int selectYear, selectMonth, selectDay, selectHour,
+                    selectMinutes;
+                double selectSeconds;
+                int previousYear, previousMonth, previousDay, previousHour,
+                    previousMinutes;
+                double previousSeconds;
 
-                  if(now.year == int.parse(_deliveryHistory.orderDate.split('T')[0].split('-')[0].toString())){
-                    if(now.month == int.parse(_deliveryHistory.orderDate.split('T')[0].split('-')[1].split('-')[0].toString())){
+                for (int index = 0; index <
+                    state.deliveryHistoryModel.orderModel.length; index++) {
+                  String _dateTime = DateTime.parse(
+                      state.deliveryHistoryModel.orderModel[index].updatedAt)
+                      .toLocal()
+                      .toString();
+                  year = int.parse(_dateTime.split('-')[0]);
+                  month = int.parse(_dateTime.split('-')[1]);
 
-                      if (deliveryHistory.isNotEmpty && _nowDay > int.parse(_deliveryHistory.orderDate.split('-')[2].split('T')[0].toString())) {
-                        deliveryHistoryAsDays.add(
-                            DeliveryHistoryModel(orderModel: deliveryHistory.toList())
-                        );
-                        deliveryHistory.clear();
+                  if (year == now.year && month == now.month) {
+                    deliveryHistory.insert(
+                        index, state.deliveryHistoryModel.orderModel[index]);
+                    _deliveryHistory.insert(
+                        index, state.deliveryHistoryModel.orderModel[index]);
+                    isLooping = true;
+                  }
+                }
+                if (deliveryHistory.isNotEmpty) {
+                  if (deliveryHistory.length > 1) {
+                    while (isLooping) {
+                      int loopingCount = 0;
+                      for (int index = 1; index <
+                          deliveryHistory.length; index++) {
+                        String previousDateTime = DateTime.parse(
+                            deliveryHistory[index - 1].updatedAt)
+                            .toLocal()
+                            .toString();
+                        String selectDateTime = DateTime.parse(
+                            deliveryHistory[index].updatedAt)
+                            .toLocal()
+                            .toString();
+
+                        selectYear = int.parse(selectDateTime.split('-')[0]);
+                        selectMonth = int.parse(selectDateTime.split('-')[1]);
+                        selectDay =
+                            int.parse(
+                                selectDateTime.split('-')[2].split(' ')[0]);
+                        selectHour =
+                            int.parse(
+                                selectDateTime.substring(11).split(':')[0]);
+                        selectMinutes =
+                            int.parse(
+                                selectDateTime.substring(11).split(':')[1]);
+                        selectSeconds = double.parse(
+                            selectDateTime.substring(11).split(':')[2]);
+
+                        previousYear =
+                            int.parse(previousDateTime.split('-')[0]);
+                        previousMonth =
+                            int.parse(previousDateTime.split('-')[1]);
+                        previousDay =
+                            int.parse(
+                                previousDateTime.split('-')[2].split(' ')[0]);
+                        previousHour =
+                            int.parse(
+                                previousDateTime.substring(11).split(':')[0]);
+                        previousMinutes =
+                            int.parse(
+                                previousDateTime.substring(11).split(':')[1]);
+                        previousSeconds = double.parse(
+                            previousDateTime.substring(11).split(':')[2]);
+
+
+                        // if (previousYear > selectYear && previousYear == now.year && selectYear == now.year) {
+                        //   // store previousOrder
+                        //   isStoring = true;
+                        // }
+                        // if (previousYear < selectYear && previousYear == now.year && selectYear == now.year) {
+                        //   // switch & store selectOrder
+                        //   isSwitching = true;
+                        // }
+                        // if (previousYear == selectYear && previousYear == now.year && selectYear == now.year) {
+                        //   if (previousMonth > selectMonth && previousMonth == now.month && selectMonth == now.month) {
+                        //     // store previousOrder
+                        //     isStoring = true;
+                        //   }
+                        //   if (previousMonth < selectMonth && previousMonth == now.month && selectMonth == now.month) {
+                        //     // switch & store selectOrder
+                        //     isSwitching = true;
+                        //   }
+                        //   if (previousMonth == selectMonth && previousMonth == now.month && selectMonth == now.month) {
+                        //     if (previousDay > selectDay) {
+                        //       // store previousOrder
+                        //       isStoring = true;
+                        //     }
+                        //     if (previousDay < selectDay) {
+                        //       // switch & store selectOrder
+                        //       isSwitching = true;
+                        //     }
+                        //     if (previousDay == selectDay) {
+                        //       if (previousHour > selectHour) {
+                        //         // store previousOrder
+                        //         isStoring = true;
+                        //       }
+                        //       if (previousHour < selectHour) {
+                        //         // switch & store selectOrder
+                        //         isSwitching = true;
+                        //       }
+                        //       if (previousHour == selectHour) {
+                        //         if (previousMinutes > selectMinutes) {
+                        //           // store previousOrder
+                        //           isStoring = true;
+                        //         }
+                        //         if (previousMinutes < selectMinutes) {
+                        //           // switch & store selectOrder
+                        //           isSwitching = true;
+                        //         }
+                        //         if (previousMinutes == selectMinutes) {
+                        //           if (previousSeconds > selectSeconds) {
+                        //             // store previousOrder
+                        //             isStoring = true;
+                        //           }
+                        //           if (previousSeconds < selectSeconds) {
+                        //             // switch & store selectOrder
+                        //             isSwitching = true;
+                        //           }
+                        //           if (previousSeconds == selectSeconds) {
+                        //             // anything
+                        //             isStoring = true;
+                        //           }
+                        //         }
+                        //       }
+                        //     }
+                        //   }
+                        // }
+
+                          if (previousDay > selectDay) {
+                            // store previousOrder
+                            isStoring = true;
+                          }
+                          if (previousDay < selectDay) {
+                            // switch & store selectOrder
+                            isSwitching = true;
+                          }
+                          if (previousDay == selectDay) {
+                            if (previousHour > selectHour) {
+                              // store previousOrder
+                              isStoring = true;
+                            }
+                            if (previousHour < selectHour) {
+                              // switch & store selectOrder
+                              isSwitching = true;
+                            }
+                            if (previousHour == selectHour) {
+                              if (previousMinutes > selectMinutes) {
+                                // store previousOrder
+                                isStoring = true;
+                              }
+                              if (previousMinutes < selectMinutes) {
+                                // switch & store selectOrder
+                                isSwitching = true;
+                              }
+                              if (previousMinutes == selectMinutes) {
+                                if (previousSeconds > selectSeconds) {
+                                  // store previousOrder
+                                  isStoring = true;
+                                }
+                                if (previousSeconds < selectSeconds) {
+                                  // switch & store selectOrder
+                                  isSwitching = true;
+                                }
+                                if (previousSeconds == selectSeconds) {
+                                  // anything
+                                  isStoring = true;
+                                }
+                              }
+                            }
+                          }
+
+                        if (isStoring == true) {
+                          deliveryHistory.removeAt(index - 1);
+                          deliveryHistory.insert(
+                              index - 1, _deliveryHistory[index - 1]);
+                          isStoring = false;
+                          loopingCount++;
+                        }
+                        if (isSwitching == true) {
+                          deliveryHistory.removeAt(index - 1);
+                          deliveryHistory.insert(
+                              index - 1, _deliveryHistory[index]);
+                          deliveryHistory.removeAt(index);
+                          deliveryHistory.insert(
+                              index, _deliveryHistory[index - 1]);
+                          isSwitching = false;
+                          loopingCount = 0;
+                        }
+                        _deliveryHistory.clear();
+                        _deliveryHistory.addAll(deliveryHistory);
                       }
 
-                      while(_nowDay>=int.parse(_deliveryHistory.orderDate.split('-')[2].split('T')[0].toString())) {
+                      if (loopingCount == deliveryHistory.length - 1) {
+                        _deliveryHistory.clear();
+                        isLooping = false;
+                      } else {
+                        isLooping = true;
+                      }
+                      print(deliveryHistory.length.toString());
+                    }
 
-                        if (_nowDay == int.parse(_deliveryHistory.orderDate.split('-')[2].split('T')[0].toString())) {
-                          OrderGeo orderGeo = OrderGeo(
-                              shop: _deliveryHistory.orderGeo.shop,
-                              delivery: _deliveryHistory.orderGeo.delivery
+                  }
+                  if (deliveryHistory.length > 1) {
+                    for (int index = 1; index < deliveryHistory.length; index++) {
+                      int _day = int.parse(DateTime.parse(deliveryHistory[index-1].updatedAt).toLocal().toString().split('-')[2].split(' ')[0]);
+                      day = int.parse(DateTime.parse(deliveryHistory[index].updatedAt).toLocal().toString().split('-')[2].split(' ')[0]);
+
+                      if(_day == day){
+                        _deliveryHistory.add(deliveryHistory[index-1]);
+                      } else{
+                        if(index == 1){
+                          _deliveryHistory.add(deliveryHistory[index-1]);
+                          deliveryHistoryAsDays.add(
+                              DeliveryHistoryModel(
+                                  orderModel: _deliveryHistory.toList())
                           );
-                          deliveryHistory.add(
-                              OrderModel(
-                                orderProductList: _deliveryHistory
-                                    .orderProductList,
-                                orderAditionalCharges: _deliveryHistory
-                                    .orderAditionalCharges,
-                                orderGeo: orderGeo,
-                                sId: _deliveryHistory.sId,
-                                orderDate: _deliveryHistory.orderDate,
-                                orderCompany: _deliveryHistory.orderCompany,
-                                orderBranchId: _deliveryHistory.orderBranchId,
-                                orderCustomerId: _deliveryHistory
-                                    .orderCustomerId,
-                                orderCustomerName: _deliveryHistory
-                                    .orderCustomerName,
-                                orderCustomerMobile: _deliveryHistory
-                                    .orderCustomerMobile,
-                                orderPaymentMethod: _deliveryHistory
-                                    .orderPaymentMethod,
-                                orderAmount: _deliveryHistory.orderAmount,
-                                orderDiscount: _deliveryHistory.orderDiscount,
-                                orderTotal: _deliveryHistory.orderTotal,
-                                orderAdvancePayment: _deliveryHistory
-                                    .orderAdvancePayment,
-                                orderStatus: _deliveryHistory.orderStatus,
-                                orderStatusString: _deliveryHistory
-                                    .orderStatusString.toString().toLowerCase(),
-                                orderType: _deliveryHistory.orderType,
-                                orderAcceptedUserId: _deliveryHistory
-                                    .orderAcceptedUserId,
-                                orderInvoiceId: _deliveryHistory.orderInvoiceId,
-                                orderDeliveryPersonId: _deliveryHistory
-                                    .orderDeliveryPersonId,
-                                createdAt: _deliveryHistory.createdAt,
-                                updatedAt: _deliveryHistory.updatedAt,
-                                iV: _deliveryHistory.iV,
-                              )
+                        } else{
+                          deliveryHistoryAsDays.add(
+                              DeliveryHistoryModel(
+                                  orderModel: _deliveryHistory.toList())
                           );
-                          break;
                         }
-                        else{
-                          _nowDay--;
-                        }
+                        _deliveryHistory.clear();
+                        _deliveryHistory.add(deliveryHistory[index]);
+                      }
+
+                      if(index == deliveryHistory.length-1){
+                        deliveryHistoryAsDays.add(
+                            DeliveryHistoryModel(
+                                orderModel: _deliveryHistory.toList())
+                        );
                       }
                     }
                   }
-                }
-                  if (deliveryHistory.isNotEmpty) {
+                  if (deliveryHistory.length == 1) {
                     deliveryHistoryAsDays.add(
-                        DeliveryHistoryModel(orderModel: deliveryHistory.toList())
+                        DeliveryHistoryModel(
+                            orderModel: deliveryHistory.toList())
                     );
-                    deliveryHistory.clear();
                   }
+                }
 
-                  // print(deliveryHistoryAsDays.length);
-                  // print(deliveryHistoryAsDays[0].orderModel[0].orderDate);
+                _deliveryHistory.clear();
+                print(deliveryHistory.length.toString());
+                print(deliveryHistoryAsDays.length.toString());
+                print('Done');
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+          ////////////////////////////////////////Earnings//////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 
               }
+
               if(state is GetOrdersHistoryFailed){
 
               }

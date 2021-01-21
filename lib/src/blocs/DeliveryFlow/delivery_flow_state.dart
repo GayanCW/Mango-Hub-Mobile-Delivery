@@ -7,12 +7,12 @@ class DeliveryFlowInitial extends DeliveryFlowState {}
 
 class AcceptedDeliverySuccess extends DeliveryFlowState{
   AcceptedDeliverySuccess(this.response);
-  final String response;
+  final OrderModel response;
 }
 
 class AcceptedDeliveryFailed extends DeliveryFlowState{
   AcceptedDeliveryFailed(this.response);
-  final String response;
+  final OrderModel response;
 }
 
 class AcceptedDeliveryFailedException extends DeliveryFlowState{
@@ -22,12 +22,12 @@ class AcceptedDeliveryFailedException extends DeliveryFlowState{
 ////////////////////////////////////////////////////////////////////////////////
 class DeliveredDeliverySuccess extends DeliveryFlowState{
   DeliveredDeliverySuccess(this.response);
-  final String response;
+  final OrderModel response;
 }
 
 class DeliveredDeliveryFailed extends DeliveryFlowState{
   DeliveredDeliveryFailed(this.response);
-  final String response;
+  final OrderModel response;
 }
 
 class DeliveredDeliveryFailedException extends DeliveryFlowState{

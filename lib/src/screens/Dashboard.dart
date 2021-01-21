@@ -156,13 +156,13 @@ class _DashboardState extends State<Dashboard> {
                         margin: EdgeInsets.only(top:20.0),
                         child: Column(
                           children: <Widget>[
-                            Text(
-                        user.userFirstName+" "+user.userLastName,
-                              style: TextStyle(
-                                  color: mangoWhiteText,
-                                  fontSize: 30.0
-                              ),
-                            ),
+                            (user.userFirstName != null)
+                                ? Text(user.userFirstName+" "+user.userLastName,
+                                    style: TextStyle(
+                                        color: mangoWhiteText,
+                                        fontSize: 30.0
+                                    ),
+                                  ) : Placeholder(),
                           ],
                         ),
                       ),

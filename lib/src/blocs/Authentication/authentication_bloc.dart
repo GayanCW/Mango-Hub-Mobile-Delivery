@@ -132,7 +132,7 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
           },
-          body: jsonEncode(<String, dynamic>{
+            body: jsonEncode(<String, dynamic>{
             "login": {
               "login_email": event.authentication.login.loginEmail,
               "login_email_verification": event.authentication.login.loginEmailVerification,

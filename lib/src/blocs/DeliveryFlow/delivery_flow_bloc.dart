@@ -41,7 +41,7 @@ class DeliveryFlowBloc extends Bloc<DeliveryFlowEvent, DeliveryFlowState> {
               "delivery": event.deliveryFlow.orderGeo.delivery
             },
             "order_product_list": event.deliveryFlow.orderProductList,
-            "order_aditional_charges": event.deliveryFlow.orderAditionalCharges,
+            "order_aditional_charges": event.deliveryFlow.orderAdditionalCharges,
             "_id": event.deliveryFlow.sId,
             "order_date": event.deliveryFlow.orderDate,
             "order_company": event.deliveryFlow.orderCompany,
@@ -65,9 +65,11 @@ class DeliveryFlowBloc extends Bloc<DeliveryFlowEvent, DeliveryFlowState> {
       );
 
       if (response.statusCode == 200) {
-        yield AcceptedDeliverySuccess('Success');
+        var acceptedDeliveryResponse = jsonDecode(response.body);
+        yield AcceptedDeliverySuccess(OrderModel.fromJson(acceptedDeliveryResponse));
       } else {
-        yield AcceptedDeliveryFailed('Failed');
+        var errorResponse = jsonDecode(response.body);
+        yield AcceptedDeliveryFailed(OrderModel.fromJson(errorResponse));
       }
     }
     catch (e) {
@@ -91,7 +93,7 @@ class DeliveryFlowBloc extends Bloc<DeliveryFlowEvent, DeliveryFlowState> {
               "delivery": event.deliveryFlow.orderGeo.delivery
             },
             "order_product_list": event.deliveryFlow.orderProductList,
-            "order_aditional_charges": event.deliveryFlow.orderAditionalCharges,
+            "order_aditional_charges": event.deliveryFlow.orderAdditionalCharges,
             "_id": event.deliveryFlow.sId,
             "order_date": event.deliveryFlow.orderDate,
             "order_company": event.deliveryFlow.orderCompany,
@@ -115,9 +117,11 @@ class DeliveryFlowBloc extends Bloc<DeliveryFlowEvent, DeliveryFlowState> {
       );
 
       if (response.statusCode == 200) {
-        yield DeliveredDeliverySuccess('Success');
+        var deliveredDeliveryResponse = jsonDecode(response.body);
+        yield DeliveredDeliverySuccess(OrderModel.fromJson(deliveredDeliveryResponse));
       } else {
-        yield DeliveredDeliveryFailed('Failed');
+        var errorResponse = jsonDecode(response.body);
+        yield DeliveredDeliveryFailed(OrderModel.fromJson(errorResponse));
       }
     }
     catch (e) {

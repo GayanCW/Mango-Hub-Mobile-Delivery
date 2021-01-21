@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:collection';
-import 'dart:math';
 import 'dart:typed_data';
 import 'dart:ui';
 
@@ -11,10 +10,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
-import 'package:location/location.dart';
 import 'package:mangoHub/src/blocs/DeliveryFlow/delivery_flow_bloc.dart';
 import 'package:mangoHub/src/blocs/GetNearbyCompanies/get_nearby_companies_bloc.dart';
 import 'package:mangoHub/src/components/AlertBox.dart';
+import 'package:mangoHub/src/components/LoaderForm.dart';
 import 'package:mangoHub/src/models/APImodels/GetNearbyCompaniesModel.dart';
 import 'package:mangoHub/src/models/APImodels/OrderModel.dart';
 import 'package:mangoHub/src/services/Services.dart';
@@ -44,7 +43,6 @@ class _OrderLocationState extends State<OrderLocation> {
   Repository _repository = new Repository();
   final oCcy = new NumberFormat("#,##0.00", "en_US");
 
-  Location location = Location();
   GoogleMapController _mapController;
   BitmapDescriptor sourceIcon;
   BitmapDescriptor destinationIcon;
@@ -75,17 +73,22 @@ class _OrderLocationState extends State<OrderLocation> {
   PolylinePoints polylinePoints = PolylinePoints();
   String googleAPiKey = "AIzaSyDhOoTKiPahx0kxP77CsMoQFcI61ivN4PU";
 
+  bool _polylineUpdate;
+  bool _locationUpdate;
+
+
+
   static final _initialCameraPosition = CameraPosition(
     target: LatLng(6.767679, 79.893027),
     zoom: 16,
   );
 
-  void _onMapCreated(GoogleMapController controller) {
-    _toggleMapStyle(false);
+  void onMapCreated(GoogleMapController controller) {
+    toggleMapStyle(false);
     _mapController = controller;
   }
 
-  void _toggleMapStyle(bool style) async {
+  void toggleMapStyle(bool style) async {
     String _style = await DefaultAssetBundle.of(context).loadString('assets/googleMap/map_style2.json');
 
     if (style) {
@@ -111,16 +114,7 @@ class _OrderLocationState extends State<OrderLocation> {
     });
   }
 
-  // double calculateDistance(double lat1, double lang1, double lat2, double lang2){
-  //   double p = 0.017453292519943295;
-  //   double a = 0.5 - cos((lat2 - lat1) * p)/2 +
-  //       cos(lat1 * p) * cos(lat2 * p) *
-  //           (1 - cos((lang2 - lang1) * p))/2;
-  //
-  //   return 12742 * asin(sqrt(a));
-  // }
-
-  void _setNewMarkers(double _latitude, double _longitude, BitmapDescriptor bitIcon){
+  void setNewMarkers(double _latitude, double _longitude, BitmapDescriptor bitIcon){
       _markers.add(
         Marker(
             markerId: MarkerId("My Location"),
@@ -149,10 +143,12 @@ class _OrderLocationState extends State<OrderLocation> {
     Polyline polyline = Polyline(
         polylineId: id, color: mangoBlue, points: polylineCoordinates, width: 2, startCap: Cap.roundCap, endCap: Cap.buttCap);
     polylines[id] = polyline;
-    // setState(() {});
+    setState(() {
+      _polylineUpdate = true;
+    });
   }
 
-  _getPolyline(double _originLatitude, double _originLongitude, double _destLatitude, double _destLongitude) async {
+  getPolyline(double _originLatitude, double _originLongitude, double _destLatitude, double _destLongitude) async {
     PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
         googleAPiKey,
         PointLatLng(_originLatitude, _originLongitude),
@@ -169,7 +165,7 @@ class _OrderLocationState extends State<OrderLocation> {
     _addPolyLine();
   }
 
-  _buttonEnabled(String key){
+  buttonEnabled(String key){
     if(key=='time') {
       Future.delayed(const Duration(milliseconds: 10000), () {
           buttonVisibility = true;
@@ -183,7 +179,7 @@ class _OrderLocationState extends State<OrderLocation> {
     }
   }
 
-  void _getNearbyCompany(double latitude, double longitude, BuildContext context){
+  void getNearbyCompany(double latitude, double longitude, BuildContext context){
     BlocProvider.of<GetNearbyCompaniesBloc>(context).add(
         GetNearbyCompanies(
             latitude: latitude,
@@ -193,7 +189,7 @@ class _OrderLocationState extends State<OrderLocation> {
     );
   }
 
-  void _deliveryFlow(String flow , int index, BuildContext context)async{
+  void deliveryFlow(String flow , int index, BuildContext context)async{
 
     String _userProfileId = await _repository.readData('userProfileId');
     print(_userProfileId);
@@ -205,7 +201,7 @@ class _OrderLocationState extends State<OrderLocation> {
     OrderModel _deliveryFlow = new OrderModel(
         orderGeo:  _geoCoordinates,
         orderProductList: acceptedOrder[index].orderProductList,
-        orderAditionalCharges: acceptedOrder[index].orderAditionalCharges,
+        orderAdditionalCharges: acceptedOrder[index].orderAdditionalCharges,
         sId:  acceptedOrder[index].sId,
         orderDate:  acceptedOrder[index].orderDate,
         orderCompany: acceptedOrder[index].orderCompany,
@@ -239,7 +235,7 @@ class _OrderLocationState extends State<OrderLocation> {
 
   }
 
-  void _launchTurnByTurnNavigationInGoogleMaps(double latitude, double longitude) {
+  void launchTurnByTurnNavigationInGoogleMaps(double latitude, double longitude) {
     final AndroidIntent intent = AndroidIntent(
         action: 'action_view',
         data: Uri.encodeFull(
@@ -248,15 +244,15 @@ class _OrderLocationState extends State<OrderLocation> {
     intent.launch();
   }
 
-  bool locationUpdate(double updateLat, double updateLong){
-    bool _locationUpdate;
+  bool locationUpdate(Position locationData){
+    print(locationData.speed.toString());
     if(distanceCalculating==true){
-      newLatitude = updateLat;
-      newLongitude = updateLong;
-      // double updatedDistance = 1000*calculateDistance(oldLatitude, oldLongitude, newLatitude, newLongitude);
-      double updatedDistance = Geolocator.distanceBetween(oldLatitude, oldLongitude, newLatitude, newLongitude);
+      newLatitude = locationData.latitude;
+      newLongitude = locationData.longitude;
+      double updatedDistance = Geolocator.distanceBetween(
+          oldLatitude, oldLongitude, newLatitude, newLongitude);
 
-      if(updatedDistance>=minimumUpdatingDistance){
+      if(updatedDistance >= minimumUpdatingDistance && locationData.speed >= locationData.speedAccuracy / 2){
         distanceCalculating=false;
         _locationUpdate=true;
       }
@@ -266,14 +262,25 @@ class _OrderLocationState extends State<OrderLocation> {
       }
     }
     if(distanceCalculating==false){
-      oldLatitude = updateLat;
-      oldLongitude = updateLong;
+      oldLatitude = locationData.latitude;
+      oldLongitude = locationData.longitude;
       distanceCalculating=true;
       _locationUpdate=true;
     }
 
     return _locationUpdate;
   }
+
+  double estimateTime(Position locationData){
+    double distance = Geolocator.distanceBetween(locationData.latitude, locationData.longitude, polylineCoordinates[0].latitude, polylineCoordinates[0].longitude);
+    for(int i=1; i<polylineCoordinates.length; i++){
+      distance = distance + Geolocator.distanceBetween(polylineCoordinates[i-1].latitude, polylineCoordinates[i-1].longitude, polylineCoordinates[i].latitude, polylineCoordinates[i].longitude);
+    }
+
+    double estimateTime = distance / locationData.speed;
+    return estimateTime/60; // minutes
+  }
+
 
 
   @override
@@ -290,8 +297,8 @@ class _OrderLocationState extends State<OrderLocation> {
     });
 
     // _setSourceAndDestinationIcons();
-    _getNearbyCompany(widget.myLatitude, widget.myLongitude, context);
-    _deliveryFlow('AcceptDelivery', 0, context);
+    getNearbyCompany(widget.myLatitude, widget.myLongitude, context);
+    deliveryFlow('AcceptDelivery', 0, context);
 
   }
 
@@ -301,10 +308,9 @@ class _OrderLocationState extends State<OrderLocation> {
     OrderModel _acceptedOrder = Provider.of<OrderModel>(context);
     Position _locationData = Provider.of<Position>(context);
 
-
     if (_acceptedOrder != null && _locationData != null && _mapController != null) {
 
-      bool _locationUpdate = locationUpdate(_locationData.latitude, _locationData.longitude);
+      _locationUpdate = locationUpdate(_locationData);
 
       acceptedOrder.clear();
       acceptedOrder.add(_acceptedOrder);
@@ -315,30 +321,29 @@ class _OrderLocationState extends State<OrderLocation> {
       deliveryLong = double.parse(acceptedOrder[0].orderGeo.delivery.split(',')[1]);
 
       // print("My Location : ${_locationData.latitude} / ${_locationData.longitude}");
-      if(_locationUpdate==true){
-        _firebaseServices.addDriver(
-            acceptedOrder[0].orderCustomerId,
-            "${_locationData.latitude},${_locationData.longitude}",
-            "${_locationData.speed}"
-        );
-      }
 
+      if(_polylineUpdate==true){
+        double _estimateTime = (polylineCoordinates.isNotEmpty)
+            ? estimateTime(_locationData)
+            : 0.00;
+        _firebaseServices.addDriver(acceptedOrder[0].sId, _locationData, _estimateTime);
+        _polylineUpdate=false;
+      }
 
       if(_locationId == 'shop') {
         _orderStatusString = 'accepted';
           if(markerCreateState==true) {
-            _buttonEnabled('time'); // must be commented..................
-            _setNewMarkers(shopLat, shopLong, sourceIcon);
+            buttonEnabled('time'); // must be commented..................
+            setNewMarkers(shopLat, shopLong, sourceIcon);
               if(_locationUpdate==true){
-                _getPolyline(_locationData.latitude, _locationData.longitude, shopLat, shopLong);
+                getPolyline(_locationData.latitude, _locationData.longitude, shopLat, shopLong);
               }
           }
           else{
-            // double _distance = calculateDistance(_locationData.latitude, _locationData.longitude, shopLat, shopLong);
             double _distance = Geolocator.distanceBetween(_locationData.latitude, _locationData.longitude, shopLat, shopLong);
 
             if(_distance<100){
-              _buttonEnabled('auto');
+              buttonEnabled('auto');
             }
             if(acceptedOrder[0].orderStatusString.toLowerCase()=='handover'){
                 _markers.clear();
@@ -350,7 +355,7 @@ class _OrderLocationState extends State<OrderLocation> {
                 _locationId='buyer';
             }
             if(_locationUpdate==true){
-              _getPolyline(_locationData.latitude, _locationData.longitude, shopLat, shopLong);
+              getPolyline(_locationData.latitude, _locationData.longitude, shopLat, shopLong);
             }
           }
       }
@@ -358,21 +363,20 @@ class _OrderLocationState extends State<OrderLocation> {
       if(_locationId == 'buyer') {
         _orderStatusString = 'picked';
           if(markerCreateState==true) {
-            _buttonEnabled('time'); // must be commented........................
-            _setNewMarkers(deliveryLat, deliveryLong, destinationIcon);
+            buttonEnabled('time'); // must be commented........................
+            setNewMarkers(deliveryLat, deliveryLong, destinationIcon);
             if(_locationUpdate==true){
-              _getPolyline(_locationData.latitude, _locationData.longitude, deliveryLat, deliveryLong); // need to change _getPolyline(_latLang.latitude, _latLang.longitude, deliveryLat, deliveryLong)
+              getPolyline(_locationData.latitude, _locationData.longitude, deliveryLat, deliveryLong); // need to change _getPolyline(_latLang.latitude, _latLang.longitude, deliveryLat, deliveryLong)
             }
           }
           else {
-            // double _distance = calculateDistance(_locationData.latitude, _locationData.longitude, deliveryLat, deliveryLong);
             double _distance = Geolocator.distanceBetween(_locationData.latitude, _locationData.longitude, deliveryLat, deliveryLong);
 
             if (_distance < 100) {
-              _buttonEnabled('auto');
+              buttonEnabled('auto');
             }
             if(_locationUpdate==true){
-              _getPolyline(_locationData.latitude, _locationData.longitude, deliveryLat, deliveryLong); // need to change _getPolyline(_latLang.latitude, _latLang.longitude, deliveryLat, deliveryLong)
+              getPolyline(_locationData.latitude, _locationData.longitude, deliveryLat, deliveryLong); // need to change _getPolyline(_latLang.latitude, _latLang.longitude, deliveryLat, deliveryLong)
             }
           }
       }
@@ -392,14 +396,14 @@ class _OrderLocationState extends State<OrderLocation> {
           Container(
             height: _size.height * 0.5,
             child: GoogleMap(
-              onMapCreated: _onMapCreated,
+              onMapCreated: onMapCreated,
               mapType: MapType.normal,
               initialCameraPosition: _initialCameraPosition,
               markers: _markers,
               polylines: Set<Polyline>.of(polylines.values),
               myLocationEnabled: true,
               myLocationButtonEnabled: true,
-              zoomControlsEnabled: true,
+              zoomControlsEnabled: false,
             ),
           ),
 
@@ -437,7 +441,7 @@ class _OrderLocationState extends State<OrderLocation> {
                     borderRadius: BorderRadius.circular(8.0),
                   ),
                   onPressed: (buttonVisibility==false)?null:(){
-                    _deliveryFlow('DeliveredOrder', 0, context);
+                    deliveryFlow('DeliveredOrder', 0, context);
                     setState(() {
                       _markers.clear();
                       polylineCoordinates.clear();
@@ -454,8 +458,8 @@ class _OrderLocationState extends State<OrderLocation> {
             alignment: Alignment.topRight,
             child: Container(
               margin: EdgeInsets.only(
-                  top: _size.height * 0.25,
-                  // top: _size.height * 0.41,
+                  // top: _size.height * 0.25,
+                  top: _size.height * 0.41,
                   right: 15.0),
               child: CircleAvatar(
                 radius: 30,
@@ -463,8 +467,8 @@ class _OrderLocationState extends State<OrderLocation> {
                 child: IconButton(
                   icon: Icon(Icons.navigation_outlined),
                   onPressed: () =>
-                    (_orderStatusString=='accepted')?_launchTurnByTurnNavigationInGoogleMaps(shopLat, shopLong):
-                    (_orderStatusString=='picked')?_launchTurnByTurnNavigationInGoogleMaps(deliveryLat, deliveryLong):
+                    (_orderStatusString=='accepted')?launchTurnByTurnNavigationInGoogleMaps(shopLat, shopLong):
+                    (_orderStatusString=='picked')?launchTurnByTurnNavigationInGoogleMaps(deliveryLat, deliveryLong):
                     null,
                 ),
               ),
@@ -582,7 +586,6 @@ class _OrderLocationState extends State<OrderLocation> {
                       ),
                       child: Column(children: [
                         Text("Total Price", style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w300, color: mangoWhite),),
-                        // Text("Rs: ${totalPrice.toStringAsFixed(2)}", style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w400),),
                         Text('Rs.' +oCcy.format(acceptedOrder[0].orderTotal), style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w400, color: mangoOrange),),
 
                       ],),
@@ -619,42 +622,44 @@ class _OrderLocationState extends State<OrderLocation> {
           ),
 
         ],
-      ):Center(child: AlertDialog(
-        contentPadding: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 0.0),
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        content: ClipRRect(
-          borderRadius: BorderRadius.vertical(top: Radius.circular(30.0), bottom: Radius.circular(30.0)),
-          child: Container(
-            height: 60,
-            width: 50,
-            child: new Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  child: CircularProgressIndicator(
-                    backgroundColor: Colors.orange,
-                  ),
-                  // color: Colors.red,
-                  height: 30,
-                  width: 30,
-                ),
-                Container(
-                  margin: EdgeInsets.only(left: 20,top: 10),
-                  child: Text(
-                    'Loading     ',
-                    style: TextStyle(
-                        color: mangoWhite,
-                        fontSize: 14.0,
-                        fontWeight: FontWeight.w600),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      )),
+      )
+      //     : Center(child: AlertDialog(
+      //   contentPadding: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 0.0),
+      //   backgroundColor: Colors.transparent,
+      //   elevation: 0,
+      //   content: ClipRRect(
+      //     borderRadius: BorderRadius.vertical(top: Radius.circular(30.0), bottom: Radius.circular(30.0)),
+      //     child: Container(
+      //       height: 60,
+      //       width: 50,
+      //       child: new Column(
+      //         mainAxisAlignment: MainAxisAlignment.center,
+      //         crossAxisAlignment: CrossAxisAlignment.center,
+      //         children: [
+      //           Container(
+      //             child: CircularProgressIndicator(
+      //               backgroundColor: Colors.orange,
+      //             ),
+      //             // color: Colors.red,
+      //             height: 30,
+      //             width: 30,
+      //           ),
+      //           Container(
+      //             margin: EdgeInsets.only(left: 20,top: 10),
+      //             child: Text(
+      //               'Loading     ',
+      //               style: TextStyle(
+      //                   color: mangoWhite,
+      //                   fontSize: 14.0,
+      //                   fontWeight: FontWeight.w600),
+      //             ),
+      //           ),
+      //         ],
+      //       ),
+      //     ),
+      //   ),
+      // )),
+          : Container(color: mangoGrey),
     );
 
   }
@@ -668,7 +673,7 @@ class _OrderLocationState extends State<OrderLocation> {
           catchError: (_, __) => null,
         ),
         StreamProvider(
-          create: (BuildContext context) => _locationServices.getMyLiveLocation(),
+          create: (BuildContext context) => _locationServices.getMyLiveLocation(10000, 0),
           catchError: (_, __) => null,
         ),
       ],
@@ -725,7 +730,8 @@ class _OrderLocationState extends State<OrderLocation> {
 
                 }
                 if(state is GetNearbyCompaniesFailedException){
-
+                  LoaderFormState.hideLoader(context);
+                  showAlertDialog(context,'Exception', state.errorObject);
                 }
               }
           ),
@@ -733,13 +739,16 @@ class _OrderLocationState extends State<OrderLocation> {
           BlocListener<DeliveryFlowBloc,DeliveryFlowState>(
               listener: (context, state){
                 if(state is AcceptedDeliverySuccess){
-                  print('Accepted Success');
+                  LoaderFormState.hideLoader(context);
                 }
                 if(state is AcceptedDeliveryFailed){
-                  print('Accepted Failed');
+                  LoaderFormState.hideLoader(context);
+                  showAlertDialog(context,'Attention', state.response.message);
+                  Navigator.pushNamedAndRemoveUntil(context, '/dashboard', (route) => false);
                 }
                 if(state is AcceptedDeliveryFailedException){
-
+                  LoaderFormState.hideLoader(context);
+                  showAlertDialog(context,'Exception', state.errorObject);
                 }
 
                 if(state is DeliveredDeliverySuccess){
@@ -747,25 +756,23 @@ class _OrderLocationState extends State<OrderLocation> {
                   Navigator.pushNamedAndRemoveUntil(context, '/dashboard', (route) => false);
                 }
                 if(state is DeliveredDeliveryFailed){
-
+                  showAlertDialog(context,'Failed', state.response.message);
+                  Navigator.pushNamedAndRemoveUntil(context, '/dashboard', (route) => false);
                 }
                 if(state is DeliveredDeliveryFailedException){
-
+                  LoaderFormState.hideLoader(context);
+                  showAlertDialog(context,'Exception', state.errorObject);
                 }
 
               }
           ),
         ],
-        child: BlocBuilder<GetNearbyCompaniesBloc,GetNearbyCompaniesState>(
+        child: BlocBuilder<DeliveryFlowBloc,DeliveryFlowState>(
             builder: (context,state){
               return buildUI(context);
             }
         ),
       ),
-      // child: Builder(
-      //   builder: (BuildContext context){
-      //     return
-      //   }),
     );
   }
 
